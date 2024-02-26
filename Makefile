@@ -18,6 +18,7 @@ SRC = ft_strlen.c \
 	ft_isalnum.c \
 	ft_isprint.c \
 	ft_isascii.c
+	
 #memset
 #bzero
 #memcpy
