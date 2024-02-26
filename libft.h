@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 19:04:21 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 19:42:56 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ int ft_isalpha(int c);
 int	ft_isalnum(int c);
 int ft_isprint(int c);
 int ft_isascii(int c);
+int ft_toupper(int c);
+int ft_tolower(int c);
 
 #endif
