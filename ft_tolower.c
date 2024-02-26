@@ -6,13 +6,15 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:39:58 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 19:40:23 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:49:02 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_tolower(int c)
+int	ft_tolower(int c)
 {
-    if (c >= 'A' && c <= 'Z')
+	if (c >= 'A' && c <= 'Z')
+	{
 		c = c + 32;
-    return (c);
+	}
+	return (c);
 }

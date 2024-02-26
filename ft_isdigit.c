@@ -6,11 +6,11 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:56:23 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 18:04:49 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:50:37 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int num)
 {
-    return (num >= '0' && num <= '9');
+	return (num >= '0' && num <= '9');
 }

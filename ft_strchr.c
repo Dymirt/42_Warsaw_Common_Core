@@ -6,19 +6,19 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:54:10 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 20:13:16 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 21:23:26 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    while (*s != '\0')
-    {
-        if (*s == c)
-            return ((char*) s);
-        s++;
-    }
-    return (NULL);
+	while (*s != '\0')
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	return ((void *)0);
 }

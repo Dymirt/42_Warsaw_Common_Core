@@ -6,11 +6,11 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:01:04 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 19:02:54 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:55:04 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
-    return (c >= ' ');
+	return (c >= ' ');
 }

@@ -20,14 +20,14 @@ SRC = ft_strlen.c \
 	ft_isascii.c \
 	ft_toupper.c \
 	ft_tolower.c \
-	ft_strchr.c
+	ft_strchr.c \
+	ft_strrchr.c
 
 #memset
 #bzero
 #memcpy
 #memmove
 #strlcpy
-#strrchr
 #memchr
 #memcmp
 #strnstr
@@ -57,5 +57,5 @@ all: $(NAME)
 re: fclean all
 
 # Phony targets to avoid conflicts with file names
-.PHONY: all clean fclean
+.PHONY: all clean fclean re
 

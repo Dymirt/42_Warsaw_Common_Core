@@ -6,13 +6,13 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:34:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 19:38:56 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:57:11 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_toupper(int c)
+int	ft_toupper(int c)
 {
-    if (c >= 'a' && c <= 'z')
+	if (c >= 'a' && c <= 'z')
 		c = c - 32;
-    return (c);
+	return (c);
 }
