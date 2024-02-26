@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 19:42:56 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/26 20:11:43 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+#define NULL ((void *)0)
 
 int	ft_atoi(char *str);
 int	ft_strlen(char *str);
@@ -28,5 +30,6 @@ int ft_isprint(int c);
 int ft_isascii(int c);
 int ft_toupper(int c);
 int ft_tolower(int c);
+char *ft_strchr(const char *s, int c);
 
 #endif

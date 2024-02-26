@@ -19,14 +19,14 @@ SRC = ft_strlen.c \
 	ft_isprint.c \
 	ft_isascii.c \
 	ft_toupper.c \
-	ft_tolower.c 
+	ft_tolower.c \
+	ft_strchr.c
 
 #memset
 #bzero
 #memcpy
 #memmove
 #strlcpy
-#strchr
 #strrchr
 #memchr
 #memcmp
