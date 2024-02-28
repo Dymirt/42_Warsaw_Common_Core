@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 20:18:41 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 21:23:38 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/28 21:30:46 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ char	*ft_strrchr(const char *s, int c)
 		}
 		s++;
 	}
+	if (c == '\0')
+		return ((char *)s);
 	return ((char *)last_occurrence);
 }
