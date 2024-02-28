@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 21:23:58 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/02/28 20:15:35 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
+void 			*ft_memset(void *s, int c, size_t n);
 
 #endif
