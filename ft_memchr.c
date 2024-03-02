@@ -6,21 +6,21 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:32:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 18:35:53 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:05:33 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void *memchr(const void *s, int c, int n)
+void *ft_memchr(const void *s, int c, int n)
 {
+    char *p = (char *)s; // Casting s to unsigned char pointer for byte-wise comparison
 	int i;
 	i = 0;
-	while (i != n)
+    while (i < n)
 	{
-		if (s + 1 == c)
-			return ((void *)s + i);
+        if (p[i] == (char)c) // Comparing byte-wise
+            return (void *)(p + i); // Returning pointer to the occurrence
 		i++;
-	}
-	if (c == '\0')
-		return ((char *)s + i);
-	return (0);
+    }
+
+    return (0); // If not found
 }
