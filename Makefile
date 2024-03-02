@@ -26,8 +26,8 @@ SRC = ft_strlen.c \
 	ft_bzero.c \
 	ft_memcpy.c \
 	ft_memmove.c \
-	ft_strlcpy.c
-#memchr
+	ft_strlcpy.c \
+	ft_memchr.c
 #memcmp
 #strnstr
 
