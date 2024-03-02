@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 19:12:56 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/02 20:39:32 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+#define RED  "\x1B[31m"
+#define GEEN  "\x1B[32m"
+#define NORMAL  "\x1B[0m"
 
 int				ft_atoi(char *str);
 int				ft_strlen(char *str);
