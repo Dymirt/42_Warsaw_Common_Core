@@ -6,15 +6,15 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 13:39:55 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 15:11:25 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/02 16:10:15 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
 char	*ft_strdup(char *src);
 char	*ft_strcpy(char *dest, char *src);
-int		ft_strlen(char *str);
 
 char	*ft_strdup(char *src)
 {
@@ -38,14 +38,4 @@ char	*ft_strcpy(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
-}
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
 }
