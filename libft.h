@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 18:34:33 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:12:56 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ void 			*ft_memcpy(void *dst, const void *src, size_t n);
 void			*ft_memmove(void *dst, const void *src, int len);
 int				ft_strlcpy(char *dst,  char *src, int size);
 void 			*ft_memchr(const void *s, int c, int n);
+int 			ft_memcmp(const void *s1, const void *s2, int n);
 
 #endif
