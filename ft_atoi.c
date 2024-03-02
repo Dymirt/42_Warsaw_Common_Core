@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:36:13 by dkolida           #+#    #+#             */
-/*   Updated: 2023/12/04 18:53:24 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/02 20:03:54 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int	get_sign(char *str, int *ptr_i)
 	count = 1;
 	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
-	while ((str[i] == '+' || str[i] == '-'))
+
+	if (str[i] == '-')
 	{
-		if (str[i] == '-')
-			count *= -1;
+		count *= -1;
 		i++;
 	}
+
 	*ptr_i = i;
 	return (count);
 }
