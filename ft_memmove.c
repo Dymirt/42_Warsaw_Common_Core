@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 23:58:04 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/02/29 00:23:29 by dmytrokolid      ###   ########.fr       */
+/*   Created: 2024/03/02 15:59:30 by dkolida           #+#    #+#             */
+/*   Updated: 2024/03/02 15:59:58 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

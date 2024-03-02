@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 22:54:10 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/02/28 23:00:17 by dmytrokolid      ###   ########.fr       */
+/*   Created: 2024/03/02 15:59:46 by dkolida           #+#    #+#             */
+/*   Updated: 2024/03/02 15:59:50 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
