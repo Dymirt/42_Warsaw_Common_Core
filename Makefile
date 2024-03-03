@@ -55,8 +55,8 @@ all: $(NAME)
 
 re: fclean all
 
-tests: re
-	bash tests/run_tests.sh
+tests:	re
+		bash tests/run_tests.sh
 
 # Phony targets to avoid conflicts with file names
 .PHONY: all clean fclean re tests

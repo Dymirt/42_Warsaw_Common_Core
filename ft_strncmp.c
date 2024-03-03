@@ -6,13 +6,15 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:28:07 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 19:43:33 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/03 22:05:27 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+#include "libft.h"
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
+	size_t	i;
 	
 	unsigned char *ptrs1 = (unsigned char *)s1;
 	unsigned char *ptrs2 = (unsigned char *)s2;

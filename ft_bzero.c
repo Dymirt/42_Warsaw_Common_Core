@@ -6,11 +6,13 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:59:46 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 15:59:50 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/03 21:44:50 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_bzero(void *s, int n)
+#include "libft.h"
+
+void ft_bzero(void *s, size_t n)
 {
 	char *ptr;
 	ptr = s;

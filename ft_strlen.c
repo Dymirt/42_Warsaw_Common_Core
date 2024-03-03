@@ -6,19 +6,21 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 20:45:25 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 15:11:06 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/03 22:17:20 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
 	int	counter;
 
 	counter = 0;
-	while (*str != '\0')
+	while (*s != '\0')
 	{
 		counter++;
-		str++;
+		s++;
 	}
 	return (counter);
 }
