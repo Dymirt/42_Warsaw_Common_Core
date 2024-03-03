@@ -51,10 +51,13 @@ fclean: clean
 
 # Default rule
 all: $(NAME)
-	bash tests/run_tests.sh
+	
 
 re: fclean all
 
+tests: re
+	bash tests/run_tests.sh
+
 # Phony targets to avoid conflicts with file names
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re tests
 
