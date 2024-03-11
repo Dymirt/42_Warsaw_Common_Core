@@ -28,10 +28,10 @@ SRC = ft_strlen.c \
 	ft_memmove.c \
 	ft_strlcpy.c \
 	ft_memchr.c \
-	ft_memcmp.c
-#strnstr
-
-#calloc
+	ft_memcmp.c \
+	ft_strnstr.c \
+	ft_calloc.c	\
+	ft_itoa.c \
 
 
 # Object files
@@ -51,12 +51,12 @@ fclean: clean
 
 # Default rule
 all: $(NAME)
-	
+
 
 re: fclean all
 
 tests:	re
-		bash tests/run_tests.sh
+		bash .tests/run_tests.sh
 
 # Phony targets to avoid conflicts with file names
 .PHONY: all clean fclean re tests
