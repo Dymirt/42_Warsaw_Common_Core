@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_ft_atoi.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 20:16:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 20:41:15 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/11 20:39:21 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int main()
 		"\n\n\n  -46\b9 \n5d6",
 		"",
 		};
-	
+
 	for (int i = 1; i < 20; i++){
 		if (ft_atoi(test_cases[i]) == atoi(test_cases[i]))
-			printf("%sOK[%d] ", GEEN, i);
+			printf("%sOK[%d] ", GREEN, i);
 		else
 			printf("%sKO[%d] ", RED, i);
 	}

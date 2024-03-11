@@ -14,7 +14,7 @@ int main() {
     for (i = 0; i < 14; i++)
 	{
         if (!!ft_isalnum(test_cases[i]) == !!isalnum(test_cases[i]))
-			printf("%sOK[%d] ", GEEN, i);
+			printf("%sOK[%d] ", GREEN, i);
 		else
 			printf("%sKO[%d] ", RED, i);
 	}

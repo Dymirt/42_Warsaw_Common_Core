@@ -5,7 +5,7 @@
 # Set paths
 LIBRARY_DIR="."
 INCLUDE_DIR="."
-TESTS_DIR="tests"
+TESTS_DIR=".tests"
 
 # Compile test files
 compile_tests() {
@@ -13,7 +13,7 @@ compile_tests() {
     for test_file in $TESTS_DIR/*.c; do
         test_name=$(basename $test_file .c)
         echo "Compiling $test_name..."
-        cc -o tests/$test_name $test_file -I$INCLUDE_DIR -L$LIBRARY_DIR -lft
+        cc -o .tests/$test_name $test_file -I$INCLUDE_DIR -L$LIBRARY_DIR -lft
         if [ $? -ne 0 ]; then
             echo "Compilation failed for $test_name"
             exit 1

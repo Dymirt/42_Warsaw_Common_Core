@@ -25,6 +25,7 @@ int main() {
         return 1;
     }
 
-    printf("%sOK\n", GEEN);
+    printf("%sOK\n", GREEN);
+    printf("%s", NORMAL);
     return 0;
 }
