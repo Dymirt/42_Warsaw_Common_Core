@@ -3,34 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 21:26:54 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/02 16:50:18 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/05 23:27:20 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
-{
-	unsigned int	dest_lenth;
-	unsigned int	src_lenth;
-	unsigned int	i;
+#include "libft.h"
 
-	dest_lenth = 0;
-	src_lenth = 0;
-	while (dest[dest_lenth] != '\0')
-		dest_lenth++;
-	while (src[src_lenth] != '\0')
-		src_lenth++;
-	i = dest_lenth;
-	if (size == 0 || size <= dest_lenth)
-		return (src_lenth + size);
-	while (i < size - 1 && *src != '\0')
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+{
+	size_t	dst_lenth;
+	size_t	src_lenth;
+	size_t	i;
+
+	if (dst == 0 && dstsize == 0)
+		return (ft_strlen(src));
+
+	if(dst == 0 && dstsize != 0)
 	{
-		dest[i] = *src;
+		volatile int *crash = 0;
+        *crash = 0xDEADBEEF;
+	}
+
+	dst_lenth = ft_strlen(dst);
+	src_lenth = ft_strlen(src);
+
+	i = dst_lenth;
+	if (dstsize == 0 || dstsize <= dst_lenth)
+		return (src_lenth + dstsize);
+	while (i < dstsize - 1 && *src != '\0')
+	{
+		dst[i] = *src;
 		src++;
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest_lenth + src_lenth);
+	dst[i] = '\0';
+	return (dst_lenth + src_lenth);
 }
