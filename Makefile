@@ -1,5 +1,5 @@
 # Compiler
-CC = cc
+CC = clang
 
 # Compiler flags
 CFLAGS = -Wall -Werror -Wextra
@@ -32,6 +32,7 @@ SRC = ft_strlen.c \
 	ft_strnstr.c \
 	ft_calloc.c	\
 	ft_itoa.c \
+	ft_striteri.c \
 
 
 # Object files
