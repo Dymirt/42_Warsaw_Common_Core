@@ -35,6 +35,7 @@ SRC = ft_strlen.c \
 	ft_striteri.c \
 	ft_substr.c \
 	ft_strjoin.c \
+	ft_strtrim.c \
 
 
 # Object files
