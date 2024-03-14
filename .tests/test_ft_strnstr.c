@@ -1,4 +1,4 @@
 #include "libft.h"
 int main() {
-	return 0;
+	printf("No tests for ft_strnstr\n");
 }
