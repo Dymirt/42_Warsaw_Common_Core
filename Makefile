@@ -39,6 +39,7 @@ SRC = ft_strlen.c \
 	ft_split.c \
 	ft_strmapi.c \
 	ft_putchar_fd.c \
+	ft_putstr_fd.c \
 
 
 # Object files
