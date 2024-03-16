@@ -6,13 +6,13 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:36:08 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/16 17:36:09 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/16 18:13:18 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	nb;
 

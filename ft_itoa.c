@@ -6,13 +6,13 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:35:36 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/16 17:35:37 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/16 18:05:01 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int ft_nbrlen(int n);
+static	int	ft_nbrlen(int n);
 
 char	*ft_itoa(int n)
 {
@@ -41,12 +41,15 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-static int ft_nbrlen(int n)
+static int	ft_nbrlen(int n)
 {
-	int len;
+	int	len;
 
 	len = 1;
-	while (n /= 10)
+	while (n / 10)
+	{
+		n /= 10;
 		len++;
+	}
 	return (len);
 }

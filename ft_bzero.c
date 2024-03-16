@@ -6,19 +6,20 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 15:59:46 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/03 21:44:50 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/16 17:43:07 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
-	char *ptr;
+	char	*ptr;
+
 	ptr = s;
 	while (n > 0)
 	{
-		*ptr= 0;
+		*ptr = 0;
 		ptr++;
 		n--;
 	}
