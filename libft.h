@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/11 20:38:47 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/03/16 18:15:06 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-#define RED  "\x1B[31m"
-#define GREEN  "\x1B[32m"
-#define NORMAL  "\x1B[0m"
+# define RED  "\x1B[31m"
+# define GREEN  "\x1B[32m"
+# define NORMAL  "\x1B[0m"
 
 size_t	ft_strlen(const char *s);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -35,7 +35,7 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
-void	*ft_memcpy(void * dst, const void * src, size_t n);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -75,6 +75,5 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 */
-
 
 #endif

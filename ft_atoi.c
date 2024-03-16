@@ -6,14 +6,13 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:36:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/03 21:41:37 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/16 18:12:32 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int ft_atoi(const char *nptr);
-
+int	ft_atoi(const char *nptr);
 
 int	get_sign(const char *str, int *ptr_i)
 {
@@ -24,12 +23,11 @@ int	get_sign(const char *str, int *ptr_i)
 	count = 1;
 	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
-	if( str[i] == '-' || str[i] == '+')
+	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
 		{
 			count *= -1;
-
 		}
 		i++;
 	}
