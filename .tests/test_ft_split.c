@@ -63,6 +63,34 @@ void test_ft_split()
     print_arr(expected4);
     printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result4);
+
+    // Test case 5: Single separator
+    char *str5 = "Hello";
+    char charset5 = 'o';
+    char **result5 = ft_split(str5, charset5);
+    char *expected5[] = {"Hell", 0};
+    result = arrcmp(result5, expected5) == 0;
+    printf("Test 5: ft_split(\"Hello\", 'o') - Result: {");
+    print_arr(result5);
+    printf("NULL}, Expected: {");
+    print_arr(expected5);
+    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    free_array(result5);
+
+    // Test case 6
+    char *str6 = "  tripouille  42  ";
+    char charset6 = ' ';
+    char **result6 = ft_split(str6, charset6);
+    char *expected6[] = {"tripouille", "42", 0};
+    result = arrcmp(result6, expected6) == 0;
+    printf("Test 6: ft_split(\"  tripouille  42  \", ' ') - Result: {");
+    print_arr(result6);
+    printf("NULL}, Expected: {");
+    print_arr(expected6);
+    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    free_array(result6);
+    
+
 }
 
 static int  arrcmp(char **arr1, char **arr2)
