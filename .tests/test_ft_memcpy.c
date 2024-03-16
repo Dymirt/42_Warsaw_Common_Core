@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_ft_memcpy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 17:05:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/11 21:43:57 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/03/16 17:57:33 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void test_ft_memcpy();
 
 int main ()
 {
+	test_ft_memcpy();
+
 	void *dest = 0;
 	void *src = 0;
 
@@ -68,7 +70,7 @@ int main ()
 
 	printf("%s\n", NORMAL);
 
-	test_ft_memcpy();
+	
 }
 
 void test_ft_memcpy()
