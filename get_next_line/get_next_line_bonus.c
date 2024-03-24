@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 12:45:37 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/24 21:02:58 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:02:52 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	ft_read(int fd, char **str);
 static char	*ft_get_line(char **str);
@@ -18,22 +18,22 @@ static int	save_to_static(char **str, int i);
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[MAX_FD];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!str)
+	if (!str[fd])
 	{
-		str = ft_strdup("");
-		if (!str)
+		str[fd] = ft_strdup("");
+		if (!str[fd])
 			return (NULL);
 	}
-	if (ft_read(fd, &str) <= 0)
+	if (ft_read(fd, &str[fd]) <= 0)
 	{
-		free(str);
+		free(str[fd]);
 		return (NULL);
 	}
-	return (ft_get_line(&str));
+	return (ft_get_line(&str[fd]));
 }
 
 static int	ft_read(int fd, char **str)
