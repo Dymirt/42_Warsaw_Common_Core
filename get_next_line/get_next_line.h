@@ -9,7 +9,7 @@
 # endif
 
 char	*get_next_line(int fd);
-char *ft_get_line(char **str);
+char	*ft_get_line(char **str);
 
 char	*ft_strdup(const char *s);
 char	*ft_strchr(const char *s, int c);

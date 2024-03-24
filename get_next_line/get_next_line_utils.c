@@ -1,30 +1,5 @@
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s)
-{
-	char	*dest;
-	size_t	s_len;
-
-	s_len = ft_strlen(s);
-	dest = (char *)malloc((s_len + 1) * sizeof(char));
-	if (dest == 0)
-		return (0);
-	return (ft_memcpy(dest, (char *)s, s_len + 1));
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s != '\0')
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0')
-		return ((char *)s);
-	return (0);
-}
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*joined;
