@@ -70,12 +70,12 @@ int ft_vprintf(const char *str, va_list args)
 				if (!ft_swap_and_free(&print_str, &tmp))
 					return (-1);
 			}
-			else if (*str == 'x')
+			/*else if (*str == 'x')
 			{
 				tmp = ft_strjoin(print_str, ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef"));
 				if (!ft_swap_and_free(&print_str, &tmp))
 					return (-1);
-			}
+			}*/
 			else
 			{
 				tmp = ft_strjoin(print_str, ft_substr(str, 0, 1));

@@ -6,6 +6,5 @@
 
 int	ft_printf(const char *format, ...);
 char	*ft_utoa(unsigned int n);
-char *ft_putnbr_base(int nbr, char *base);
 
 #endif

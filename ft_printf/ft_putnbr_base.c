@@ -1,7 +1,5 @@
 #include "ft_printf.h"
 
-#include "ft_printf.h" // Include the header file for ft_strjoin function
-
 void	ft_putnbr_base_recursive(int nbr, char *base, int base_length , char *base_ptr)
 {
 	if (nbr == -2147483648)

@@ -2,9 +2,9 @@
 
 int test_ft_printf(void)
 {
-	char *str = "Hello, %x%% %s%c %u";
+	char *str = "Hello, %%% %s%c %u";
 	unsigned int max_uint = 4294967295;
-	int result = ft_printf(str, 42, "World", '!', max_uint);
+	int result = ft_printf(str, "World", '!', max_uint);
 	return (result);
 }
 
