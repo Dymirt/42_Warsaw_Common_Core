@@ -28,7 +28,7 @@ $(NAME): $(OBJ)
 
 # Rule for compiling test file
 test: all
-	$(CC) $(CFLAGS) -o test_ft_printf .test_ft_printf.c -I$(LIBFT_DIR) -L. -lftprintf -L$(LIBFT_DIR) -lft
+	$(CC) $(CFLAGS) -o .test_ft_printf .test_ft_printf.c -I$(LIBFT_DIR) -L. -lftprintf -L$(LIBFT_DIR) -lft
 
 # Rule for cleaning object files and libraries
 clean:
