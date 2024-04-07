@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:00 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/06 21:53:01 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/04/07 14:50:24 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_utoa(unsigned int n)
 		str[len] = n % 10 + '0';
 		n /= 10;
 	}
-	printf("ft_utoa: %s\n", str);
 	return (str);
 }
 
