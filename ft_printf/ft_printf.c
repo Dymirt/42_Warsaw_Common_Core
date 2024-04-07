@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:15 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/07 14:58:31 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/04/07 15:20:07 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int		ft_vprintf(const char *str, va_list args);
 int		ft_swap_and_free(char **str1, char **str2);
-void	va_printf_di(char **print_str, va_list args);
-void	va_printf_def(const char *str, char **print_str);
-void	va_printf_u(char **print_str, va_list args);
+void	ft_printf_join(char **print_str, char *str);
 
 int	ft_printf(const char *str, ...)
 {
@@ -45,9 +43,10 @@ int	ft_vprintf(const char *str, va_list args)
 		{
 			str++;
 			if (*str == 'd' || *str == 'i')
-				va_printf_di(&print_str, args);
+				ft_printf_join(&print_str, ft_itoa(va_arg(args, int)));
 			else if (*str == 'u')
-				va_printf_u(&print_str, args);
+				ft_printf_join(&print_str, ft_utoa(va_arg(args, unsigned int)));
+
 			/*
 			else if (*str == 's')
 			{
@@ -75,50 +74,16 @@ int	ft_vprintf(const char *str, va_list args)
 					return (-1);
 			}*/
 			else
-				va_printf_def(str, &print_str);
+				ft_printf_join(&print_str, ft_substr(str, 0, 1));
 		}
 		else
-			va_printf_def(str, &print_str);
+			ft_printf_join(&print_str, ft_substr(str, 0, 1));
 		str++;
 	}
 	ft_putstr_fd(print_str, 1);
 	result = ft_strlen(print_str);
 	free(print_str);
 	return (result);
-}
-
-void	va_printf_di(char **print_str, va_list args)
-{
-	char	*tmp;
-	char	*tmp_2;
-
-	tmp_2 = ft_itoa(va_arg(args, int));
-	tmp = ft_strjoin(*print_str, tmp_2);
-	if (!tmp)
-	{
-		free(*print_str);
-		free(tmp_2);
-		return ;
-	}
-	free(tmp_2);
-	ft_swap_and_free(print_str, &tmp);
-}
-
-void	va_printf_u(char **print_str, va_list args)
-{
-	char	*tmp;
-	char	*tmp_2;
-
-	tmp_2 = ft_utoa(va_arg(args, unsigned int));
-	tmp = ft_strjoin(*print_str, tmp_2);
-	if (!tmp)
-	{
-		free(*print_str);
-		free(tmp_2);
-		return ;
-	}
-	free(tmp_2);
-	ft_swap_and_free(print_str, &tmp);
 }
 
 int	ft_swap_and_free(char **str1, char **str2)
@@ -132,14 +97,17 @@ int	ft_swap_and_free(char **str1, char **str2)
 	return (1);
 }
 
-void	va_printf_def(const char *str, char **print_str)
+void	ft_printf_join(char **print_str, char *str)
 {
-	char	*tmp_substr;
-	char	*tmp_str;
+	char	*tmp;
 
-	tmp_substr = ft_substr(str, 0, 1);
-	tmp_str = ft_strjoin(*print_str, tmp_substr);
-	if (!ft_swap_and_free(print_str, &tmp_str))
+	tmp = ft_strjoin(*print_str, str);
+	if (!tmp)
+	{
+		free(*print_str);
+		free(str);
 		return ;
-	free(tmp_substr);
+	}
+	free(str);
+	ft_swap_and_free(print_str, &tmp);
 }
