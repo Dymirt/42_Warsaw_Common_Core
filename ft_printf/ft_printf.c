@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:15 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/07 15:20:07 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/04/07 17:33:54 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	ft_vprintf(const char *str, va_list args)
 	int		result;
 	char	*print_str;
 	char	char_to_str_tmp[2];
+	char	*tmp;
 
 	char_to_str_tmp[1] = '\0';
+
 	print_str = ft_calloc(1, sizeof(char));
 	if (!print_str)
 		return (-1);
@@ -46,21 +48,22 @@ int	ft_vprintf(const char *str, va_list args)
 				ft_printf_join(&print_str, ft_itoa(va_arg(args, int)));
 			else if (*str == 'u')
 				ft_printf_join(&print_str, ft_utoa(va_arg(args, unsigned int)));
-
-			/*
 			else if (*str == 's')
-			{
-				tmp = ft_strjoin(print_str, va_arg(args, char *));
-				if (!ft_swap_and_free(&print_str, &tmp))
-					return (-1);
-			}
+			{	
+				char *arg = va_arg(args, char *);
+				if (arg)
+					tmp = ft_strdup(arg);
+				else
+					tmp = ft_strdup("(null)");
+				ft_printf_join(&print_str, tmp);
+			}		
 			else if (*str == 'c')
 			{
 				char_to_str_tmp[0] = va_arg(args, int);
-				tmp = ft_strjoin(print_str, char_to_str_tmp);
-				if (!ft_swap_and_free(&print_str, &tmp))
-					return (-1);
+				ft_printf_join(&print_str, ft_strdup(char_to_str_tmp));
+				# TODO result is not correct for case when char is 0
 			}
+			/*
 			else if (*str == '%')
 			{
 				tmp = ft_strjoin(print_str, "%");
