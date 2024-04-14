@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:15 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/13 22:59:17 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/04/14 13:38:41 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 int		ft_vprintf(const char *str, va_list args);
 int		ft_swap_and_free(char **str1, char **str2);
 void	ft_printf_join(char **print_str, char *str, size_t print_str_len, size_t str_len);
-char *ft_memjoin(char *s1, char *s2, size_t len1, size_t len2);
-char * ft_putnbr_base(unsigned int nbr, char *base);
-void	ft_putnbr_base_recursive(unsigned int nbr, char *base, unsigned int base_length , char **base_ptr);
-
 
 int	ft_printf(const char *str, ...)
 {
@@ -37,6 +33,7 @@ int	ft_vprintf(const char *str, va_list args)
 	char	*print_str;
 	char	char_to_str_tmp[3];
 	char	*tmp;
+	char 	*tmp2;
 	size_t	tmp_len;
 	
 	result = 0;
@@ -93,14 +90,14 @@ int	ft_vprintf(const char *str, va_list args)
 			}
 			else if (*str == 'x')
 			{
-				tmp = ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef");
+				tmp = ft_nbr_base(va_arg(args, unsigned int), "0123456789abcdef");
 				tmp_len = ft_strlen(tmp);
 				ft_printf_join(&print_str, tmp, result, tmp_len);
 				result += tmp_len;
 			}
 			else if (*str == 'X')
 			{
-				tmp = ft_putnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF");
+				tmp = ft_nbr_base(va_arg(args, unsigned int), "0123456789ABCDEF");
 				tmp_len = ft_strlen(tmp);
 				ft_printf_join(&print_str, tmp, result, tmp_len);
 				result += tmp_len;
@@ -108,8 +105,14 @@ int	ft_vprintf(const char *str, va_list args)
 			else if (*str == 'p')
 			{
 				
-				tmp = ft_putnbr_base(va_arg(args, unsigned int), "0123456789abcdef");
-				tmp = ft_strjoin("0x", tmp);
+				tmp2 = ft_nbr_base(va_arg(args, uintptr_t), "0123456789abcdef");
+				tmp = ft_strjoin("0x", tmp2);
+				if (tmp2[0] == '0' && tmp2[1] == '\0')
+				{
+					free(tmp);
+					tmp = ft_strdup("(nil)");
+				}
+				free(tmp2);
 				tmp_len = ft_strlen(tmp);
 				ft_printf_join(&print_str, tmp, result, tmp_len);
 				result += tmp_len;
@@ -156,38 +159,4 @@ void	ft_printf_join(char **print_str, char *str, size_t print_str_len, size_t st
 	}
 	free(str);
 	ft_swap_and_free(print_str, &tmp);
-}
-
-char *ft_memjoin(char *s1, char *s2, size_t len1, size_t len2)
-{
-	char	*joined;
-
-	joined = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!joined)
-		return (NULL);
-	ft_memcpy(joined, s1, len1);
-	ft_memcpy(joined + len1, s2, len2);
-	return (joined);
-}
-
-char * ft_putnbr_base(unsigned int nbr, char *base)
-{
-	unsigned int	base_length;
-	char	*base_ptr;
-
-	base_length = ft_strlen(base);
-
-	base_ptr = ft_calloc(1, sizeof(char));
-
-	ft_putnbr_base_recursive(nbr, base, base_length, &base_ptr);
-	return (base_ptr);
-}
-
-void	ft_putnbr_base_recursive(unsigned int nbr, char *base, unsigned int base_length , char **base_ptr)
-{
-	if (nbr >= base_length)
-	{
-		ft_putnbr_base_recursive(nbr / base_length, base, base_length, base_ptr);
-	}
-	*base_ptr = ft_strjoin(*base_ptr, ft_substr(base, nbr % base_length, 1 ));
 }

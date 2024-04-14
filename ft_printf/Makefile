@@ -6,7 +6,7 @@
 #    By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 21:53:29 by dkolida           #+#    #+#              #
-#    Updated: 2024/04/06 21:53:30 by dkolida          ###   ########.fr        #
+#    Updated: 2024/04/14 12:38:10 by dkolida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = libftprintf.a
 
 # Source files for ft_printf library
-SRC = ft_printf.c ft_utoa.c
+SRC = ft_printf.c ft_utoa.c ft_memjoin.c ft_nbr_base.c
 
 # Rule for compiling libft
 LIBFT_NAME = libft.a
