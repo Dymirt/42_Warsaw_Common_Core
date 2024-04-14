@@ -6,7 +6,7 @@
 #    By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 21:53:29 by dkolida           #+#    #+#              #
-#    Updated: 2024/04/14 14:58:57 by dkolida          ###   ########.fr        #
+#    Updated: 2024/04/14 17:07:14 by dkolida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,14 @@ NAME = libftprintf.a
 SRC =	ft_printf.c\
 		ft_utoa.c\
 		ft_memjoin.c\
-		ft_nbr_base.c\
 		ft_ctoa.c\
+		ft_utoa_base.c\
+		ft_utob16.c\
+		ft_utob16u.c\
+		ft_swap_and_free.c\
+		ft_printf_handle_s.c\
+		ft_printf_handle_p.c\
+
 
 # Rule for compiling libft
 LIBFT_NAME = libft.a

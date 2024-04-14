@@ -6,141 +6,68 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:15 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/14 15:01:41 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/04/14 17:08:58 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_vprintf(const char *str, va_list args);
-int			ft_swap_and_free(char **str1, char **str2);
-void		ft_printf_join(char **print_str, char *str, size_t print_str_len, size_t str_len);
-static void	handle_numbers(int *result, char **print_str, int num, char *(*f)());
+void		str_loop(const char *str, va_list args, char **p_str, size_t *res);
+
+static void	toa_join(size_t *res, char **p_str, long long num, char *(*f)());
+void		handle_p(uintptr_t nbr, size_t *res, char **p_str);
+void		match_c(const char *str, va_list args, char **p_str, size_t *res);
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int		result;
+	size_t	result;
+	char	*p_str;
 
+	result = 0;
+	p_str = ft_calloc(1, sizeof(char));
+	if (!p_str)
+		return (-1);
 	va_start(args, str);
-	result = ft_vprintf(str, args);
+	str_loop(str, args, &p_str, &result);
 	va_end(args);
+	write(1, p_str, result);
+	free(p_str);
 	return (result);
 }
 
-int	ft_vprintf(const char *str, va_list args)
+void	str_loop(const char *str, va_list args, char **p_str, size_t *res)
 {
-	int		result;
-	char	*print_str;
-	char	char_to_str_tmp[3];
-	char	*tmp;
-	char	*tmp2;
-	size_t	tmp_len;
-
-	result = 0;
-	ft_bzero(char_to_str_tmp, 3);
-	print_str = ft_calloc(1, sizeof(char));
-	if (!print_str)
-		return (-1);
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
-			if (*str == 'd' || *str == 'i')
-			{
-				handle_numbers(&result, &print_str, va_arg(args, int), &ft_itoa);
-			}
-			else if (*str == 'u')
-			{
-				handle_numbers(&result, &print_str, va_arg(args, int), &ft_utoa);
-			}
-			else if (*str == 's')
-			{
-				char	*arg = va_arg(args, char *);
-				if (arg)
-					tmp = ft_strdup(arg);
-				else
-					tmp = ft_strdup("(null)");
-				tmp_len = ft_strlen(tmp);
-				ft_printf_join(&print_str, tmp, result, tmp_len);
-				result += tmp_len;
-			}
-			else if (*str == 'c')
-			{
-				handle_numbers(&result, &print_str, va_arg(args, int), &ft_ctoa);
-			}
-			else if (*str == 'x')
-			{
-				tmp = ft_nbr_base(va_arg(args, unsigned int), BASE_16);
-				tmp_len = ft_strlen(tmp);
-				ft_printf_join(&print_str, tmp, result, tmp_len);
-				result += tmp_len;
-			}
-			else if (*str == 'X')
-			{
-				tmp = ft_nbr_base(va_arg(args, unsigned int), BASE_16_UPPER);
-				tmp_len = ft_strlen(tmp);
-				ft_printf_join(&print_str, tmp, result, tmp_len);
-				result += tmp_len;
-			}
-			else if (*str == 'p')
-			{
-				tmp2 = ft_nbr_base(va_arg(args, uintptr_t), BASE_16);
-				if (tmp2[0] == '0')
-					tmp = ft_strdup("(nil)");
-				else
-					tmp = ft_strjoin("0x", tmp2);
-				free(tmp2);
-				tmp_len = ft_strlen(tmp);
-				ft_printf_join(&print_str, tmp, result, tmp_len);
-				result += tmp_len;
-			}
-			else
-			{
-				ft_printf_join(&print_str, ft_substr(str, 0, 1), result, 1);
-				result ++;
-			}
+			match_c(str, args, p_str, res);
 		}
 		else
-		{
-			ft_printf_join(&print_str, ft_substr(str, 0, 1), result, 1);
-			result++;
-		}
+			printf_join(p_str, ft_substr(str, 0, 1), res, 1);
 		str++;
 	}
-	write(1, print_str, result);
-	free(print_str);
-	return (result);
 }
 
-int	ft_swap_and_free(char **str1, char **str2)
+void	printf_join(char **p_str, char *str, size_t *res, size_t str_len)
 {
 	char	*tmp;
 
-	tmp = *str1;
-	*str1 = *str2;
-	*str2 = NULL;
-	free(tmp);
-	return (1);
-}
-
-void	ft_printf_join(char **print_str, char *str, size_t print_str_len, size_t str_len)
-{
-	char	*tmp;
-
-	tmp = ft_memjoin(*print_str, str, print_str_len, str_len);
+	tmp = ft_memjoin(*p_str, str, *res, str_len);
 	if (!tmp)
 	{
-		free(*print_str);
+		free(*p_str);
 		free(str);
 		return ;
 	}
 	free(str);
-	ft_swap_and_free(print_str, &tmp);
+	ft_swap_and_free(p_str, &tmp);
+	*res += str_len;
 }
 
-static void	handle_numbers(int *result, char **print_str, int num, char *(*f)())
+static void	toa_join(size_t *res, char **p_str, long long num, char *(*f)())
 {
 	char	*tmp;
 	size_t	tmp_len;
@@ -150,6 +77,25 @@ static void	handle_numbers(int *result, char **print_str, int num, char *(*f)())
 		tmp_len = 1;
 	else
 		tmp_len = ft_strlen(tmp);
-	ft_printf_join(print_str, tmp, *result, tmp_len);
-	*result += tmp_len;
+	printf_join(p_str, tmp, res, tmp_len);
+}
+
+void	match_c(const char *c, va_list args, char **p_str, size_t *res)
+{
+	if (*c == 'd' || *c == 'i')
+		toa_join(res, p_str, va_arg(args, int), &ft_itoa);
+	else if (*c == 'u')
+		toa_join(res, p_str, va_arg(args, int), &ft_utoa);
+	else if (*c == 's')
+		ft_printf_handle_s(va_arg(args, char *), res, p_str);
+	else if (*c == 'c')
+		toa_join(res, p_str, va_arg(args, int), &ft_ctoa);
+	else if (*c == 'x')
+		toa_join(res, p_str, va_arg(args, int), &ft_utob16);
+	else if (*c == 'X')
+		toa_join(res, p_str, va_arg(args, int), &ft_utob16u);
+	else if (*c == 'p')
+		ft_printf_handle_p(va_arg(args, uintptr_t), res, p_str);
+	else
+		printf_join(p_str, ft_substr(c, 0, 1), res, 1);
 }
