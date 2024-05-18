@@ -25,14 +25,20 @@ $(NAME): $(OBJ)
 # Rule for cleaning object files
 clean:
 	rm -f $(OBJ)
+	@make clean -C $(LIBFT_DIR)
+
 
 # Rule for fully cleaning the project (removing executable and object files)
 fclean: clean
 	rm -f $(NAME)
+	@make fclean -C $(LIBFT_DIR)
+
+# Default rule
+re: fclean all
 
 # Default rule
 all: $(NAME)
 
 # Phony targets to avoid conflicts with file names
-.PHONY: all clean fclean
+.PHONY: all clean fclean re
 

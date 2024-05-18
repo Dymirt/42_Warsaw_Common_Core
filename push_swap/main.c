@@ -14,7 +14,7 @@ int	main(int argc, char **argv)
 	int size_b = 0;
 	int stack_a[size_a];
 	int stack_b[size_a];
-	char **split;
+	char **split = NULL;
 	int average;
 
 	if (argc < 2)
@@ -32,9 +32,15 @@ int	main(int argc, char **argv)
 			i++;
 
 		}
+		size_a = i;
+		i = 0;
+		while (i < size_a)
+		{
+			free(split[i]);
+			i++;
+		}
+		free(split);
 	}
-
-
 	else
 	{
 		while (i < argc - 1)
@@ -48,14 +54,7 @@ int	main(int argc, char **argv)
 			i++;
 		}
 	}
-	size_a = i;
-	i = 0;
-	while (i < size_a)
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+	
 	average = sum(stack_a, size_a) / size_a;
 
 	while (!check_sort(stack_a, size_a) || size_b)
