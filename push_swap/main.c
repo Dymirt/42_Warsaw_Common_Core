@@ -9,52 +9,26 @@ void print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 
 int	main(int argc, char **argv)
 {
-	int i = 0;
-	int size_a = argc - 1;
+	int size_a;
 	int size_b = 0;
-	int stack_a[size_a];
-	int stack_b[size_a];
-	char **split = NULL;
+	int *stack_a;
+	int *stack_b;
 	int average;
+	struct array *array;
 
-	if (argc < 2)
-	{
-		printf("Error\n");
-		return (0);
-	}
+	array = valid_input(argc, argv);
 
-	if (argc == 2)
+	if (!array->array)
 	{
-		split = ft_split(argv[1], ' ');
-		while (split[i])
-		{
-			stack_a[i] = ft_atoi(split[i]);
-			i++;
+		ft_putendl_fd("Error", 2);
+		exit(0);
+	}
+	size_a = array->size;
+	stack_a = array->array;
 
-		}
-		size_a = i;
-		i = 0;
-		while (i < size_a)
-		{
-			free(split[i]);
-			i++;
-		}
-		free(split);
-	}
-	else
-	{
-		while (i < argc - 1)
-		{
-			stack_a[i] = ft_atoi(argv[i + 1]);
-			if (!stack_a[i])
-			{
-				printf("Error\n");
-				return (0);
-			}
-			i++;
-		}
-	}
-	
+
+	stack_b = ft_calloc(size_a, sizeof(int));
+
 	average = sum(stack_a, size_a) / size_a;
 
 	while (!check_sort(stack_a, size_a) || size_b)
@@ -76,7 +50,6 @@ int	main(int argc, char **argv)
 			pa(stack_a, stack_b, &size_a, &size_b);
 	}
 	//print_stacks(stack_a, stack_b, size_a, size_b);
-
 }
 
 int check_sort(int *stack_a, int size)

@@ -8,8 +8,7 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = push_swap
 
 # Source files
-SRC = main.c swap.c rotate.c push.c
-
+SRC = main.c swap.c rotate.c push.c valid_input.c
 # Rule for compiling libft
 LIBFT_NAME = libft.a
 LIBFT_DIR = libft/

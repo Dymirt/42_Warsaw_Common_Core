@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/05/16 01:41:51 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/03 01:44:08 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 # include <stdint.h>
+
+typedef struct array {
+	int	*array;
+	int	size;
+} t_array;
+
+//valid_input.c
+t_array *valid_input(int argc, char **argv);
 
 // swap.c
 void	swap_head(int *stack, char *str);
@@ -42,7 +50,6 @@ int		ft_swap_and_free(char **str1, char **str2);
 void	ft_printf_handle_s(char *va_sting, size_t *res, char **p_str);
 void	ft_printf_handle_p(uintptr_t nbr, size_t *res, char **p_str);
 void	printf_join(char **p_str, char *str, size_t *res, size_t str_len);
-
 
 
 
