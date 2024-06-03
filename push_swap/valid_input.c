@@ -5,6 +5,7 @@ void free_split(char **split , int len);
 int is_digit_array(char **array, int len);
 void array_to_int(char **array, int *stack, int len);
 int is_unique_int_array(int *array, int len);
+int integrity_check(int *stack, char **array, int len);
 
 
 t_array *valid_input(int argc, char **argv)
@@ -54,10 +55,22 @@ t_array *valid_input(int argc, char **argv)
 	if (argc == 2)
 	{
 		array_to_int(split, stack, array->size);
+		if (!integrity_check(stack, split, array->size))
+		{
+			free(stack);
+			stack = NULL;
+		}
 		free_split(split, array->size);
 	}
 	else
+	{
 		array_to_int(argv + 1, stack, array->size);
+		if (!integrity_check(stack, argv + 1, array->size))
+		{
+			free(stack);
+			stack = NULL;
+		}
+	}
 
 	if (!is_unique_int_array(stack, array->size))
 	{
@@ -71,6 +84,8 @@ t_array *valid_input(int argc, char **argv)
 int ft_isdigit_str(char *str)
 {
 	int i = 0;
+	if (ft_strlen(str) > 11)
+		return (0);
 	while (str[i])
 	{
 		if (str[i] == '-' && i == 0 && ft_isdigit(str[i + 1]))
@@ -94,45 +109,14 @@ void free_split(char **split , int len)
 
 int is_digit_array(char **array, int len)
 {
-	if (len)
+	while (len)
 	{
-		while (len)
-		{
-			if (!ft_isdigit_str(array[len - 1]))
-				return (0);
-			len--;
-		}
-	}
-	else
-	{
-		while (*array != NULL)
-		{
-			if (!ft_isdigit_str(*array))
-				return (0);
-			array++;
-		}
+		if (!ft_isdigit_str(array[len - 1]))
+			return (0);
+		len--;
 	}
 	return (1);
 }
-
-int array_duplicate_str(char **array, int len)
-{
-	int i = 0;
-	int j = 0;
-	while (i < len)
-	{
-		while (j < i)
-		{
-			if (ft_strncmp(array[j], array[i], ft_strlen(array[j])) == 0)
-				return (0);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (1);
-}
-
 
 void array_to_int(char **array, int *stack, int len)
 {
@@ -164,3 +148,23 @@ int is_unique_int_array(int *array, int len)
 	return (1);
 }
 
+int integrity_check(int *stack, char **array, int len)
+{
+	int i;
+	char * str;
+	i = 0;
+	while (i < len)
+	{
+		str = ft_itoa(stack[i]);
+		if (ft_strncmp(str, array[i], ft_strlen(str)))
+		{
+			free(str);
+			str = NULL;
+			return (0);
+		}
+		free(str);
+		str = NULL;
+		i++;
+	}
+	return (1);
+}

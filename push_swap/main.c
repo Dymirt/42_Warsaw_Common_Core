@@ -49,6 +49,9 @@ int	main(int argc, char **argv)
 		else if (size_b)
 			pa(stack_a, stack_b, &size_a, &size_b);
 	}
+	free(array->array);
+	free(array);
+	free(stack_b);
 	//print_stacks(stack_a, stack_b, size_a, size_b);
 }
 
