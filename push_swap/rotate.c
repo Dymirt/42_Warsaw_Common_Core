@@ -25,14 +25,14 @@ void rr(int *stack_a, int *stack_b, int size_a, int size_b)
 	ft_putendl_fd("rr", 1);
 }
 
-int check_for_ra(int *stack, int size, int average)
+int check_for_ra(int *stack, int size)
 {
-	return (stack[0] > stack[1] && (stack[0] > average || stack[0] > stack[size - 1]));
+	return (stack[0] > stack[size - 1]);
 }
 
-int check_for_rb(int *stack, int size, int average)
+int check_for_rb(int *stack, int size)
 {
-	return (stack[0] < stack[1] && (stack[0] < average || stack[0] < stack[size - 1]));
+	return (stack[0] < stack[size - 1]);
 }
 
 
@@ -51,7 +51,19 @@ void reverse_rotate(int *stack, int size, char *str)
 		ft_putendl_fd(str, 1);
 }
 
-int check_for_rra(int *stack, int size, int average)
+void rrr(int *stack_a, int *stack_b, int size_a, int size_b)
 {
-	return (stack[size - 1] < stack[0] && (stack[size - 1] < average || stack[size - 1] < stack[size - 2]));
+	rotate(stack_a, size_a, "");
+	rotate(stack_b, size_b, "");
+	ft_putendl_fd("rrr", 1);
+}
+
+int check_for_rra(int *stack, int size)
+{
+	return (stack[size - 1] < stack[size - 2]);
+}
+
+int check_for_rrb(int *stack, int size)
+{
+	return (stack[size - 1] > stack[size - 2]);
 }
