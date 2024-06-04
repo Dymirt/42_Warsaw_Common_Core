@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/04 16:04:01 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/04 17:13:18 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void rrr(int *stack_a, int *stack_b, int size_a, int size_b);
 int check_for_rra(int *stack, int size);
 int check_for_rrb(int *stack, int size);
 // push.c
-void pb(int *stack_a, int *stack_b, int *size_a, int *size_b);
-void pa(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void push(int *stack_a, int *stack_b, int *size_a, int *size_b, char *str);
 
 int		ft_printf(const char *format, ...);
 char	*ft_utoa(unsigned int n);

@@ -40,9 +40,9 @@ int	main(int argc, char **argv)
 		else if (stack_a[0] > stack_a[1] && size_a > 1)
 			swap_head(stack_a, "sa");
 		else if (stack_a[0] < stack_a[1] && !check_sort(stack_a, size_a))
-			pb(stack_a, stack_b, &size_a, &size_b);
+			push(stack_a, stack_b, &size_a, &size_b, "pb");
 		else if (size_b)
-			pa(stack_a, stack_b, &size_a, &size_b);
+			push(stack_b, stack_a, &size_b, &size_a, "pa");
 		//print_stacks(stack_a, stack_b, size_a, size_b);
 
 	}
