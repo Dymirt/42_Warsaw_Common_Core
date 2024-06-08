@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 18:35:33 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 21:57:18 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_int_arr	*valid_input(int argc, char **argv);
 // swap.c
 void		swap_head(int *stack, char *str);
 void		ss(int *stack_a, int *stack_b);
+int	check_swap(t_int_arr *stack);
+
 // rotate.c
 void		rotate(t_int_arr *stack_a, char *str);
 void		rr(t_int_arr *stack_a, t_int_arr *stack_b);

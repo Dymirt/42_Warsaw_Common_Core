@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:06:59 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 16:07:31 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 22:26:12 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,9 @@ void	ss(int *stack_a, int *stack_b)
 	swap_head(stack_a, "");
 	swap_head(stack_b, "");
 	ft_putendl_fd("ss", 1);
+}
+
+int	check_swap(t_int_arr *stack)
+{
+	return (stack->array[0] > stack->array[1] && stack->array[0] < stack->array[stack->size - 1]);
 }

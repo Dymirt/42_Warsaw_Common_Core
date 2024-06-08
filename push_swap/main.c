@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 21:33:41 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 22:37:57 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	main(int argc, char **argv)
 	}
 	total_size = stack_a->size;
 	i = 0;
-	while (i < total_size / 2)
+	while (i < total_size / 2 && total_size > 5)
 	{
 		push(stack_a, stack_b, "pb");
 		i++;
@@ -59,33 +59,45 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (!ft_sorted(stack_a->array, stack_a->size) || stack_b->size)
 	{
-		/*
-		if (i++ > 500)
+		//*
+		if (i++ > 20)
 			break;
-
-		print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 		//*/
+		print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 
-		if (check_for_rotate(stack_a) && !check_for_rotate(stack_b))
+		 if (check_swap(stack_a) && check_swap(stack_b) && stack_b->size > 1)
+			ss(stack_a->array, stack_b->array);
+		else if (check_swap(stack_a))
+			swap_head(stack_a->array, "sa");
+		else if (check_swap(stack_b) && stack_b->size > 1)
+			swap_head(stack_b->array, "sb");
+
+		else if (check_for_rotate(stack_a) && check_for_rotate(stack_b) && stack_b->size > 1)
 			rr(stack_a, stack_b);
 		else if (check_for_rotate(stack_a))
 			rotate(stack_a, "ra");
-		else if (check_reverse_rotate(stack_a) && !check_reverse_rotate(stack_b) && stack_b->size > 1)
+		else if (check_for_rotate(stack_b) && stack_b->size > 1)
+			rotate(stack_b, "rb");
+			
+		else if (check_reverse_rotate(stack_a) && check_reverse_rotate(stack_b) && stack_b->size > 1)
 			rrr(stack_a, stack_b);
 		else if (check_reverse_rotate(stack_a))
 			reverse_rotate(stack_a, "rra");
-		else if (stack_a->array[0] > stack_a->array[1] && stack_b->array[0] < stack_b->array[1] && stack_b->size > 1)
-			ss(stack_a->array, stack_b->array);
-		else if (stack_a->array[0] > stack_a->array[1] && stack_a->size > 1)
-			swap_head(stack_a->array, "sa");
-		else if (!header_fits(stack_a))
-			push(stack_a, stack_b, "pb");
-		else if (header_fits(stack_a) && !ft_sorted(stack_a->array, stack_a->size))
-			push(stack_a, stack_b, "pb");
+		else if (check_reverse_rotate(stack_b) && stack_b->size > 1)
+			reverse_rotate(stack_b, "rrb");
+			
+
+
 		else if (stack_b->size && stack_b->array[0] < stack_a->array[0] && stack_b->array[0] < stack_a->array[stack_a->size - 1])
 			push(stack_b, stack_a,"pa");
-		else if (stack_b->size)
-			push(stack_b, stack_a, "pa");
+
+		else if (header_fits(stack_a) && !ft_sorted(stack_a->array, stack_a->size))
+			push(stack_a, stack_b, "pb");
+		
+		else
+			rotate(stack_a, "ra");
+
+
 		//print_stacks(stack_a, stack_b, size_a, size_b);
 		
 		
