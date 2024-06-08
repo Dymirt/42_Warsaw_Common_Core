@@ -1,0 +1,14 @@
+ARG=$(shuf -i 0-14900 -n 500 | tr '\n' ' ');
+RESULT=$(./push_swap $ARG | wc -l);
+./push_swap $ARG | ./checker_linux $ARG;
+
+echo $RESULT
+if [ $RESULT -lt 5500 ]
+then
+	echo "GREAT"
+elif [ $RESULT -lt 7000 ]
+then
+	echo "GOOD"
+else
+	echo "TOO MUCH MOVES"
+fi
