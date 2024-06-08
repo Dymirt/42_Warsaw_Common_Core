@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:10:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 18:23:54 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 19:10:17 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	reverse_rotate(t_int_arr *stack, char *str)
 	tmp = stack->array[stack->size - 1];
 	while (i > 0)
 	{
-		stack[i] = stack[i - 1];
+		stack->array[i] = stack->array[i - 1];
 		i--;
 	}
 	stack->array[i] = tmp;
