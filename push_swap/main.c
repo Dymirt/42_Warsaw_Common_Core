@@ -6,13 +6,12 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 17:02:47 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 17:14:20 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "push_swap.h"
 
-int		check_sort(int *stack_a, int size);
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 
 int	main(int argc, char **argv)
@@ -32,7 +31,7 @@ int	main(int argc, char **argv)
 	size_a = array->size;
 	stack_a = array->array;
 	stack_b = ft_calloc(size_a, sizeof(int));
-	while (!check_sort(stack_a, size_a) || size_b)
+	while (!ft_sorted(stack_a, size_a) || size_b)
 	{
 		//print_stacks(stack_a, stack_b, size_a, size_b);
 		if (check_for_ra(stack_a, size_a) && check_for_rb(stack_b, size_b))
@@ -47,7 +46,7 @@ int	main(int argc, char **argv)
 			ss(stack_a, stack_b);
 		else if (stack_a[0] > stack_a[1] && size_a > 1)
 			swap_head(stack_a, "sa");
-		else if (stack_a[0] < stack_a[1] && !check_sort(stack_a, size_a))
+		else if (stack_a[0] < stack_a[1] && !ft_sorted(stack_a, size_a))
 			push(stack_a, stack_b, &size_a, &size_b, "pb");
 		else if (size_b)
 			push(stack_b, stack_a, &size_b, &size_a, "pa");
@@ -57,20 +56,6 @@ int	main(int argc, char **argv)
 	free(array->array);
 	free(array);
 	free(stack_b);
-}
-
-int	check_sort(int *stack_a, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (stack_a[i] > stack_a[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)
