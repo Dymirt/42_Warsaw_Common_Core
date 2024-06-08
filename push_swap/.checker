@@ -1,14 +1,12 @@
-ARG=$(shuf -i 0-14900 -n 500 | tr '\n' ' ');
-RESULT=$(./push_swap $ARG | wc -l);
-./push_swap $ARG | ./checker_linux $ARG;
+i=1
+while [ $i -le 100 ]
+do
+    ARG=$(shuf -i 0-14900 -n 5 | tr '\n' ' ');
+    RESULT=$(./push_swap $ARG | wc -l);
+    AVERAGE=$(($AVERAGE + $RESULT));
+	i=$((i + 1))
+done
 
-echo $RESULT
-if [ $RESULT -lt 5500 ]
-then
-	echo "GREAT"
-elif [ $RESULT -lt 7000 ]
-then
-	echo "GOOD"
-else
-	echo "TOO MUCH MOVES"
-fi
+AVERAGE=$(echo "scale=2; $AVERAGE / 100" | bc)
+
+echo "AVERAGE: $AVERAGE"

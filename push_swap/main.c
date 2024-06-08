@@ -6,18 +6,24 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 18:56:59 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 21:33:41 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
+int header_fits(t_int_arr *stack);
 
 int	main(int argc, char **argv)
 {
 	struct int_arr	*stack_a;
 	struct int_arr	*stack_b;
+
+	int i;
+	int total_size;
+
+	
 
 	stack_a = valid_input(argc, argv);
 	if (!stack_a->array)
@@ -43,9 +49,23 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Error", 2);
 		exit(0);
 	}
+	total_size = stack_a->size;
+	i = 0;
+	while (i < total_size / 2)
+	{
+		push(stack_a, stack_b, "pb");
+		i++;
+	}
+	i = 0;
 	while (!ft_sorted(stack_a->array, stack_a->size) || stack_b->size)
 	{
-		//print_stacks(stack_a, stack_b, size_a, size_b);
+		/*
+		if (i++ > 500)
+			break;
+
+		print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
+		//*/
+
 		if (check_for_rotate(stack_a) && !check_for_rotate(stack_b))
 			rr(stack_a, stack_b);
 		else if (check_for_rotate(stack_a))
@@ -58,11 +78,17 @@ int	main(int argc, char **argv)
 			ss(stack_a->array, stack_b->array);
 		else if (stack_a->array[0] > stack_a->array[1] && stack_a->size > 1)
 			swap_head(stack_a->array, "sa");
-		else if (stack_a->array[0] < stack_a->array[1] && !ft_sorted(stack_a->array, stack_a->size))
+		else if (!header_fits(stack_a))
 			push(stack_a, stack_b, "pb");
-		else if (stack_b->size)
+		else if (header_fits(stack_a) && !ft_sorted(stack_a->array, stack_a->size))
+			push(stack_a, stack_b, "pb");
+		else if (stack_b->size && stack_b->array[0] < stack_a->array[0] && stack_b->array[0] < stack_a->array[stack_a->size - 1])
 			push(stack_b, stack_a,"pa");
+		else if (stack_b->size)
+			push(stack_b, stack_a, "pa");
 		//print_stacks(stack_a, stack_b, size_a, size_b);
+		
+		
 	}
 	//print_stacks(stack_a, stack_b, size_a, size_b);
 		free(stack_a->array);
@@ -93,4 +119,9 @@ void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)
 		i++;
 	}
 	ft_putendl_fd("", 1);
+}
+
+int header_fits(t_int_arr *stack)
+{
+	return ((stack->array[0] < stack->array[1]) && (stack->array[0] < stack->array[stack->size - 1]));
 }

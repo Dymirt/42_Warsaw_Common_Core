@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:10:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 19:10:17 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 19:37:49 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	rrr(t_int_arr *stack_a, t_int_arr *stack_b)
 
 int	check_reverse_rotate(t_int_arr *stack)
 {
-	return (stack->array[stack->size - 1] < stack->array[stack->size - 2]);
+	//return (stack->array[stack->size - 1] < stack->array[stack->size - 2]);
+	return (stack->array[0] > stack->array[1] && stack->array[0] > stack->array[stack->size - 1]);
 }
