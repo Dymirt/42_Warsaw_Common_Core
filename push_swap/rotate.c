@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:07:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 17:51:37 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:23:03 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,7 @@ void	rr(t_int_arr *stack_a, t_int_arr *stack_b)
 	ft_putendl_fd("rr", 1);
 }
 
-int	check_for_ra(t_int_arr *stack)
+int	check_for_rotate(t_int_arr *stack)
 {
 	return (stack->array[0] > stack->array[stack->size - 1]);
-}
-
-int	check_for_rb(t_int_arr *stack)
-{
-	return (stack->array[0] < stack->array[stack->size - 1]);
 }

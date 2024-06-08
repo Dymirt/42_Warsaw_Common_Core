@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 18:13:36 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:35:33 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void		ss(int *stack_a, int *stack_b);
 // rotate.c
 void		rotate(t_int_arr *stack_a, char *str);
 void		rr(t_int_arr *stack_a, t_int_arr *stack_b);
-int			check_for_ra(t_int_arr *stack);
-int			check_for_rb(t_int_arr *stack);
+int			check_for_rotate(t_int_arr *stack);
+
 // Reverse rotate at rotate.c
 void		reverse_rotate(t_int_arr *stack, char *str);
 void		rrr(t_int_arr *stack_a, t_int_arr *stack_b);
-int			check_for_rra(t_int_arr *stack);
-int			check_for_rrb(t_int_arr *stack);
+int			check_reverse_rotate(t_int_arr *stack);
+
 // push.c
 void		push(t_int_arr *stack_a, t_int_arr *stack_b, char *str);
 

@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 18:17:40 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:24:19 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	main(int argc, char **argv)
 	while (!ft_sorted(stack_a->array, stack_a->size) || stack_b->size)
 	{
 		//print_stacks(stack_a, stack_b, size_a, size_b);
-		if (check_for_ra(stack_a) && check_for_rb(stack_b))
+		if (check_for_rotate(stack_a) && !check_for_rotate(stack_b))
 			rr(stack_a, stack_b);
-		else if (check_for_ra(stack_a))
+		else if (check_for_rotate(stack_a))
 			rotate(stack_a, "ra");
-		else if (check_for_rra(stack_a) && check_for_rrb(stack_b))
+		else if (check_reverse_rotate(stack_a) && !check_reverse_rotate(stack_b))
 			rrr(stack_a, stack_b);
-		else if (check_for_rra(stack_a))
+		else if (check_reverse_rotate(stack_a))
 			reverse_rotate(stack_a, "rra");
 		else if (stack_a->array[0] > stack_a->array[1] && stack_b->array[0] < stack_b->array[1] && stack_b->size > 1)
 			ss(stack_a->array, stack_b->array);
