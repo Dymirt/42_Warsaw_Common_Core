@@ -6,42 +6,42 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:07:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 16:11:50 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 17:51:37 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rotate(int *stack, int size, char *str)
+void	rotate(t_int_arr *stack, char *str)
 {
 	int	i;
 	int	tmp;
 
 	i = 0;
-	tmp = stack[0];
-	while (i < size - 1)
+	tmp = stack->array[0];
+	while (i < stack->size - 1)
 	{
-		stack[i] = stack[i + 1];
+		stack->array[i] = stack->array[i + 1];
 		i++;
 	}
-	stack[i] = tmp;
+	stack->array[i] = tmp;
 	if (*str)
 		ft_putendl_fd(str, 1);
 }
 
-void	rr(int *stack_a, int *stack_b, int size_a, int size_b)
+void	rr(t_int_arr *stack_a, t_int_arr *stack_b)
 {
-	rotate(stack_a, size_a, "");
-	rotate(stack_b, size_b, "");
+	rotate(stack_a, "");
+	rotate(stack_b, "");
 	ft_putendl_fd("rr", 1);
 }
 
-int	check_for_ra(int *stack, int size)
+int	check_for_ra(t_int_arr *stack)
 {
-	return (stack[0] > stack[size - 1]);
+	return (stack->array[0] > stack->array[stack->size - 1]);
 }
 
-int	check_for_rb(int *stack, int size)
+int	check_for_rb(t_int_arr *stack)
 {
-	return (stack[0] < stack[size - 1]);
+	return (stack->array[0] < stack->array[stack->size - 1]);
 }

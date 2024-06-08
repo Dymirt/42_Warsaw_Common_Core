@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:52:18 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 17:00:12 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 17:23:44 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	array_to_int(char **array, int *stack, int len);
 int		is_unique_int_array(int *array, int len);
 int		integrity_check(int *stack, char **array, int len);
 
-t_array	*valid_input(int argc, char **argv)
+t_int_arr	*valid_input(int argc, char **argv)
 {
 	char			**split;
 	int				*stack;
-	struct array	*array;
+	struct int_arr	*array;
 
-	array = (struct array *)malloc(sizeof(struct array));
+	array = (struct int_arr *)malloc(sizeof(struct int_arr));
 	array->size = 0;
 	array->array = NULL;
 	split = NULL;

@@ -6,56 +6,69 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 17:14:20 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:17:40 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "push_swap.h"
+#include "push_swap.h"
 
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 
 int	main(int argc, char **argv)
 {
-	int				size_a;
-	int				size_b = 0;
-	int				*stack_a;
-	int				*stack_b;
-	struct array	*array;
+	struct int_arr	*stack_a;
+	struct int_arr	*stack_b;
 
-	array = valid_input(argc, argv);
-	if (!array->array)
+	stack_a = valid_input(argc, argv);
+	if (!stack_a->array)
 	{
 		ft_putendl_fd("Error", 2);
 		exit(0);
 	}
-	size_a = array->size;
-	stack_a = array->array;
-	stack_b = ft_calloc(size_a, sizeof(int));
-	while (!ft_sorted(stack_a, size_a) || size_b)
+	stack_b = (struct int_arr *)malloc(sizeof(struct int_arr));
+	if (!stack_b)
+	{
+		free(stack_a->array);
+		free(stack_a);
+		ft_putendl_fd("Error", 2);
+		exit(0);
+	}
+	stack_b->size = 0;
+	stack_b->array = (int *)malloc(sizeof(int) * stack_a->size);
+	if (!stack_b->array)
+	{
+		free(stack_a->array);
+		free(stack_a);
+		free(stack_b);
+		ft_putendl_fd("Error", 2);
+		exit(0);
+	}
+	while (!ft_sorted(stack_a->array, stack_a->size) || stack_b->size)
 	{
 		//print_stacks(stack_a, stack_b, size_a, size_b);
-		if (check_for_ra(stack_a, size_a) && check_for_rb(stack_b, size_b))
-			rr(stack_a, stack_b, size_a, size_b);
-		else if (check_for_ra(stack_a, size_a))
-			rotate(stack_a, size_a, "ra");
-		else if (check_for_rra(stack_a, size_a) && check_for_rrb(stack_b, size_b))
-			rrr(stack_a, stack_b, size_a, size_b);
-		else if (check_for_rra(stack_a, size_a))
-			reverse_rotate(stack_a, size_a, "rra");
-		else if (stack_a[0] > stack_a[1] && stack_b[0] < stack_b[1] && size_b > 1)
-			ss(stack_a, stack_b);
-		else if (stack_a[0] > stack_a[1] && size_a > 1)
-			swap_head(stack_a, "sa");
-		else if (stack_a[0] < stack_a[1] && !ft_sorted(stack_a, size_a))
-			push(stack_a, stack_b, &size_a, &size_b, "pb");
-		else if (size_b)
-			push(stack_b, stack_a, &size_b, &size_a, "pa");
+		if (check_for_ra(stack_a) && check_for_rb(stack_b))
+			rr(stack_a, stack_b);
+		else if (check_for_ra(stack_a))
+			rotate(stack_a, "ra");
+		else if (check_for_rra(stack_a) && check_for_rrb(stack_b))
+			rrr(stack_a, stack_b);
+		else if (check_for_rra(stack_a))
+			reverse_rotate(stack_a, "rra");
+		else if (stack_a->array[0] > stack_a->array[1] && stack_b->array[0] < stack_b->array[1] && stack_b->size > 1)
+			ss(stack_a->array, stack_b->array);
+		else if (stack_a->array[0] > stack_a->array[1] && stack_a->size > 1)
+			swap_head(stack_a->array, "sa");
+		else if (stack_a->array[0] < stack_a->array[1] && !ft_sorted(stack_a->array, stack_a->size))
+			push(stack_a, stack_b, "pb");
+		else if (stack_b->size)
+			push(stack_b, stack_a,"pa");
 		//print_stacks(stack_a, stack_b, size_a, size_b);
 	}
 	//print_stacks(stack_a, stack_b, size_a, size_b);
-	free(array->array);
-	free(array);
-	free(stack_b);
+		free(stack_a->array);
+		free(stack_a);
+		free(stack_b->array);
+		free(stack_b);
 }
 
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)

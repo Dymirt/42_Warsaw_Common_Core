@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 17:12:30 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 17:25:49 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,13 @@ char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 
 // push_swap
-int	ft_sorted(int *arr, int size);
+typedef struct int_arr
+{
+	int	*array;
+	int	size;
+}	t_int_arr;
+
+int		ft_sorted(int *arr, int size);
 
 /*
 void	ft_lstclear(t_list **lst, void (*del)(void *));
