@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 18:24:19 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/08 18:56:59 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 			rr(stack_a, stack_b);
 		else if (check_for_rotate(stack_a))
 			rotate(stack_a, "ra");
-		else if (check_reverse_rotate(stack_a) && !check_reverse_rotate(stack_b))
+		else if (check_reverse_rotate(stack_a) && !check_reverse_rotate(stack_b) && stack_b->size > 1)
 			rrr(stack_a, stack_b);
 		else if (check_reverse_rotate(stack_a))
 			reverse_rotate(stack_a, "rra");
