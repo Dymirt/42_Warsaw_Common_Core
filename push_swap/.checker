@@ -1,19 +1,20 @@
 i=1
-while [ $i -le 100 ]
+while [ $i -le 1000 ]
 do
     ARG=$(shuf -i 0-14900 -n 5 | tr '\n' ' ');
 	echo "ARG: $ARG";
     RESULT=$(./push_swap $ARG | wc -l);
+	#./push_swap $ARG | ./checker_linux $ARG;
 	echo "RESULT: $RESULT";
     AVERAGE=$(($AVERAGE + $RESULT));
 	i=$((i + 1))
 done
 
-AVERAGE=$(echo "scale=2; $AVERAGE / 100" | bc)
+AVERAGE=$(echo "scale=2; $AVERAGE / 1000" | bc)
 
 echo "AVERAGE: $AVERAGE"
 
-# 3 numbers 1.47 `average`
+# 3 numbers 1.16 `average` 10000
 # 5 numbers 8.3 `average`
 # 100 numbers 2252499.90 `average`
 # 500 numbers  `average`
