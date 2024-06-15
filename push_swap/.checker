@@ -1,20 +1,34 @@
 i=1
-while [ $i -le 1000 ]
+ITERATION=1000
+MAX=0
+AVERAGE=0
+while [ $i -le $ITERATION ]
 do
-    ARG=$(shuf -i 0-14900 -n 5 | tr '\n' ' ');
+    ARG=$(shuf -i 0-14900 -n 3 | tr '\n' ' ');
 	echo "ARG: $ARG";
     RESULT=$(./push_swap $ARG | wc -l);
-	#./push_swap $ARG | ./checker_linux $ARG;
+	./push_swap $ARG | ./checker_linux $ARG;
+	#./push_swap $ARG
 	echo "RESULT: $RESULT";
+	if [ $RESULT -eq 0 ]
+	then
+		ITERATION=$(($ITERATION - 1));
+	fi
+	if [ $RESULT -gt $MAX ]
+	then
+		MAX=$RESULT;
+	fi
     AVERAGE=$(($AVERAGE + $RESULT));
 	i=$((i + 1))
 done
 
-AVERAGE=$(echo "scale=2; $AVERAGE / 1000" | bc)
+AVERAGE=$(echo "scale=2; $AVERAGE / $ITERATION" | bc)
 
 echo "AVERAGE: $AVERAGE"
+echo "ITERATION: $ITERATION"
+echo "MAX: $MAX"
 
-# 3 numbers 1.16 `average` 10000
-# 5 numbers 8.3 `average`
-# 100 numbers 2252499.90 `average`
-# 500 numbers  `average`
+# 3 numbers 1.15 `average` 1000
+# 5 numbers 7.06 `average` 1000
+# 100 numbers 1478 `average` 1000
+# 500 numbers 32422.45 `average` 1000

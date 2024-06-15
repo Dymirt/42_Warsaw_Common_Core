@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/11 00:03:19 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/15 20:00:24 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ int ft_sorted_percent_rev(int *stack, int size);
 int max_value(int *stack, int size);
 int min_value(int *stack, int size);
 int min_value_index(int *stack, int size);
+int max_value_index(int *stack, int size);
 int ft_sorted_percent_rev_desc(int *stack, int size);
 int ft_sorted_percent_desc(int *stack, int size);
+int nearest_smaller_value(int *stack, int size, int value);
+int nearest_larger_value(int *stack, int size, int value);
 
 
 int	main(int argc, char **argv)
@@ -87,14 +90,61 @@ int	main(int argc, char **argv)
 		// 3. Merge stack_a and stack_b
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 
+		
+
+		//
+		// This is condition for 3 elements if thay are not partialy sorted do sa and exit loop;
+		//
 		if (check_swap(stack_a) && stack_a->size == 3)
 			swap_head(stack_a->array, "sa");
+		
+
+		// This condition is for those cases when b is not empty and there is sb can be done
+		/*
 		else if (check_swap(stack_a) && (check_swap_rev(stack_b) && stack_b->size > 1))
-		{
 			ss(stack_a->array, stack_b->array);
-		}
 		else if (check_swap_rev(stack_b))
 			swap_head(stack_b->array, "sb");
+		*/
+
+
+		// push two first elements to stack_b this will work for 5 elements
+		else if (stack_b->size == 0)
+		{
+			while (stack_b->size < 2)
+			{
+				push(stack_a, stack_b, "pb");
+			}
+		}
+
+		else
+		{
+
+			if (stack_a->array[0] < max_value(stack_b->array, stack_b->size))
+			{
+				//ft_putnbr_fd(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]), 1);
+				while(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
+				{
+					if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0])))
+						rotate(stack_b, "rb");
+					else
+						reverse_rotate(stack_b, "rrb");
+				}
+				push(stack_a, stack_b, "pb");
+			}
+			else
+			{
+				while(stack_b->array[0] != min_value(stack_b->array, stack_b->size))
+				{
+					if (min_value_index(stack_b->array, stack_b->size) < (stack_b->size - min_value_index(stack_b->array, stack_b->size)))
+						rotate(stack_b, "rb");
+					else
+						reverse_rotate(stack_b, "rrb");
+				}
+				push(stack_a, stack_b, "pb");
+			}
+		}
+			
 		/*
 		else if (check_for_rotate(stack_a) && (!check_for_rotate(stack_b) && stack_b->size > 1))
 			rr(stack_a, stack_b);
@@ -109,6 +159,7 @@ int	main(int argc, char **argv)
 		else if (check_for_rotate(stack_a)	&& stack_a->size == 3)
 			rotate(stack_a, "ra");
 			*/
+		/*
 		else if (stack_a->array[0] == min_value(stack_a->array, stack_a->size))
 		{
 			push (stack_a, stack_b, "pb");
@@ -132,7 +183,6 @@ int	main(int argc, char **argv)
 				if (min_value_index(stack_b->array, stack_b->size) < (stack_b->size - min_value_index(stack_b->array, stack_b->size)))
 				{
 					rr(stack_a, stack_b);
-					break;
 				}
 				else
 				{
@@ -143,6 +193,14 @@ int	main(int argc, char **argv)
 			{
 				reverse_rotate(stack_a, "rra");
 			}
+		*/
+
+
+
+
+
+
+		
 		/*
 		else
 		{
@@ -200,6 +258,32 @@ int	main(int argc, char **argv)
 	}
 	while (stack_b->size)
 	{
+		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
+
+			if (stack_b->array[0] < max_value(stack_a->array, stack_a->size))
+			{
+				//ft_putnbr_fd(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]), 1);
+				while(nearest_larger_value(stack_a->array, stack_a->size, stack_b->array[0]) != 0)
+				{
+					if (nearest_larger_value(stack_a->array, stack_a->size, stack_b->array[0]) < (stack_a->size - nearest_larger_value(stack_a->array, stack_a->size, stack_b->array[0])))
+						rotate(stack_a, "ra");
+					else
+						reverse_rotate(stack_a, "rra");
+				}
+				push(stack_b, stack_a, "pa");
+			}
+			else
+			{
+				while(stack_a->array[0] != min_value(stack_a->array, stack_a->size))
+				{
+					if (min_value_index(stack_a->array, stack_a->size) < (stack_a->size - min_value_index(stack_a->array, stack_a->size)))
+						rotate(stack_a, "ra");
+					else
+						reverse_rotate(stack_a, "rra");
+				}
+				push(stack_b, stack_a, "pa");
+			}
+		/*
 		if (ft_sorted(stack_a->array, stack_a->size) && stack_b->array[0] < stack_a->array[0] && stack_b->array[0] < stack_a->array[stack_a->size - 1])
 				{
 					push (stack_b, stack_a, "pa");
@@ -235,6 +319,7 @@ int	main(int argc, char **argv)
 
 			}
 		}
+		*/
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 	}
 	//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
@@ -428,6 +513,61 @@ int min_value_index(int *stack, int size)
 			min = stack[i];
 			index = i;
 		}
+		i++;
+	}
+	return (index);
+}
+
+int max_value_index(int *stack, int size)
+{
+	int i;
+	int max;
+	int index;
+
+	i = 1;
+	max = stack[0];
+	index = 0;
+	while (i < size)
+	{
+		if (stack[i] > max)
+		{
+			max = stack[i];
+			index = i;
+		}
+		i++;
+	}
+	return (index);
+}
+
+int nearest_larger_value(int *stack, int size, int value)
+{
+	int index = -1;
+	int i = 0;
+
+	while (i < size)
+	{	
+		if ((stack[i] > value) )
+			{
+				if (stack[i] < stack[index] || index == -1)
+					index = i;
+			}
+		i++;
+	}
+	return (index);
+}
+
+int nearest_smaller_value(int *stack, int size, int value)
+{
+	int index = -1;
+	int i = 0;
+
+	while (i < size)
+	{	
+		if ((stack[i] < value) )
+			{
+				if (stack[i] > stack[index] || index == -1)
+					index = i;
+			}
 		i++;
 	}
 	return (index);

@@ -30,7 +30,7 @@ do
 	ARG=$(generate_unique_numbers 100 0 14900)
 	echo "ARG: $ARG";
     RESULT=$(./push_swap $ARG | wc -l);
-	./push_swap $ARG | ./checker_Mac $ARG;
+	./push_swap $ARG | ./checker_linux $ARG;
 	echo "RESULT: $RESULT";
 	if [ $RESULT -eq 0 ]
 	then
@@ -56,14 +56,14 @@ echo "MAX: $MAX"
 # 500 numbers 44224 `max` 100 iteration
 
 
-#required: sort   3 numbers with <=     3 operations
-#required: sort   5 numbers with <=    12 operations
-#scored:   sort 100 numbers with <=   700 operations   max score
+# required: sort   3 numbers with <=     3 operations
+# required: sort   5 numbers with <=    12 operations
+# scored:   sort 100 numbers with <=   700 operations   max score
 #                                     900 operations
 #                                    1100 operations
 #                                    1300 operations
 #                                    1500 operations   min score
-#scored:   sort 500 numbers with <=  5500 operations   max score
+# scored:   sort 500 numbers with <=  5500 operations   max score
 #                                    7000 operations
 #                                    8500 operations
 #                                   10000 operations
