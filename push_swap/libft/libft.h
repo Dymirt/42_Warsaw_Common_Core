@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/08 17:25:49 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/10 19:08:49 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct int_arr
 }	t_int_arr;
 
 int		ft_sorted(int *arr, int size);
+int		ft_sorted_desc(int *arr, int size);
 
 /*
 void	ft_lstclear(t_list **lst, void (*del)(void *));

@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:06:59 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/09 23:00:00 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/10 18:21:37 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ int	check_swap(t_int_arr *stack)
 	else if (stack->array[0] > stack->array[1] && stack->array[0] < stack->array[stack->size - 1] && stack->array[1] < stack->array[stack->size - 1]) // 2 1 3
 		return (1);
 	else if (stack->array[0] > stack->array[1] && stack->array[0] > stack->array[stack->size - 1] && stack->array[1] > stack->array[stack->size - 1]) // 3 2 1
+		return (1);
+	return (0);
+}
+int check_swap_rev(t_int_arr *stack)
+{
+	if (stack->array[0] < stack->array[1] && stack->array[0] > stack->array[stack->size - 1])
 		return (1);
 	return (0);
 }
