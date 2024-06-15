@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/15 20:00:24 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/15 22:01:04 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,18 @@ int ft_sorted_percent_rev_desc(int *stack, int size);
 int ft_sorted_percent_desc(int *stack, int size);
 int nearest_smaller_value(int *stack, int size, int value);
 int nearest_larger_value(int *stack, int size, int value);
+int moves_required(int *stack, int size, int value); 
 
 
 int	main(int argc, char **argv)
 {
 	struct int_arr	*stack_a;
 	struct int_arr	*stack_b;
+
+	int max_rb = 0;
+	int max_rrb = 0;
+	int i = 0;
+	int min_step_index = 0;
 
 	//int i;
 	//int total_size;
@@ -60,53 +66,11 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Error", 2);
 		exit(0);
 	}
-	/*
-	if (!ft_sorted(stack_a->array, stack_a->size))
-	{
-		total_size = stack_a->size;
-		i = 0;
-		while (i < 2 && total_size > 4)
-		{
-			push(stack_a, stack_b, "pb");
-			i++;
-		}
-	}
-	*/
-	//i = 0;
 
 	while (ft_sorted_percent(stack_a->array, stack_a->size) + ft_sorted_percent_rev(stack_a->array, stack_a->size) < 99)
 	{
-		//ft_putnbr_fd(ft_sorted_percent(stack_a->array, stack_a->size), 1);
-		//ft_putendl_fd("%", 1);
-		//ft_putnbr_fd(ft_sorted_percent_rev(stack_a->array, stack_a->size), 1);
-		//ft_putendl_fd("% rev", 1);
-
-		/*
-		if (i++ > 20)
-			break;
-		//*/
-		// 2. Sort stack_a and stack_b
-
-		// 3. Merge stack_a and stack_b
-		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
-
-		
-
-		//
-		// This is condition for 3 elements if thay are not partialy sorted do sa and exit loop;
-		//
 		if (check_swap(stack_a) && stack_a->size == 3)
 			swap_head(stack_a->array, "sa");
-		
-
-		// This condition is for those cases when b is not empty and there is sb can be done
-		/*
-		else if (check_swap(stack_a) && (check_swap_rev(stack_b) && stack_b->size > 1))
-			ss(stack_a->array, stack_b->array);
-		else if (check_swap_rev(stack_b))
-			swap_head(stack_b->array, "sb");
-		*/
-
 
 		// push two first elements to stack_b this will work for 5 elements
 		else if (stack_b->size == 0)
@@ -116,153 +80,92 @@ int	main(int argc, char **argv)
 				push(stack_a, stack_b, "pb");
 			}
 		}
-
 		else
 		{
+			if ()
 
-			if (stack_a->array[0] < max_value(stack_b->array, stack_b->size))
+			
+			else if (stack_a->array[0] < max_value(stack_b->array, stack_b->size))
 			{
+
+				
 				//ft_putnbr_fd(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]), 1);
-				while(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
+				if (moves_required(stack_b->array, stack_b->size, stack_a->array[0]) > (moves_required(stack_b->array, stack_b->size, stack_a->array[1] + 1)))
 				{
-					if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0])))
-						rotate(stack_b, "rb");
+					if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[1]) < (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[1])))
+						rr(stack_a, stack_b);
 					else
-						reverse_rotate(stack_b, "rrb");
+						rotate(stack_a, "ra");
 				}
-				push(stack_a, stack_b, "pb");
+				else
+				{
+					i = 0;
+					while(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
+					{
+						if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0])))
+						{
+							rotate(stack_b, "rb");
+							i++;
+							if (i > max_rb)
+								max_rb = i;
+						}
+						
+						else
+						{
+							reverse_rotate(stack_b, "rrb");
+							i++;
+							if (i > max_rrb)
+								max_rrb = i;
+						}
+					}
+					push(stack_a, stack_b, "pb");
+				}
+
+				
 			}
 			else
 			{
 				while(stack_b->array[0] != min_value(stack_b->array, stack_b->size))
 				{
 					if (min_value_index(stack_b->array, stack_b->size) < (stack_b->size - min_value_index(stack_b->array, stack_b->size)))
+					{
 						rotate(stack_b, "rb");
+						i++;
+						if (i > max_rb)
+							max_rb = i;
+					}
 					else
+					{
 						reverse_rotate(stack_b, "rrb");
+						i++;
+						if (i > max_rrb)
+							max_rrb = i;
+					}
 				}
 				push(stack_a, stack_b, "pb");
 			}
 		}
-			
-		/*
-		else if (check_for_rotate(stack_a) && (!check_for_rotate(stack_b) && stack_b->size > 1))
-			rr(stack_a, stack_b);
-		else if (check_reverse_rotate(stack_a) && (!check_reverse_rotate(stack_b) && stack_b->size > 1))
-			rrr(stack_a, stack_b);
-		*/
-
-
-		/*
-		else if (check_reverse_rotate(stack_a) && stack_a->size == 3)
-			reverse_rotate(stack_a, "rra");
-		else if (check_for_rotate(stack_a)	&& stack_a->size == 3)
-			rotate(stack_a, "ra");
-			*/
-		/*
-		else if (stack_a->array[0] == min_value(stack_a->array, stack_a->size))
-		{
-			push (stack_a, stack_b, "pb");
-			while (!ft_sorted_desc(stack_b->array, stack_b->size))
+		if (ft_sorted_percent_desc(stack_b->array, stack_b->size) + ft_sorted_percent_rev_desc(stack_b->array, stack_b->size) < 99)
 			{
-				if (stack_b->array[0] < stack_b->array[stack_b->size - 1])
-				{
-					rotate(stack_b, "rb");
-				}
-				swap_head(stack_b->array, "sb");
-				if (ft_sorted_desc(stack_b->array, stack_b->size))
-					break;
-				//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
-				rotate(stack_b, "rb");
-				//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
+				print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
+				ft_putnbr_fd(ft_sorted_percent_desc(stack_b->array, stack_b->size), 1);
+				ft_putendl_fd("%", 1);
+				ft_putnbr_fd(ft_sorted_percent_rev_desc(stack_b->array, stack_b->size), 1);
+				ft_putendl_fd("% rev", 1);
+				ft_putendl_fd("Error", 2);
+				exit(0);
 			}
-		}
-		else
-			if (min_value_index(stack_a->array, stack_a->size) < (stack_a->size - min_value_index(stack_a->array, stack_a->size)))
-			{
-				if (min_value_index(stack_b->array, stack_b->size) < (stack_b->size - min_value_index(stack_b->array, stack_b->size)))
-				{
-					rr(stack_a, stack_b);
-				}
-				else
-				{
-					rotate(stack_a, "ra");
-				}
-			}
-			else
-			{
-				reverse_rotate(stack_a, "rra");
-			}
-		*/
-
-
-
-
-
-
-		
-		/*
-		else
-		{
-			if (min_value_index(stack_a->array, stack_a->size) < stack_a->size / 2)
-			{
-				rotate(stack_a, "ra");
-			}
-			else
-			{
-				reverse_rotate(stack_a, "rra");
-			}
-		}
-		*/
-			/*
-			if (stack_b->array[0] < stack_a->array[0] && stack_b->array[0] > stack_a->array[stack_a->size - 1] && stack_b->size > 0)
-			{
-				push (stack_b, stack_a, "pa");
-			}
-			rotate(stack_a, "ra end");
-			*/
-
-
-
-		/*
-
-		else if (check_for_rotate(stack_a))
-			rotate(stack_a, "ra");
-		else if (check_for_rotate(stack_b) && stack_b->size > 1)
-			rotate(stack_b, "rb");
-
-
-		else if (check_reverse_rotate(stack_a))
-			reverse_rotate(stack_a, "rra");
-		else if (check_reverse_rotate(stack_b) && stack_b->size > 1)
-			reverse_rotate(stack_b, "rrb");
-
-		else if (stack_b->size && stack_b->array[0] < stack_a->array[0] && stack_b->array[0] < stack_a->array[stack_a->size - 1])
-			push(stack_b, stack_a,"pa");
-
-		else if (header_fits(stack_a) && !ft_sorted(stack_a->array, stack_a->size))
-			push(stack_a, stack_b, "pb");
-
-		else
-			rotate(stack_a, "ra");
-
-		//*/
 
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
-		//ft_putnbr_fd(ft_sorted_percent(stack_a->array, stack_a->size), 1);
-		//ft_putendl_fd("%", 1);
-		//ft_putnbr_fd(ft_sorted_percent_rev(stack_a->array, stack_a->size), 1);
-		//ft_putendl_fd("% rev", 1);
-		//ft_putnbr_fd(ft_sorted_percent(stack_a->array, stack_a->size) + ft_sorted_percent_rev(stack_a->array, stack_a->size), 1);
-		//ft_putendl_fd("% total", 1);
+
 	}
+
 	while (stack_b->size)
 	{
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 
 			if (stack_b->array[0] < max_value(stack_a->array, stack_a->size))
 			{
-				//ft_putnbr_fd(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]), 1);
 				while(nearest_larger_value(stack_a->array, stack_a->size, stack_b->array[0]) != 0)
 				{
 					if (nearest_larger_value(stack_a->array, stack_a->size, stack_b->array[0]) < (stack_a->size - nearest_larger_value(stack_a->array, stack_a->size, stack_b->array[0])))
@@ -283,47 +186,9 @@ int	main(int argc, char **argv)
 				}
 				push(stack_b, stack_a, "pa");
 			}
-		/*
-		if (ft_sorted(stack_a->array, stack_a->size) && stack_b->array[0] < stack_a->array[0] && stack_b->array[0] < stack_a->array[stack_a->size - 1])
-				{
-					push (stack_b, stack_a, "pa");
-				}
-		else
-		{
-			if (stack_b->array[0] < stack_a->array[0] && stack_b->array[0] > stack_a->array[stack_a->size - 1])
-			{
-				push (stack_b, stack_a, "pa");
-			}
-			else if (stack_b->array[0] > max_value(stack_a->array, stack_a->size) && stack_a->array[0] == min_value(stack_a->array, stack_a->size))
-			{
-				push (stack_b, stack_a, "pa");
-			}
-			else if (stack_b->array[0] < min_value(stack_a->array, stack_a->size) && stack_a->array[0] == min_value(stack_a->array, stack_a->size))
-			{
-				push (stack_b, stack_a, "pa");
-			}
-			else
-			{
-				if (check_swap_rev(stack_b))
-				{
-					swap_head(stack_b->array, "sb");
-				}
-				else if (stack_b->array[0] < stack_a->array[0])
-				{
-					reverse_rotate(stack_a, "rra");
-				}
-				else
-				{
-					rotate(stack_a, "ra");
-				}
-
-			}
-		}
-		*/
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 	}
 	//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
-	//ft_putnbr_fd(i, 1);
 	while (!ft_sorted(stack_a->array, stack_a->size))
 	{
 		if (min_value_index(stack_a->array, stack_a->size) < (stack_a->size - min_value_index(stack_a->array, stack_a->size)))
@@ -336,23 +201,14 @@ int	main(int argc, char **argv)
 		}
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 	}
-
-	/*/
-	ft_putnbr_fd(ft_sorted_percent(stack_a->array, stack_a->size), 1);
-	ft_putendl_fd("%", 1);
-	ft_putnbr_fd(ft_sorted_percent(stack_b->array, stack_b->size), 1);
-	ft_putendl_fd("%", 1);
-
-	ft_putnbr_fd(ft_sorted_percent_rev(stack_a->array, stack_a->size), 1);
-	ft_putendl_fd("% rev", 1);
-	ft_putnbr_fd(ft_sorted_percent_rev(stack_b->array, stack_b->size), 1);
-	ft_putendl_fd("% rev", 1);
-	//*/
-	//print_stacks(stack_a, stack_b, size_a, size_b);
 		free(stack_a->array);
 		free(stack_a);
 		free(stack_b->array);
 		free(stack_b);
+		ft_putnbr_fd(max_rb, 1);
+		ft_putendl_fd(" max_rb", 1);
+		ft_putnbr_fd(max_rrb, 1);
+		ft_putendl_fd(" max_rrb", 1);
 }
 
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)
@@ -431,16 +287,16 @@ int ft_sorted_percent_rev_desc(int *stack, int size)
 	int percent;
 
 	i = size - 1;
-	sorted = 1;
+	sorted = (stack[0] > stack[size - 1]);
 	while (i > 0)
 	{
-		if (stack[i - 1] > stack[i])
+		if (stack[i - 1] < stack[i])
 			sorted++;
 		else
 			break;
 		i--;
 	}
-	percent = (sorted * 100) / (size - 1);
+	percent = (sorted * 100) / size;
 	return (percent);
 }
 
@@ -451,10 +307,10 @@ int ft_sorted_percent_desc(int *stack, int size)
 	int percent;
 
 	i = 0;
-	sorted = 0;
+	sorted = stack[0] > stack[size - 1];
 	while (i < size - 1)
 	{
-		if (stack[i] > stack[i + 1])
+		if (stack[i] < stack[i + 1])
 			sorted++;
 		else
 			break;
@@ -571,4 +427,43 @@ int nearest_smaller_value(int *stack, int size, int value)
 		i++;
 	}
 	return (index);
+}
+
+int moves_required(int *stack, int size, int value)
+{
+	int moves_up = nearest_larger_value(stack, size, value);
+	int moves_down = size - nearest_larger_value(stack, size, value);
+	if (nearest_larger_value(stack, size, value) < (size - nearest_larger_value(stack, size, value)))
+		return (moves_up);
+	else
+		return (moves_down);
+}
+
+int optimal_value_for_push(t_int_arr *stack_a, t_int_arr *stack_b)
+{
+	int i = 0;
+	int min_step_index = 0;
+	
+	while (i < stack_a->size)
+	{
+		if (moves_required(stack_b->array, stack_b->size, stack_a->array[min_step_index]) > (moves_required(stack_b->array, stack_b->size, stack_a->array[i] + i)))
+		{
+			min_step_index = i;
+		}
+		i++;
+	}
+	
+	if (min_step_index < stack_a->size - min_step_index)
+	{
+		return (min_step_index);
+	}
+	else if (min_step_index > stack_a->size - min_step_index)
+	{
+		return (min_step_index - stack_a->size);
+	}
+	else
+	{
+		return (0);
+	}
+	
 }
