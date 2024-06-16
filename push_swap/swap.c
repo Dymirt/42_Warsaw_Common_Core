@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:06:59 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/10 18:21:37 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/16 17:14:06 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 void	swap_head(int *stack, char *str)
 {
-	int	tmp;
-
-	tmp = stack[0];
-	stack[0] = stack[1];
-	stack[1] = tmp;
+	stack[0] = stack[0] ^ stack[1];
+	stack[1] = stack[0] ^ stack[1];
+	stack[0] = stack[0] ^ stack[1];
 	if (*str)
 		ft_putendl_fd(str, 1);
 }
