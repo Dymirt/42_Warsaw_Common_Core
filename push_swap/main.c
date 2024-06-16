@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/16 17:20:02 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/16 19:29:25 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Error", 2);
 		exit(0);
 	}
+	if (stack_a->size < 2)
+	{
+		free(stack_a);
+		ft_putendl_fd("", 1);
+		exit(0);
+	}
 	stack_b = (struct int_arr *)malloc(sizeof(struct int_arr));
 	if (!stack_b)
 	{
@@ -86,53 +92,29 @@ int	main(int argc, char **argv)
 			if (optimal_value_for_push(stack_a, stack_b) != 0)
 			{
 				i = optimal_value_for_push(stack_a, stack_b);
-				//ft_putnbr_fd(i, 1);
-				//ft_putendl_fd(" optimal_value_for_push", 1);
-				//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 				if (i < (stack_a->size - i))
-				{
-					if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[i]) < (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[i])))
-						rr(stack_a, stack_b);
-					else
 						rotate(stack_a, "ra");
-				}
 				else
-				{
-					if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[i]) > (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[i])))
-						rrr(stack_a, stack_b);
-					else
 						reverse_rotate(stack_a, "rra");
-				}
-				i = 0;
 			}
-			else if (stack_a->array[0] < max_value(stack_b->array, stack_b->size))
+			else if (stack_a->array[0] > min_value(stack_b->array, stack_b->size))
 			{
 				i = 0;
-				while(nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
+				while(nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
 				{
-					if (nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_larger_value(stack_b->array, stack_b->size, stack_a->array[0])))
-					{
+					if (nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0])))
 						rotate(stack_b, "rb");
-						i++;
-						if (i > max_rb)
-							max_rb = i;
-					}
 
 					else
-					{
 						reverse_rotate(stack_b, "rrb");
-						i++;
-						if (i > max_rrb)
-							max_rrb = i;
-					}
 				}
 				push(stack_a, stack_b, "pb");
 			}
 			else
 			{
-				while(stack_b->array[0] != min_value(stack_b->array, stack_b->size))
+				while(stack_b->array[0] != max_value(stack_b->array, stack_b->size))
 				{
-					if (min_value_index(stack_b->array, stack_b->size) < (stack_b->size - min_value_index(stack_b->array, stack_b->size)))
+					if (max_value_index(stack_b->array, stack_b->size) < (stack_b->size - max_value_index(stack_b->array, stack_b->size)))
 					{
 						rotate(stack_b, "rb");
 						i++;
@@ -150,17 +132,18 @@ int	main(int argc, char **argv)
 				push(stack_a, stack_b, "pb");
 			}
 		}
-		if ((ft_sorted_percent_desc(stack_b->array, stack_b->size) + ft_sorted_percent_rev_desc(stack_b->array, stack_b->size) < 99) && stack_b->size)
+		/*
+		if ((ft_sorted_percent_desc(stack_b->array, stack_b->size) + ft_sorted_percent_rev(stack_b->array, stack_b->size) < 99) && stack_b->size)
 			{
 				print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 				ft_putnbr_fd(ft_sorted_percent_desc(stack_b->array, stack_b->size), 1);
 				ft_putendl_fd("%", 1);
-				ft_putnbr_fd(ft_sorted_percent_rev_desc(stack_b->array, stack_b->size), 1);
+				ft_putnbr_fd(ft_sorted_percent_rev(stack_b->array, stack_b->size), 1);
 				ft_putendl_fd("% rev", 1);
 				ft_putendl_fd("Error", 2);
 				exit(0);
 			}
-
+		*/
 		//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
 
 	}
@@ -436,9 +419,9 @@ int nearest_smaller_value(int *stack, int size, int value)
 
 int moves_required(int *stack, int size, int value)
 {
-	int moves_up = nearest_larger_value(stack, size, value);
-	int moves_down = size - nearest_larger_value(stack, size, value);
-	if (nearest_larger_value(stack, size, value) < (size - nearest_larger_value(stack, size, value)))
+	int moves_up = nearest_smaller_value(stack, size, value);
+	int moves_down = size - nearest_smaller_value(stack, size, value);
+	if (moves_up < moves_down)
 		return (moves_up);
 	else
 		return (moves_down);

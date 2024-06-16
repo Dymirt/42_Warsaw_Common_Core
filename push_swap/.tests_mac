@@ -15,22 +15,15 @@ generate_unique_numbers() {
     echo "${numbers[@]}"
 }
 
-# Generate 5 unique random numbers between 0 and 14900
-
-echo "$ARG"
-
-
-
 i=1
-ITERATION=10
+ITERATION=100
 MAX=0
 while [ $i -le $ITERATION ]
 do
-    #ARG=$(jot -r 500 0 14900 | tr '\n' ' ');
-	ARG=$(generate_unique_numbers 100 0 14900)
+	ARG=$(generate_unique_numbers 5 0 14900)
 	echo "ARG: $ARG";
     RESULT=$(./push_swap $ARG | wc -l);
-	./push_swap $ARG | ./checker_linux $ARG;
+	./push_swap $ARG | ./checker_Mac $ARG;
 	echo "RESULT: $RESULT";
 	if [ $RESULT -eq 0 ]
 	then
@@ -51,9 +44,9 @@ echo "ITERATION: $ITERATION"
 echo "MAX: $MAX"
 
 # 3 numbers 2 `max` 10000 iteration
-# 5 numbers 11 `max` 10000 iteration
-# 100 numbers 2353 `max` 1000 iteration
-# 500 numbers 44224 `max` 100 iteration
+# 5 numbers 10 `max` 10000 iteration
+# 100 numbers 785 `max` 1000 iteration
+# 500 numbers 7746 `max` 100 iteration
 
 
 # required: sort   3 numbers with <=     3 operations

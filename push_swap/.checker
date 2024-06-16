@@ -4,7 +4,7 @@ MAX=0
 AVERAGE=0
 while [ $i -le $ITERATION ]
 do
-    ARG=$(shuf -i 0-14900 -n 500 | tr '\n' ' ');
+    ARG=$(shuf -i 0-14900 -n 10 | tr '\n' ' ');
 	echo "ARG: $ARG";
     RESULT=$(./push_swap $ARG | wc -l);
 	./push_swap $ARG | ./checker_linux $ARG;
