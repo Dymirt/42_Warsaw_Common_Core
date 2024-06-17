@@ -47,6 +47,7 @@ SRC = ft_strlen.c \
 	is_arr_uniq.c \
 	is_int_str.c \
 	ft_arr_atoi.c \
+	ft_compare.c\
 
 # Object files
 OBJ = $(SRC:.c=.o)
