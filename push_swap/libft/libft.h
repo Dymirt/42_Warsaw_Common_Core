@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/10 19:08:49 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/17 22:25:15 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
+void	ft_free_2d(char **split, int len);
+int		is_arr_uniq(int *array, int len);
+int		is_int_str(char *str);
+void	ft_arr_atoi(char **array, int *stack, int len);
 
 // push_swap
 typedef struct int_arr
 {
-	int	*array;
-	int	size;
+	int	*array ;
+	int	size ;
 }	t_int_arr;
 
 int		ft_sorted(int *arr, int size);

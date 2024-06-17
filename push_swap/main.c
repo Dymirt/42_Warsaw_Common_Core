@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/16 19:29:25 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/17 21:25:15 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ int	main(int argc, char **argv)
 	//int i;
 	//int total_size;
 
-
-
+	if (argc < 2)
+	{
+		exit(0);
+	}
 	stack_a = valid_input(argc, argv);
 	if (!stack_a->array)
 	{
@@ -50,8 +52,9 @@ int	main(int argc, char **argv)
 	}
 	if (stack_a->size < 2)
 	{
+		free(stack_a->array);
 		free(stack_a);
-		ft_putendl_fd("", 1);
+		//ft_putendl_fd("", 1);
 		exit(0);
 	}
 	stack_b = (struct int_arr *)malloc(sizeof(struct int_arr));

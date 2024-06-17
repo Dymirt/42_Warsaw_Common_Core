@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:06:59 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/16 17:14:06 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/16 19:52:02 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,18 @@ void	ss(int *stack_a, int *stack_b)
 
 int	check_swap(t_int_arr *stack)
 {
-	if (stack->array[0] < stack->array[1] && stack->array[0] < stack->array[stack->size - 1] && stack->array[1] > stack->array[stack->size - 1]) // 1 3 2
+	int	first;
+	int	second;
+	int	last;
+
+	first = stack->array[0];
+	second = stack->array[1];
+	last = stack->array[stack->size - 1];
+	if (first < second && first < last && second > last)
 		return (1);
-	else if (stack->array[0] > stack->array[1] && stack->array[0] < stack->array[stack->size - 1] && stack->array[1] < stack->array[stack->size - 1]) // 2 1 3
+	else if (first > second && first < last && second < last)
 		return (1);
-	else if (stack->array[0] > stack->array[1] && stack->array[0] > stack->array[stack->size - 1] && stack->array[1] > stack->array[stack->size - 1]) // 3 2 1
-		return (1);
-	return (0);
-}
-int check_swap_rev(t_int_arr *stack)
-{
-	if (stack->array[0] < stack->array[1] && stack->array[0] > stack->array[stack->size - 1])
+	else if (first > second && first > last && second > last)
 		return (1);
 	return (0);
 }

@@ -43,6 +43,10 @@ SRC = ft_strlen.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c \
 	ft_sorted.c \
+	ft_free_2d.c \
+	is_arr_uniq.c \
+	is_int_str.c \
+	ft_arr_atoi.c \
 
 # Object files
 OBJ = $(SRC:.c=.o)
