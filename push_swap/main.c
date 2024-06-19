@@ -6,13 +6,12 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/18 00:23:03 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/19 23:53:29 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 int		ft_sorted_percent(int *stack, int size);
 int		ft_sorted_percent_rev(int *stack, int size);
 int		moves_required(int *stack, int size, int value);
@@ -68,7 +67,7 @@ int	main(int argc, char **argv)
 {
 	struct int_arr	*stack_a;
 	struct int_arr	*stack_b;
-	int				i;
+	int				i_optimal;
 
 	stack_a = init_stak_a(argc, argv);
 	stack_b = init_stak_b(stack_a);
@@ -83,10 +82,10 @@ int	main(int argc, char **argv)
 		}
 		else
 		{
-			if (optimal_value_for_push(stack_a, stack_b) != 0)
+			i_optimal = optimal_value_for_push(stack_a, stack_b);
+			if (i_optimal != 0)
 			{
-				i = optimal_value_for_push(stack_a, stack_b);
-				if (i < (stack_a->size - i))
+				if (i_optimal < (stack_a->size - i_optimal))
 					rotate(stack_a, "ra");
 				else
 					reverse_rotate(stack_a, "rra");
@@ -147,32 +146,26 @@ int	main(int argc, char **argv)
 	free(stack_b);
 }
 
-//print_stacks(stack_a->array, stack_b->array, stack_a->size, stack_b->size);
-/*
-void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)
+char *debug_stack(t_int_arr *stack)
 {
-	int	i;
+	char *str;
+	char *tmp;
+	int i;
 
 	i = 0;
-	ft_putstr_fd("Stack A: ", 1);
-	while (i < size_a)
+	str = ft_strdup("Stack: ");
+	while (i < stack->size)
 	{
-		ft_putnbr_fd(stack_a[i], 1);
-		ft_putchar_fd(' ', 1);
+		tmp = ft_itoa(stack->array[i]);
+		str = ft_strjoin(str, tmp);
+		str = ft_strjoin(str, " ");
+		free(tmp);
+		tmp = NULL;
 		i++;
 	}
-	ft_putendl_fd("", 1);
-	i = 0;
-	ft_putstr_fd("Stack B: ", 1);
-	while (i < size_b)
-	{
-		ft_putnbr_fd(stack_b[i], 1);
-		ft_putchar_fd(' ', 1);
-		i++;
-	}
-	ft_putendl_fd("", 1);
+	return (str);
 }
-*/
+
 int	ft_sorted_percent(int *stack, int size)
 {
 	int	i;
