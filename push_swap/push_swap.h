@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/18 00:19:55 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 00:07:27 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void		ft_printf_handle_s(char *va_sting, size_t *res, char **p_str);
 void		ft_printf_handle_p(uintptr_t nbr, size_t *res, char **p_str);
 void		printf_join(char **p_str, char *str, size_t *res, size_t str_len);
 
-int		max_value(int *stack, int size);
-int		min_value(int *stack, int size);
-int		min_value_index(int *stack, int size);
-int		max_value_index(int *stack, int size);
-int		nearest_smaller_value(int *stack, int size, int value);
-int		nearest_larger_value(int *stack, int size, int value);
-int	edge_value(int *stack, int size, int (*f)(int a, int b));
+int			max_value(int *stack, int size);
+int			min_value(int *stack, int size);
+int			min_value_index(int *stack, int size);
+int			max_value_index(int *stack, int size);
+int			nearest_smaller_value(int *stack, int size, int value);
+int			nearest_larger_value(int *stack, int size, int value);
+int			edge_value(int *stack, int size, int (*f)(int a, int b));
 
 #endif

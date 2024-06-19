@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:00:47 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/19 23:53:29 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 00:11:19 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int		ft_sorted_percent(int *stack, int size);
 int		ft_sorted_percent_rev(int *stack, int size);
 int		moves_required(int *stack, int size, int value);
 int		optimal_value_for_push(t_int_arr *stack_a, t_int_arr *stack_b);
+void	push_to_b(t_int_arr *stack_a, t_int_arr *stack_b);
+void	push_to_a(t_int_arr *stack_a, t_int_arr *stack_b);
 
 t_int_arr	*init_stak_a(int argc, char **argv)
 {
@@ -67,7 +69,6 @@ int	main(int argc, char **argv)
 {
 	struct int_arr	*stack_a;
 	struct int_arr	*stack_b;
-	int				i_optimal;
 
 	stack_a = init_stak_a(argc, argv);
 	stack_b = init_stak_b(stack_a);
@@ -75,45 +76,63 @@ int	main(int argc, char **argv)
 	{
 		if (check_swap(stack_a) && stack_a->size == 3)
 			swap_head(stack_a->array, "sa");
-		else if (stack_b->size == 0)
+		else
+			push_to_b(stack_a, stack_b);
+	}
+	push_to_a(stack_a, stack_b);
+	sort_rotate(stack_a);
+	free(stack_a->array);
+	free(stack_a);
+	free(stack_b->array);
+	free(stack_b);
+}
+
+void	push_to_b(t_int_arr *stack_a, t_int_arr *stack_b)
+{
+	int	i_optimal;
+
+	if (stack_b->size == 0)
+	{
+		while (stack_b->size < 2)
+			push(stack_a, stack_b, "pb");
+	}
+	else
+	{
+		i_optimal = optimal_value_for_push(stack_a, stack_b);
+		if (i_optimal != 0)
 		{
-			while (stack_b->size < 2)
-				push(stack_a, stack_b, "pb");
+			if (i_optimal < (stack_a->size - i_optimal))
+				rotate(stack_a, "ra");
+			else
+				reverse_rotate(stack_a, "rra");
+		}
+		else if (stack_a->array[0] > edge_value(stack_b->array, stack_b->size, ft_is_smaller))
+		{
+			while (nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
+			{
+				if (nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0])))
+					rotate(stack_b, "rb");
+				else
+					reverse_rotate(stack_b, "rrb");
+			}
+			push(stack_a, stack_b, "pb");
 		}
 		else
 		{
-			i_optimal = optimal_value_for_push(stack_a, stack_b);
-			if (i_optimal != 0)
+			while (stack_b->array[0] != edge_value(stack_b->array, stack_b->size, ft_is_larger))
 			{
-				if (i_optimal < (stack_a->size - i_optimal))
-					rotate(stack_a, "ra");
+				if (max_value_index(stack_b->array, stack_b->size) < (stack_b->size - max_value_index(stack_b->array, stack_b->size)))
+					rotate(stack_b, "rb");
 				else
-					reverse_rotate(stack_a, "rra");
+					reverse_rotate(stack_b, "rrb");
 			}
-			else if (stack_a->array[0] > edge_value(stack_b->array, stack_b->size, ft_is_smaller))
-			{
-				while (nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0]) != 0)
-				{
-					if (nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0]) < (stack_b->size - nearest_smaller_value(stack_b->array, stack_b->size, stack_a->array[0])))
-						rotate(stack_b, "rb");
-					else
-						reverse_rotate(stack_b, "rrb");
-				}
-				push(stack_a, stack_b, "pb");
-			}
-			else
-			{
-				while (stack_b->array[0] != edge_value(stack_b->array, stack_b->size, ft_is_larger))
-				{
-					if (max_value_index(stack_b->array, stack_b->size) < (stack_b->size - max_value_index(stack_b->array, stack_b->size)))
-						rotate(stack_b, "rb");
-					else
-						reverse_rotate(stack_b, "rrb");
-				}
-				push(stack_a, stack_b, "pb");
-			}
+			push(stack_a, stack_b, "pb");
 		}
 	}
+}
+
+void	push_to_a(t_int_arr *stack_a, t_int_arr *stack_b)
+{
 	while (stack_b->size)
 	{
 		if (stack_b->array[0] < edge_value(stack_a->array, stack_a->size, ft_is_larger))
@@ -139,18 +158,13 @@ int	main(int argc, char **argv)
 			push(stack_b, stack_a, "pa");
 		}
 	}
-	sort_rotate(stack_a);
-	free(stack_a->array);
-	free(stack_a);
-	free(stack_b->array);
-	free(stack_b);
 }
 
-char *debug_stack(t_int_arr *stack)
+char	*debug_stack(t_int_arr *stack)
 {
-	char *str;
-	char *tmp;
-	int i;
+	char	*str;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	str = ft_strdup("Stack: ");
@@ -205,8 +219,6 @@ int	ft_sorted_percent_rev(int *stack, int size)
 	percent = (sorted * 100) / size;
 	return (percent);
 }
-
-
 
 int	moves_required(int *stack, int size, int value)
 {

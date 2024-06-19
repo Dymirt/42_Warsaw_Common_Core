@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 23:50:27 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/06/18 00:21:51 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 00:09:55 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,3 @@ int	nearest_value(int *arr, int size, int value, int (*f)(int a, int b))
 	}
 	return (index);
 }
-
-

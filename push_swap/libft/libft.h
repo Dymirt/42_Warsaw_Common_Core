@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/18 00:11:22 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 00:05:50 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ void	ft_free_2d(char **split, int len);
 int		is_arr_uniq(int *array, int len);
 int		is_int_str(char *str);
 void	ft_arr_atoi(char **array, int *stack, int len);
+
 //compare.c
-int	ft_is_smaller(int a, int b);
-int	ft_is_larger(int a, int b);
-
-
+int		ft_is_smaller(int a, int b);
+int		ft_is_larger(int a, int b);
 
 // push_swap
 typedef struct int_arr

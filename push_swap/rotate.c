@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:07:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/17 23:46:40 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 00:08:58 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_for_rotate(t_int_arr *stack)
 	return (stack->array[0] > stack->array[stack->size - 1]);
 }
 
-void sort_rotate(t_int_arr *s)
+void	sort_rotate(t_int_arr *s)
 {
 	while (!ft_sorted(s->array, s->size))
 	{
