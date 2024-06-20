@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/20 18:02:21 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 19:34:34 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			nearest_larfer_i(t_int_arr *s, int value);
 int			nearest_smaller_i(t_int_arr *s, int value);
 int			optimal_value_for_push(t_int_arr *stack_a, t_int_arr *stack_b);
 int			moves_to_top(t_int_arr *s, int value);
+int			calculate_moves(t_int_arr *a, t_int_arr *b, int i);
 
 // init.c
 t_int_arr	*init_stak_a(int argc, char **argv);
