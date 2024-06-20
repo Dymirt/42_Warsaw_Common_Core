@@ -6,13 +6,14 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 23:50:27 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/06/20 13:34:07 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 17:37:48 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int	nearest_value(t_int_arr *s, int value, int (*f)(int a, int b));
+int	calculate_moves(t_int_arr *a, t_int_arr *b, int i);
 
 int	nearest_larfer_i(t_int_arr *s, int value)
 {
@@ -40,34 +41,39 @@ int	nearest_value(t_int_arr *s, int value, int (*f)(int a, int b))
 		}
 		i++;
 	}
-	return (index);
+	return (s->array[index]);
 }
 
-int	moves(t_int_arr *s, int value)
+int	moves_to_top(t_int_arr *s, int index)
 {
-	int	moves_up;
-	int	moves_down;
+	int	index_rev;
 
-	moves_up = nearest_smaller_i(s, value);
-	moves_down = s->size - moves_up;
-	if (moves_up < moves_down)
-		return (moves_up);
+	index_rev = s->size - index;
+	if (index < index_rev)
+		return (index);
 	else
-		return (moves_down);
+		return (index_rev * -1);
 }
 
-int	optimal_value_for_push(t_int_arr *a, t_int_arr *b)
+int	calculate_moves(t_int_arr *a, t_int_arr *b, int i)
 {
-	int	i;
-	int	min_i;
+	int	moves_total;
+	int	moves_a;
+	int	moves_b;
 
-	i = 0;
-	min_i = 0;
-	while (i < a->size)
+	moves_a = moves_to_top(a, i);
+	moves_b = moves_to_top(b, get_index(b, nearest_smaller_i(b, a->array[i])));
+	if (moves_a > 0 && moves_b > 0)
+		moves_total = ft_largest(moves_a, moves_b);
+	else if (moves_a < 0 && moves_b < 0)
+		moves_total = ft_smallest(moves_a, moves_b) * -1;
+	else
 	{
-		if ((moves(b, a->array[min_i]) + min_i) >= (moves(b, a->array[i]) + i))
-			min_i = i;
-		i++;
+		if (moves_a < 0)
+			moves_a *= -1;
+		if (moves_b < 0)
+			moves_b *= -1;
+		moves_total = moves_a + moves_b;
 	}
-	return (min_i);
+	return (moves_total);
 }
