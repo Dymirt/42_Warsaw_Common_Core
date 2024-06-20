@@ -16,7 +16,8 @@ SRC = main.c \
 	search.c \
 	init.c \
 	debug.c \
-	t_int_arr.c
+	t_int_arr.c \
+	helpers.c
 # Rule for compiling libft
 LIBFT_NAME = libft.a
 LIBFT_DIR = libft/

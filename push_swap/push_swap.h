@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/20 17:46:59 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 18:02:21 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_int_arr	*valid_input(int argc, char **argv);
 
 // swap.c
 void		swap_head(int *stack, char *str);
-void		ss(int *stack_a, int *stack_b);
 int			check_swap(t_int_arr *stack);
 
 // rotate.c
@@ -34,6 +33,8 @@ void		rotate_to(t_int_arr *stack, int value, char *r, char *rr);
 
 // push.c
 void		push(t_int_arr *stack_a, t_int_arr *stack_b, char *str);
+void		push_to_b(t_int_arr *stack_a, t_int_arr *stack_b);
+void		push_to_a(t_int_arr *stack_a, t_int_arr *stack_b);
 
 // t_int_arr.c
 int			min_value(t_int_arr *stack);
@@ -45,10 +46,12 @@ int			nearest_larfer_i(t_int_arr *s, int value);
 int			nearest_smaller_i(t_int_arr *s, int value);
 int			optimal_value_for_push(t_int_arr *stack_a, t_int_arr *stack_b);
 int			moves_to_top(t_int_arr *s, int value);
-int			calculate_moves(t_int_arr *a, t_int_arr *b, int i);
 
 // init.c
 t_int_arr	*init_stak_a(int argc, char **argv);
 t_int_arr	*init_stak_b(t_int_arr *stack_a);
+
+// helpers.c
+int			nearly_sorted(t_int_arr *stack);
 
 #endif
