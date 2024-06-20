@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/14 17:10:49 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/20 20:26:04 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,11 @@ int		ft_swap_and_free(char **str1, char **str2);
 void	ft_printf_handle_s(char *va_sting, size_t *res, char **p_str);
 void	ft_printf_handle_p(uintptr_t nbr, size_t *res, char **p_str);
 void	printf_join(char **p_str, char *str, size_t *res, size_t str_len);
+// helpers.c
+char	*ft_itoa_wrapper(long long n);
+char	*ft_utoa_wrapper(long long n);
+char	*ft_ctoa_wrapper(long long n);
+char	*ft_utob16_wrapper(long long n);
+char	*ft_utob16u_wrapper(long long n);
 
 #endif

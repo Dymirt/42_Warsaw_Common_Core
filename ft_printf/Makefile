@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+         #
+#    By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 21:53:29 by dkolida           #+#    #+#              #
-#    Updated: 2024/04/14 17:07:14 by dkolida          ###   ########.fr        #
+#    Updated: 2024/06/20 20:19:51 by dmytrokolid      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler
-CC = clang
+CC = gcc
 
 # Compiler flags
 CFLAGS = -Wall -Werror -Wextra
@@ -30,11 +30,12 @@ SRC =	ft_printf.c\
 		ft_swap_and_free.c\
 		ft_printf_handle_s.c\
 		ft_printf_handle_p.c\
+		helpers.c\
 
 
 # Rule for compiling libft
 LIBFT_NAME = libft.a
-LIBFT_DIR = libft/
+LIBFT_DIR = ../libft/
 
 # Object files
 OBJ = $(SRC:.c=.o)

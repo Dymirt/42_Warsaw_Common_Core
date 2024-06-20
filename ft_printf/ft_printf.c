@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:15 by dkolida           #+#    #+#             */
-/*   Updated: 2024/04/14 17:08:58 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/20 20:24:26 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	printf_join(char **p_str, char *str, size_t *res, size_t str_len)
 	*res += str_len;
 }
 
-static void	toa_join(size_t *res, char **p_str, long long num, char *(*f)())
+static void	toa_join(size_t *res, char **p_str, long long num, char *(*f)(long long))
 {
 	char	*tmp;
 	size_t	tmp_len;
@@ -83,17 +83,17 @@ static void	toa_join(size_t *res, char **p_str, long long num, char *(*f)())
 void	match_c(const char *c, va_list args, char **p_str, size_t *res)
 {
 	if (*c == 'd' || *c == 'i')
-		toa_join(res, p_str, va_arg(args, int), &ft_itoa);
+		toa_join(res, p_str, va_arg(args, int), &ft_itoa_wrapper);
 	else if (*c == 'u')
-		toa_join(res, p_str, va_arg(args, int), &ft_utoa);
+		toa_join(res, p_str, va_arg(args, int), &ft_utoa_wrapper);
 	else if (*c == 's')
 		ft_printf_handle_s(va_arg(args, char *), res, p_str);
 	else if (*c == 'c')
-		toa_join(res, p_str, va_arg(args, int), &ft_ctoa);
+		toa_join(res, p_str, va_arg(args, int), &ft_ctoa_wrapper);
 	else if (*c == 'x')
-		toa_join(res, p_str, va_arg(args, int), &ft_utob16);
+		toa_join(res, p_str, va_arg(args, int), &ft_utob16_wrapper);
 	else if (*c == 'X')
-		toa_join(res, p_str, va_arg(args, int), &ft_utob16u);
+		toa_join(res, p_str, va_arg(args, int), &ft_utob16u_wrapper);
 	else if (*c == 'p')
 		ft_printf_handle_p(va_arg(args, uintptr_t), res, p_str);
 	else
