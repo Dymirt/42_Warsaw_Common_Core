@@ -13,7 +13,6 @@ SRC = main.c \
 	rotate.c \
 	push.c \
 	valid_input.c \
-	reverse_rotate.c \
 	search.c \
 	init.c \
 	debug.c \

@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:07:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/20 01:57:00 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 14:05:21 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,42 @@ void	rr(t_int_arr *stack_a, t_int_arr *stack_b)
 	ft_putendl_fd("rr", 1);
 }
 
-int	check_for_rotate(t_int_arr *stack)
+void	reverse_rotate(t_int_arr *stack, char *str)
 {
-	return (stack->array[0] > stack->array[stack->size - 1]);
+	int	i;
+	int	tmp;
+
+	i = stack->size - 1;
+	tmp = stack->array[stack->size - 1];
+	while (i > 0)
+	{
+		stack->array[i] = stack->array[i - 1];
+		i--;
+	}
+	stack->array[i] = tmp;
+	if (*str)
+		ft_putendl_fd(str, 1);
 }
 
-void	sort_rotate(t_int_arr *s)
+void	rrr(t_int_arr *stack_a, t_int_arr *stack_b)
 {
-	int	min_v;
-	int	min_i;
+	reverse_rotate(stack_a, "");
+	reverse_rotate(stack_b, "");
+	ft_putendl_fd("rrr", 1);
+}
 
-	min_v = min_value(s);
-	while (!ft_sorted(s->array, s->size))
+void	rotate_to(t_int_arr *stack, int value, char *r, char *rr)
+{
+	int	i;
+	int	rotate_dir;
+
+	i = get_index(stack, value);
+	rotate_dir = i < (stack->size - i);
+	while (stack->array[0] != value)
 	{
-		min_i = get_index(s, min_v);
-		if (min_i < (s->size - min_i))
-			rotate(s, "ra");
+		if (rotate_dir)
+			rotate(stack, r);
 		else
-			reverse_rotate(s, "rra");
+			reverse_rotate(stack, rr);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/20 01:57:32 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 13:55:36 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,9 @@ int			check_swap(t_int_arr *stack);
 // rotate.c
 void		rotate(t_int_arr *stack_a, char *str);
 void		rr(t_int_arr *stack_a, t_int_arr *stack_b);
-int			check_for_rotate(t_int_arr *stack);
-void		sort_rotate(t_int_arr *s);
-
-// Reverse rotate at rotate.c
 void		reverse_rotate(t_int_arr *stack, char *str);
 void		rrr(t_int_arr *stack_a, t_int_arr *stack_b);
-int			check_reverse_rotate(t_int_arr *stack);
+void		rotate_to(t_int_arr *stack, int value, char *r, char *rr);
 
 // push.c
 void		push(t_int_arr *stack_a, t_int_arr *stack_b, char *str);
@@ -57,8 +53,10 @@ int			max_value(t_int_arr *stack);
 int			get_index(t_int_arr *s, int value);
 
 // search.c
-int			nearest_larfer_v(t_int_arr *s, int value);
-int			nearest_smaller_v(t_int_arr *s, int value);
+int			nearest_larfer_i(t_int_arr *s, int value);
+int			nearest_smaller_i(t_int_arr *s, int value);
+int			moves(t_int_arr *s, int value);
+int			optimal_value_for_push(t_int_arr *stack_a, t_int_arr *stack_b);
 
 // init.c
 t_int_arr	*init_stak_a(int argc, char **argv);
