@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/06 21:53:11 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/20 00:07:27 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 01:57:32 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,17 @@ void		ft_printf_handle_s(char *va_sting, size_t *res, char **p_str);
 void		ft_printf_handle_p(uintptr_t nbr, size_t *res, char **p_str);
 void		printf_join(char **p_str, char *str, size_t *res, size_t str_len);
 
-int			max_value(int *stack, int size);
-int			min_value(int *stack, int size);
-int			min_value_index(int *stack, int size);
-int			max_value_index(int *stack, int size);
-int			nearest_smaller_value(int *stack, int size, int value);
-int			nearest_larger_value(int *stack, int size, int value);
-int			edge_value(int *stack, int size, int (*f)(int a, int b));
+// t_int_arr.c
+int			min_value(t_int_arr *stack);
+int			max_value(t_int_arr *stack);
+int			get_index(t_int_arr *s, int value);
+
+// search.c
+int			nearest_larfer_v(t_int_arr *s, int value);
+int			nearest_smaller_v(t_int_arr *s, int value);
+
+// init.c
+t_int_arr	*init_stak_a(int argc, char **argv);
+t_int_arr	*init_stak_b(t_int_arr *stack_a);
 
 #endif

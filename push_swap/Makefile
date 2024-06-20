@@ -8,7 +8,16 @@ CFLAGS = -Wall -Werror -Wextra -g -fdiagnostics-color=always
 NAME = push_swap
 
 # Source files
-SRC = main.c swap.c rotate.c push.c valid_input.c reverse_rotate.c search.c
+SRC = main.c \
+	swap.c \
+	rotate.c \
+	push.c \
+	valid_input.c \
+	reverse_rotate.c \
+	search.c \
+	init.c \
+	debug.c \
+	t_int_arr.c
 # Rule for compiling libft
 LIBFT_NAME = libft.a
 LIBFT_DIR = libft/

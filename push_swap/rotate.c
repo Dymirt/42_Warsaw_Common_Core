@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 16:07:53 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/20 00:08:58 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 01:57:00 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ int	check_for_rotate(t_int_arr *stack)
 
 void	sort_rotate(t_int_arr *s)
 {
+	int	min_v;
+	int	min_i;
+
+	min_v = min_value(s);
 	while (!ft_sorted(s->array, s->size))
 	{
-		if (min_value_index(s->array, s->size) < (s->size - min_value_index(s->array, s->size)))
+		min_i = get_index(s, min_v);
+		if (min_i < (s->size - min_i))
 			rotate(s, "ra");
 		else
 			reverse_rotate(s, "rra");

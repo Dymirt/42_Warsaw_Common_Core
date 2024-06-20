@@ -6,120 +6,36 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 23:50:27 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/06/20 00:09:55 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/20 01:57:47 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	max_value_index(int *stack, int size)
-{
-	int	i;
-	int	max;
-	int	index;
+int	nearest_value(t_int_arr *s, int value, int (*f)(int a, int b));
 
-	i = 1;
-	max = stack[0];
-	index = 0;
-	while (i < size)
-	{
-		if (stack[i] > max)
-		{
-			max = stack[i];
-			index = i;
-		}
-		i++;
-	}
-	return (index);
+int	nearest_larfer_v(t_int_arr *s, int value)
+{
+	return (nearest_value(s, value, ft_is_larger));
 }
 
-int	min_value_index(int *stack, int size)
+int	nearest_smaller_v(t_int_arr *s, int value)
 {
-	int	i;
-	int	min;
-	int	index;
-
-	i = 1;
-	min = stack[0];
-	index = 0;
-	while (i < size)
-	{
-		if (stack[i] < min)
-		{
-			min = stack[i];
-			index = i;
-		}
-		i++;
-	}
-	return (index);
+	return (nearest_value(s, value, ft_is_smaller));
 }
 
-int	edge_value(int *stack, int size, int (*f)(int a, int b))
-{
-	int	i;
-	int	edge;
-
-	i = 1;
-	edge = stack[0];
-	while (i < size)
-	{
-		if (f(stack[i], edge))
-			edge = stack[i];
-		i++;
-	}
-	return (edge);
-}
-
-int	nearest_larger_value(int *stack, int size, int value)
+int	nearest_value(t_int_arr *s, int value, int (*f)(int a, int b))
 {
 	int	index;
 	int	i;
 
 	index = -1;
 	i = 0;
-	while (i < size)
+	while (i < s->size)
 	{
-		if ((stack[i] > value))
+		if (f(s->array[i], value))
 		{
-			if (stack[i] < stack[index] || index == -1)
-				index = i;
-		}
-		i++;
-	}
-	return (index);
-}
-
-int	nearest_smaller_value(int *stack, int size, int value)
-{
-	int	index;
-	int	i;
-
-	index = -1;
-	i = 0;
-	while (i < size)
-	{
-		if ((stack[i] < value))
-		{
-			if (stack[i] > stack[index] || index == -1)
-				index = i;
-		}
-		i++;
-	}
-	return (index);
-}
-
-int	nearest_value(int *arr, int size, int value, int (*f)(int a, int b))
-{
-	int	index;
-	int	i;
-
-	index = -1;
-	i = 0;
-	while (i < size)
-	{
-		if (f(arr[i], value))
-		{
-			if (!f(arr[i], arr[index]) || index == -1)
+			if (!f(s->array[i], s->array[index]) || index == -1)
 				index = i;
 		}
 		i++;
