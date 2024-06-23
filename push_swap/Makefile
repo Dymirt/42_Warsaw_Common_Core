@@ -19,17 +19,22 @@ SRC = main.c \
 	t_int_arr.c \
 	helpers.c
 # Rule for compiling libft
-LIBFT_NAME = libft.a
-LIBFT_DIR = libft/
+LIBFT_DIR = ../libft/
 
 # Object files
+OBJDIR = obj/
 OBJ = $(SRC:.c=.o)
+OBJ := $(addprefix $(OBJDIR),$(OBJ))
 
 # Main rule for compiling the project
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_DIR)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT_DIR)*.o
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft
 
+
+$(OBJDIR)%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 # Rule for cleaning object files
 clean:
 	rm -f $(OBJ)
