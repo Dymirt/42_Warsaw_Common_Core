@@ -6,12 +6,12 @@
 #    By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 21:53:29 by dkolida           #+#    #+#              #
-#    Updated: 2024/06/23 21:06:48 by dmytrokolid      ###   ########.fr        #
+#    Updated: 2024/06/24 02:52:10 by dmytrokolid      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler
-CC = gcc
+CC = clang
 
 # Compiler flags
 CFLAGS = -Wall -Werror -Wextra
@@ -35,7 +35,6 @@ SRC =	ft_printf.c\
 OBJDIR = obj/
 
 # Rule for compiling libft
-LIBFT_NAME = libft.a
 LIBFT_DIR = ../
 
 # Object files
@@ -53,10 +52,6 @@ $(OBJDIR)%.o: %.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Rule for compiling test file
-test: re
-	$(CC) $(CFLAGS) -o .test_ft_printf .test_ft_printf.c -I. -L. -lftprintf
-
 # Rule for cleaning object files and libraries
 clean:
 	rm -f $(OBJ)
@@ -64,8 +59,7 @@ clean:
 
 # Rule for fully cleaning the project
 fclean: clean
-	rm -f $(NAME)
-	rm -r $(OBJDIR)
+	-rm -r $(OBJDIR)
 #	@make fclean -C $(LIBFT_DIR)
 
 # Default rule

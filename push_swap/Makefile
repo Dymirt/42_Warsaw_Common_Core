@@ -1,5 +1,5 @@
 # Compiler
-CC = cc
+CC = clang
 
 # Compiler flags
 CFLAGS = -Wall -Werror -Wextra -g -fdiagnostics-color=always
