@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 17:36:18 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/16 18:47:39 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/24 02:17:42 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,17 @@ static char	*substring(char const *s, size_t i, char c)
 	while (s[i + substring_lenth] && s[i + substring_lenth] != c)
 		substring_lenth++;
 	return (ft_substr(s, i, substring_lenth));
+}
+
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 19:55:13 by dkolida           #+#    #+#             */
-/*   Updated: 2024/06/22 15:04:41 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/24 02:18:36 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_itoa(int n);
+//ft_split.c
 char	**ft_split(char const *s, char c);
+void	ft_free_split(char **split);
+
 void	ft_free_2d(char **split, int len);
 int		is_arr_uniq(int *array, int len);
 int		is_int_str(char *str);
