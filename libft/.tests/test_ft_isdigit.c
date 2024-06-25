@@ -9,23 +9,23 @@ int main() {
 
     if (!ft_isdigit(1) && isdigit(1))
     {
-        printf("BAD case 1\n");
+        ft_printf("BAD case 1\n");
         return 1;
     }
 
     if (ft_isdigit('a') && isdigit('a'))
     {
-        printf("BAD case 2\n");
+        ft_printf("BAD case 2\n");
         return 1;
     }
 
     if (!ft_isdigit('1') && isdigit('1'))
     {
-        printf("BAD case 3\n");
+        ft_printf("BAD case 3\n");
         return 1;
     }
 
-    printf("%sOK\n", GREEN);
-    printf("%s", NORMAL);
+    ft_printf("%sOK\n", GREEN);
+    ft_printf("%s", NORMAL);
     return 0;
 }

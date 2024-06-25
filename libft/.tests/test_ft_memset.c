@@ -7,9 +7,9 @@ int main() {
 	char test_cases[] = "Hello 2 World";
 	ft_memset(test_cases, '*', 5);
 	if (ft_memset(test_cases, '*', 5) != memset(test_cases, '*', 5))
-		printf("%sKO", RED);
+		ft_printf("%sKO", RED);
     else
-	    printf("%sOK", GREEN);
+	    ft_printf("%sOK", GREEN);
 	test_ft_memset();
 	return 0;
 }
@@ -23,7 +23,7 @@ void test_ft_memset()
     ft_memset(buffer2, 'X', sizeof(buffer2));
     memset(expected2, 'X', sizeof(expected2));
     int result2 = memcmp(buffer2, expected2, sizeof(buffer2)) == 0;
-    printf(result2 ? GREEN "OK " NORMAL : RED "FAIL" NORMAL);
+    ft_printf(result2 ? GREEN "OK " NORMAL : RED "FAIL" NORMAL);
 
     // Test case 3: filling part of a buffer with a constant value
     char buffer3[9] = {'L', 'o', 'v', 'e', ' ', 'Y', 'o', 'u', 0};
@@ -32,6 +32,6 @@ void test_ft_memset()
     ft_memset(buffer3 + 3, 'X', 3);
     memset(expected3 + 3, 'X', 3);
     int result3 = memcmp(buffer3, expected3, sizeof(buffer3)) == 0;
-    printf(result3 ? GREEN "OK " NORMAL : RED "FAIL" NORMAL);
-    printf("%s\n", NORMAL);
+    ft_printf(result3 ? GREEN "OK " NORMAL : RED "FAIL" NORMAL);
+    ft_printf("%s\n", NORMAL);
 }

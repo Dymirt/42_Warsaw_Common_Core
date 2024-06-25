@@ -15,7 +15,7 @@ void test_ft_strmapi()
        char expected1[] = "Hello!";
        char *result1 = ft_strmapi(input1, &caesarEncrypt);
        int result = strcmp(result1, expected1) == 0;
-       printf("Test 1: ft_strmapi(\"Hdjik!\", &caesarEncrypt) - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 1: ft_strmapi(\"Hdjik!\", &caesarEncrypt) - Result: %s, Expected: %s - %s\n",
               result1, expected1,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -23,7 +23,7 @@ void test_ft_strmapi()
        char input2[] = "";
        char *result2 = ft_strmapi(input2, &caesarEncrypt);
        result = strcmp(result2, "") == 0;
-       printf("Test 2: ft_strmapi(\"\", &caesarEncrypt) - Result: %s, Expected: \"\" - %s\n",
+       ft_printf("Test 2: ft_strmapi(\"\", &caesarEncrypt) - Result: %s, Expected: \"\" - %s\n",
               result2,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 

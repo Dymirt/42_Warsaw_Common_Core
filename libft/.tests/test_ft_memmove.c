@@ -17,7 +17,7 @@ void test_ft_memmove()
     ft_memmove(result1 + 1, source1, 5);
     memmove(expected1 + 1, source1, 5);
     int result = memcmp(result1, expected1, sizeof(result1)) == 0;
-    printf("Test 1: ft_memmove(destination1 + 1, source1, 5) - Result: %s, Expected: %s - %s\n",
+    ft_printf("Test 1: ft_memmove(destination1 + 1, source1, 5) - Result: %s, Expected: %s - %s\n",
     	result1, expected1,
     	result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -29,7 +29,7 @@ void test_ft_memmove()
     ft_memmove(result2, source2, sizeof(source2));
     memmove(expected2, source2, sizeof(source2));
     result = memcmp(result2, expected2, sizeof(result2)) == 0;
-    printf("Test 2: ft_memmove(\"\", \"Test\", sizeof(\"Test\")) - Result: %s, Expected: %s - %s\n",
+    ft_printf("Test 2: ft_memmove(\"\", \"Test\", sizeof(\"Test\")) - Result: %s, Expected: %s - %s\n",
     result2, expected2,
     result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -41,7 +41,7 @@ void test_ft_memmove()
     ft_memmove(result3 + 3, source3, 3);
     memmove(expected3 + 3, source3, 3);
     result = memcmp(result3, expected3, sizeof(result3)) == 0;
-    printf("Test 3: ft_memmove(\"XXXXXXX\" + 3, \"Love You\", 3) - Result: %s, Expected: %s - %s\n",
+    ft_printf("Test 3: ft_memmove(\"XXXXXXX\" + 3, \"Love You\", 3) - Result: %s, Expected: %s - %s\n",
     	result3, expected3,
     	result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 

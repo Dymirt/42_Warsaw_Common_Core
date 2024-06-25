@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 20:16:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/03/11 20:39:21 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/24 02:59:49 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int main()
 
 	for (int i = 1; i < 20; i++){
 		if (ft_atoi(test_cases[i]) == atoi(test_cases[i]))
-			printf("%sOK[%d] ", GREEN, i);
+			ft_printf("%sOK[%d] ", GREEN, i);
 		else
-			printf("%sKO[%d] ", RED, i);
+			ft_printf("%sKO[%d] ", RED, i);
 	}
-	printf("%s\n", NORMAL);
+	ft_printf("%s\n", NORMAL);
 	return (0);
 }

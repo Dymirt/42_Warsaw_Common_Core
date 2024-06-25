@@ -18,11 +18,11 @@ void test_ft_split()
     char **result1 = ft_split(str1, charset1);
     char *expected1[] = {"Hello", "World", "This", "is", "a", "test", 0};
     int result = arrcmp(result1, expected1) == 0;
-    printf("Test 1: ft_split(\",Hello,World,,This,is,a,,,,,,test,\", ',') - Result: {");
+    ft_printf("Test 1: ft_split(\",Hello,World,,This,is,a,,,,,,test,\", ',') - Result: {");
     print_arr(result1);
-    printf("NULL}, Expected: {");
+    ft_printf("NULL}, Expected: {");
     print_arr(expected1);
-    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    ft_printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result1);
 
     // Test case 2: Multiple words, single separator
@@ -31,11 +31,11 @@ void test_ft_split()
     char **result2 = ft_split(str2, charset2);
     char *expected2[] = {"I", "Love", "You", 0};
     result = arrcmp(result2, expected2) == 0;
-    printf("Test 2: ft_split(\"    I   Love You  \", ' ') - Result: {");
+    ft_printf("Test 2: ft_split(\"    I   Love You  \", ' ') - Result: {");
     print_arr(result2);
-    printf("NULL}, Expected: {");
+    ft_printf("NULL}, Expected: {");
     print_arr(expected2);
-    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    ft_printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result2);
 
     // Test case 3: Single word
@@ -44,11 +44,11 @@ void test_ft_split()
     char **result3 = ft_split(str3, charset3);
     char *expected3[] = {"42Warsaw", 0};
     result = arrcmp(result3, expected3) == 0;
-    printf("Test 3: ft_split(\"42Warsaw\", '-') - Result: {");
+    ft_printf("Test 3: ft_split(\"42Warsaw\", '-') - Result: {");
     print_arr(result3);
-    printf("NULL}, Expected: {");
+    ft_printf("NULL}, Expected: {");
     print_arr(expected3);
-    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    ft_printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result3);
 
 	// Test case 4: Empty string
@@ -57,11 +57,11 @@ void test_ft_split()
     char **result4 = ft_split(str4, charset4);
     char *expected4[] = {0};
     result = arrcmp(result4, expected4) == 0;
-    printf("Test 4: ft_split(\"\", '.') - Result: {");
+    ft_printf("Test 4: ft_split(\"\", '.') - Result: {");
     print_arr(result4);
-    printf("NULL}, Expected: {");
+    ft_printf("NULL}, Expected: {");
     print_arr(expected4);
-    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    ft_printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result4);
 
     // Test case 5: Single separator
@@ -70,11 +70,11 @@ void test_ft_split()
     char **result5 = ft_split(str5, charset5);
     char *expected5[] = {"Hell", 0};
     result = arrcmp(result5, expected5) == 0;
-    printf("Test 5: ft_split(\"Hello\", 'o') - Result: {");
+    ft_printf("Test 5: ft_split(\"Hello\", 'o') - Result: {");
     print_arr(result5);
-    printf("NULL}, Expected: {");
+    ft_printf("NULL}, Expected: {");
     print_arr(expected5);
-    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    ft_printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result5);
 
     // Test case 6
@@ -83,13 +83,13 @@ void test_ft_split()
     char **result6 = ft_split(str6, charset6);
     char *expected6[] = {"tripouille", "42", 0};
     result = arrcmp(result6, expected6) == 0;
-    printf("Test 6: ft_split(\"  tripouille  42  \", ' ') - Result: {");
+    ft_printf("Test 6: ft_split(\"  tripouille  42  \", ' ') - Result: {");
     print_arr(result6);
-    printf("NULL}, Expected: {");
+    ft_printf("NULL}, Expected: {");
     print_arr(expected6);
-    printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
+    ft_printf("NULL} %s\n", result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     free_array(result6);
-    
+
 
 }
 
@@ -121,7 +121,7 @@ static void print_arr(char **arr)
     int i = 0;
     while (arr[i])
     {
-        printf("%s, ", arr[i]);
+        ft_printf("%s, ", arr[i]);
         i++;
     }
 }

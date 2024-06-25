@@ -14,7 +14,7 @@ void test_ft_strjoin()
        char *result1 = ft_strjoin("Hello ", "World!");
        char *expected1 = "Hello World!";
        int result = strcmp(result1, expected1) == 0;
-       printf("Test 1: ft_strjoin(\"Hello \", \"World!\") - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 1: ft_strjoin(\"Hello \", \"World!\") - Result: %s, Expected: %s - %s\n",
               result1, expected1,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -22,7 +22,7 @@ void test_ft_strjoin()
        char *result2 = ft_strjoin("", "");
        char *expected2 = "";
        result = strcmp(result2, expected2) == 0;
-       printf("Test 2: ft_strjoin(\"\", \"\") - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 2: ft_strjoin(\"\", \"\") - Result: %s, Expected: %s - %s\n",
               result2, expected2,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
        free(result1);

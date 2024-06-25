@@ -13,7 +13,7 @@ void test_ft_strtrim()
        char *result1 = ft_strtrim("! Hello! !World  ! ", " !");
        char *expected1 = "Hello! !World";
        int result = strcmp(result1, expected1) == 0;
-       printf("Test 1: ft_strtrim(\"! Hello! !World  ! \", \" !\") - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 1: ft_strtrim(\"! Hello! !World  ! \", \" !\") - Result: %s, Expected: %s - %s\n",
               result1, expected1,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -21,7 +21,7 @@ void test_ft_strtrim()
        char *result2 = ft_strtrim("!!Hello! !World!!", "");
        char *expected2 = "!!Hello! !World!!";
        result = strcmp(result2, expected2) == 0;
-       printf("Test 2: ft_strtrim(\"!!Hello! !World!!\", \"\") - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 2: ft_strtrim(\"!!Hello! !World!!\", \"\") - Result: %s, Expected: %s - %s\n",
               result2, expected2,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -29,14 +29,14 @@ void test_ft_strtrim()
        char *result3 = ft_strtrim("AlohA", "A");
        char *expected3 = "loh";
        result = strcmp(result3, expected3) == 0;
-       printf("Test 3: ft_strtrim(\"AlohA\", \"A\") - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 3: ft_strtrim(\"AlohA\", \"A\") - Result: %s, Expected: %s - %s\n",
               result3, expected3,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
        // Test case 4: character not found in the string
        char *result4 = ft_strtrim(NULL, "ABC");
        result = result4 == NULL;
-       printf("Test 4: ft_strtrim(NULL, \"ABC\") - Result: %s, Expected: NULL - %s\n",
+       ft_printf("Test 4: ft_strtrim(NULL, \"ABC\") - Result: %s, Expected: NULL - %s\n",
               result4,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 

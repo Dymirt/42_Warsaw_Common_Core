@@ -20,7 +20,7 @@ void test_ft_putnbr_fd()
     char* result1 = (char*) calloc(10, sizeof(char));
     int x = read(fd1, result1, strlen(str1));
     int result = strcmp(result1, str1) == 0;
-    printf("Test 1: ft_putnbr_fd(\"-12345\", fd), Result: %s, Expected: %s - %s\n",
+    ft_printf("Test 1: ft_putnbr_fd(\"-12345\", fd), Result: %s, Expected: %s - %s\n",
         result1, str1, result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     close(fd1);
     free(result1);
@@ -36,7 +36,7 @@ void test_ft_putnbr_fd()
     char* result2 = (char*) calloc(13, sizeof(char));
     x = read(fd2, result2, strlen(str2));
     result = strcmp(result2, str2) == 0;
-    printf("Test 2: ft_putnbr_fd(\"-2147483648\", fd), Result: %s, Expected: %s - %s\n",
+    ft_printf("Test 2: ft_putnbr_fd(\"-2147483648\", fd), Result: %s, Expected: %s - %s\n",
         result2, str2, result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
     close(fd2);
     free(result2);
@@ -46,5 +46,5 @@ void test_ft_putnbr_fd()
     char *str3 = "111111";
     int n3 = atoi(str3);
     ft_putnbr_fd(n3, 1);
-    printf("Test 3: ft_putnbr_fd(\"111111\", 1): if this line starts with 111111, stdout is working\n");
+    ft_printf("Test 3: ft_putnbr_fd(\"111111\", 1): if this line starts with 111111, stdout is working\n");
 }

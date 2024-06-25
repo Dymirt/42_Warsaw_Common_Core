@@ -14,11 +14,11 @@ int main() {
     for (i = 0; i < 14; i++)
 	{
         if (!!ft_isalnum(test_cases[i]) == !!isalnum(test_cases[i]))
-			printf("%sOK[%d] ", GREEN, i);
+			ft_printf("%sOK[%d] ", GREEN, i);
 		else
-			printf("%sKO[%d] ", RED, i);
+			ft_printf("%sKO[%d] ", RED, i);
 	}
-	printf("%s\n", NORMAL);
+	ft_printf("%s\n", NORMAL);
 
     return 0;
 }

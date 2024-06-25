@@ -15,7 +15,7 @@ void test_ft_striteri()
        char *expected1 = "XaXaXabbbbXa!";
        ft_striteri(result1, &a_to_X);
        int result = strcmp(result1, expected1) == 0;
-       printf("Test 1: ft_striteri(\"aaaaaabbbbaa\", &a_to_X) - Result: %s, Expected: %s - %s\n",
+       ft_printf("Test 1: ft_striteri(\"aaaaaabbbbaa\", &a_to_X) - Result: %s, Expected: %s - %s\n",
               result1, expected1,
               result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 
@@ -23,7 +23,7 @@ void test_ft_striteri()
        char result2[] = "";
        ft_striteri(result2, &a_to_X);
        result = strcmp(result2, "") == 0;
-       printf("Test 2: ft_striteri(\"\", &a_to_X) - Result: %s, Expected: \"\" - %s\n",
+       ft_printf("Test 2: ft_striteri(\"\", &a_to_X) - Result: %s, Expected: \"\" - %s\n",
               result2, result ? GREEN "PASS" NORMAL : RED "FAIL" NORMAL);
 }
 

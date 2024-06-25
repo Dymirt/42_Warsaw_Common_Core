@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_ft_tolower.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:35:59 by dkolida           #+#    #+#             */
-/*   Updated: 2024/02/26 19:42:23 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/24 03:04:54 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int main() {
     for (i = 0; i < 14; i++)
         if (ft_tolower(test_cases[i]) != tolower(test_cases[i]))
         {
-            printf("BAD %d != %d\n", ft_tolower(test_cases[i]), tolower(test_cases[i]) );
+            ft_printf("BAD %d != %d\n", ft_tolower(test_cases[i]), tolower(test_cases[i]) );
             return 1;
         }
-    printf("OK\n");
+    ft_printf("OK\n");
     return 0;
 }
