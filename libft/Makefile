@@ -75,7 +75,7 @@ clean:
 # Rule for fully cleaning the project (removing executable and object files)
 fclean: clean
 	rm -f $(NAME)
-	rm -r $(OBJDIR)
+	-rm -r $(OBJDIR)
 	@make fclean -C $(FT_PRINTF_DIR)
 
 # Default rule

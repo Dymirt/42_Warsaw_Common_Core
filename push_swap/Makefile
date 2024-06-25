@@ -37,7 +37,7 @@ $(OBJDIR)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 # Rule for cleaning object files
 clean:
-	rm -f $(OBJ)
+	-rm -f $(OBJ)
 	@make clean -C $(LIBFT_DIR)
 
 
