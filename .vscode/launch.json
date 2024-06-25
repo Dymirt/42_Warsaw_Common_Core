@@ -23,7 +23,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/pipex/pipex",
-			"args": ["file1", "cmd1", "cmd2", "file2"],
+			"args": ["infile", "grep H", "wc -w", "outfile"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
