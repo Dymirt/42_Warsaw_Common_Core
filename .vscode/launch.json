@@ -1,0 +1,35 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+
+		{
+			"name": "push_swap Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/push_swap/push_swap",
+			"args": ["835 13543 2868 309 12004 10083 11667 11694 13909 13016 4542 11661 7441 7313 13181 5653 2060 10574 3724 14679 5272 3991 14523 7289 8588 3154 12629 5035 10603 12684 4358 3886 4311 13598 7566 3183 5337 7070 2417 6660 13319 2891 14258 9595 8619 7414 14630 14748 14257 3034 14093 1390 3397 2175 13058 7691 2617 12873 1010 4758 14402 14234 8421 8773 897 10268 1864 14161 3788 4036 2298 266 2884 14654 8995 13031 12890 3875 13335 10953 3028 13966 2205 5727 4021 5437 6985 10490 220 9266 12749 12027 14790 7334 1229 14425 8882 6871 11099 6998"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb",
+			"preLaunchTask": "build push_swap",
+		},
+		{
+			"name": "pipex Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/pipex/pipex",
+			"args": ["file1", "cmd1", "cmd2", "file2"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb",
+			"preLaunchTask": "build pipex",
+		}
+	]
+}

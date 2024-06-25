@@ -1,0 +1,26 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build push_swap",
+			"type": "shell",
+			"command": "make -C ${workspaceFolder}/push_swap",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "build pipex",
+			"type": "shell",
+			"command": "make -C ${workspaceFolder}/pipex",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
