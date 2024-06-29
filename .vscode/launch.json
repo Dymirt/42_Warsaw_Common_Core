@@ -30,6 +30,19 @@
 			"externalConsole": false,
 			"MIMode": "lldb",
 			"preLaunchTask": "build pipex",
+		},
+		{
+			"name": "pipex invalid Launch ",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/pipex/pipex",
+			"args": ["infile", "gasdf", "outfile"],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb",
+			"preLaunchTask": "build pipex",
 		}
 	]
 }

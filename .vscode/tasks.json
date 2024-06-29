@@ -16,7 +16,7 @@
 		{
 			"label": "build pipex",
 			"type": "shell",
-			"command": "make -C ${workspaceFolder}/pipex",
+			"command": "make re -C ${workspaceFolder}/pipex",
 			"group": {
 				"kind": "build",
 				"isDefault": true
