@@ -9,6 +9,10 @@ NAME = pipex
 
 # Source files
 SRC = main.c \
+	validations.c \
+	pipex_init.c \
+	path.c \
+	helpers.c \
 
 # Rule for compiling libft
 LIBFT_DIR = ../libft/
