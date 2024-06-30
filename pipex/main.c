@@ -6,7 +6,7 @@
 /*   By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 19:45:16 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/06/29 16:35:37 by dmytrokolid      ###   ########.fr       */
+/*   Updated: 2024/06/30 15:10:22 by dmytrokolid      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,71 +16,74 @@
 
 char	***get_commands(int argc, char **argv);
 char	*get_path(char **envp, char *cmd);
-int comands_is_valid(char **envp, char ***cmds);
-void free_pipex(t_pipex *pipex);
+int		comands_is_valid(char **envp, char ***cmds);
+void	free_pipex(t_pipex *pipex);
 
+void	execute_command(char **cmd, t_pipex *pipex)
+{
+	char	*path;
 
-void execute_command(char **cmd, t_pipex *pipex) {
-	char *path;
-    path = get_path(pipex->envp, cmd[0]);
+	path = get_path(pipex->envp, cmd[0]);
 	if (path == NULL)
 	{
-        perror("path");
-        exit(EXIT_FAILURE);
+		perror("path");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		if (execve(path, cmd, pipex->envp) == -1) {
+		if (execve(path, cmd, pipex->envp) == -1)
+		{
 			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 	}
 }
 
-void pipe_exec(t_pipex *pipex) {
-    int pipefd[2];
-    int pid;
-
-    // Create a pipe
+void	pipe_exec(t_pipex *pipex)
+{
+	int	pipefd[2];
+	int	pid;
 
 	if (pipex->cmd_index > 0)
 	{
-		if (pipe(pipefd) == -1) {
-        perror("pipe");
-        exit(EXIT_FAILURE);
+		if (pipe(pipefd) == -1)
+		{
+			perror("pipe");
+			exit(EXIT_FAILURE);
 		}
-
 		pid = fork();
-		if (pid == -1) {
+		if (pid == -1)
+		{
 			perror("fork");
 			exit(EXIT_FAILURE);
 		}
-
-		if (pid == 0) { // Child process
-			{
-				close(pipefd[0]);
-				dup2(pipefd[1], STDOUT_FILENO);
-				close(pipefd[1]);
-				pipex->cmd_index--;
-				pipe_exec(pipex);
-			}
-		} else { // Parent process
-			close(pipefd[1]); // Close the front end of the pipe
+		if (pid == 0)
+		{
+			close(pipefd[0]);
+			dup2(pipefd[1], STDOUT_FILENO);
+			close(pipefd[1]);
+			pipex->cmd_index--;
+			pipe_exec(pipex);
+		}
+		else
+		{
+			close(pipefd[1]);
 			waitpid(pid, NULL, 0);
 			dup2(pipefd[0], STDIN_FILENO);
 			close(pipefd[0]);
 			execute_command(pipex->cmds[pipex->cmd_index], pipex);
 		}
 	}
-		execute_command(pipex->cmds[pipex->cmd_index], pipex);
+	execute_command(pipex->cmds[pipex->cmd_index], pipex);
 }
 
-int main(int argc, char **argv, char **envp) {
-	struct s_pipex *pipex;
-	int pid;
-	int pipefd[2];
-	char buffer[4096]; // Buffer to store data read from the pipe
-    ssize_t bytes_read;
+int	main(int argc, char **argv, char **envp)
+{
+	struct s_pipex	*pipex;
+	int				pid;
+	int				pipefd[2];
+	char			buffer[4096];
+	ssize_t			bytes_read;
 
 	if (argc < 4)
 	{
@@ -111,61 +114,60 @@ int main(int argc, char **argv, char **envp) {
 	pipex->cmds_count = argc - 3;
 	pipex->cmd_index = pipex->cmds_count - 1;
 	pipex->envp = envp;
-
-	// Create a pipe
-    if (pipe(pipefd) == -1) {
-        perror("pipe");
-        exit(EXIT_FAILURE);
-    }
+	if (pipe(pipefd) == -1)
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
+	}
 	pid = fork();
-	if (pid == -1) {
+	if (pid == -1)
+	{
 		perror("fork");
 		exit(EXIT_FAILURE);
-    }
-
+	}
 	if (pid == 0)
 	{
-			dup2(pipex->in_fd, STDIN_FILENO);
-			close(pipex->in_fd);
-			close(pipefd[0]);
-			dup2(pipefd[1], STDOUT_FILENO);
-			close(pipefd[1]);
-			pipe_exec(pipex);
+		dup2(pipex->in_fd, STDIN_FILENO);
+		close(pipex->in_fd);
+		close(pipefd[0]);
+		dup2(pipefd[1], STDOUT_FILENO);
+		close(pipefd[1]);
+		pipe_exec(pipex);
 	}
 	else
 	{
-		close(pipefd[1]); // Close the front end of the pipe
+		close(pipefd[1]);
 		waitpid(pid, NULL, 0);
 		if (pipex->cmd_index == pipex->cmds_count - 1)
 		{
-
-			// Read from the pipe and print
-			while ((bytes_read = read(pipefd[0], buffer, sizeof(buffer) - 1)) > 0) {
-				buffer[bytes_read] = '\0'; // Null-terminate the string
-				if (write(pipex->out_fd, buffer, bytes_read) == -1) {
-				perror("write");
-				close(pipex->out_fd);
-				exit(EXIT_FAILURE);
+			while ((bytes_read = read(pipefd[0], buffer, sizeof(buffer) - 1)) > 0)
+			{
+				buffer[bytes_read] = '\0';
+				if (write(pipex->out_fd, buffer, bytes_read) == -1)
+				{
+					perror("write");
+					close(pipex->out_fd);
+					exit(EXIT_FAILURE);
 				}
 			}
-			close(pipefd[0]); // Close the read end of the pipe
+			close(pipefd[0]);
 			close(pipex->out_fd);
 		}
 	}
 	free_pipex(pipex);
-    return 0;
+	return (0);
 }
 
 char	***get_commands(int argc, char **argv)
 {
-	char ***cmds;
-	int i = 0;
+	char	***cmds;
+	int		i;
 
+	i = 0;
 	cmds = (char ***)malloc(sizeof(char **) * (argc - 2));
 	while ((i + 2) < argc - 1)
 	{
 		cmds[i] = ft_split(argv[i + 2], ' ');
-
 		i++;
 	}
 	cmds[i] = NULL;
@@ -188,7 +190,6 @@ char	*get_path(char **envp, char *cmd)
 			{
 				tmp = ft_strjoin(*paths, "/");
 				tmp = ft_strjoin(tmp, cmd);
-
 				if (access(tmp, X_OK) == 0)
 				{
 					path = tmp;
@@ -197,21 +198,22 @@ char	*get_path(char **envp, char *cmd)
 				else
 					paths++;
 			}
-			break;
+			break ;
 		}
 		envp++;
 	}
 	return (path);
 }
 
-int comands_is_valid(char **envp, char ***cmds)
+int	comands_is_valid(char **envp, char ***cmds)
 {
-	int i = 0;
-	char *path = NULL;
+	int		i;
+	char	*path;
 
+	i = 0;
+	path = NULL;
 	if (cmds == NULL)
 		return (0);
-
 	while (cmds[i])
 	{
 		path = get_path(envp, cmds[i][0]);
@@ -225,10 +227,11 @@ int comands_is_valid(char **envp, char ***cmds)
 	return (1);
 }
 
-void free_pipex(t_pipex *pipex)
+void	free_pipex(t_pipex *pipex)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (pipex->cmds[i])
 	{
 		free(pipex->cmds[i]);
