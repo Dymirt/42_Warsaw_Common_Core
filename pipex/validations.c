@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 15:15:01 by dmytrokolid       #+#    #+#             */
-/*   Updated: 2024/06/30 22:58:17 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/06/30 23:44:40 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	comands_is_valid(char **envp, char ***cmds)
 
 int	argc_is_valid(int argc)
 {
-	if (argc < 4)
+	if (argc < 5)
 	{
 		ft_putstr_fd("Usage: ./pipex infile cmd1 cmd... outfile\n", 2);
 		return (0);

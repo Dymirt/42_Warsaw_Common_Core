@@ -48,6 +48,8 @@ re: fclean all
 # Default rule
 all: $(NAME)
 
+bonus : all
+
 # Phony targets to avoid conflicts with file names
 .PHONY: all clean fclean re
 
