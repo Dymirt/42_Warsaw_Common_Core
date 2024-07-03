@@ -48,6 +48,7 @@ SRC = ft_strlen.c \
 	is_int_str.c \
 	ft_arr_atoi.c \
 	ft_compare.c\
+	get_next_line/get_next_line.c \
 
 
 # Object files
