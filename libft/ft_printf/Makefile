@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dmytrokolida <dmytrokolida@student.42.f    +#+  +:+       +#+         #
+#    By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/06 21:53:29 by dkolida           #+#    #+#              #
-#    Updated: 2024/06/24 02:52:10 by dmytrokolid      ###   ########.fr        #
+#    Updated: 2024/07/03 23:58:55 by dkolida          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ clean:
 
 # Rule for fully cleaning the project
 fclean: clean
+	rm -f $(NAME)
 	-rm -r $(OBJDIR)
 #	@make fclean -C $(LIBFT_DIR)
 
