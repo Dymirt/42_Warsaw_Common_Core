@@ -12,6 +12,7 @@ NAME = fdf
 
 # Source files
 SRC = main.c \
+	ft_realloc.c \
 
 # Rule for compiling libft
 LIBFT_DIR = ../libft/
@@ -22,19 +23,19 @@ OBJ = $(SRC:.c=.o)
 OBJ := $(addprefix $(OBJDIR),$(OBJ))
 
 # Rule for compiling libft
-MINILIBX_DIR = ./minilibx_macos/
+MINILIBX_DIR = ../minilibx_macos/
 
 
 # Main rule for compiling the project
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_DIR)
 	@make -C $(MINILIBX_DIR)
-	$(CC) $(CFLAGS_light) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx
+	$(CC) $(CFLAGS_light) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # Rule for compiling individual source files
 $(OBJDIR)%.o: %.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS_light) -c $< -o $@
+	@$(CC) $(CFLAGS_light) -c $< -o $@
 # Rule for cleaning object files
 clean:
 	rm -f $(OBJ)

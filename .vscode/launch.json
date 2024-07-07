@@ -4,7 +4,18 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-
+		{
+			"name": "FdF Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/FdF/fdf",
+			"args": [ "test_maps/42.fdf" ],
+			"stopAtEntry": false,
+			"cwd": "${fileDirname}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
 		{
 			"name": "push_swap Launch",
 			"type": "cppdbg",
@@ -43,6 +54,7 @@
 			"externalConsole": false,
 			"MIMode": "lldb",
 			"preLaunchTask": "build pipex",
-		}
+		},
+
 	]
 }
