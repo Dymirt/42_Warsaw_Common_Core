@@ -13,6 +13,9 @@ NAME = fdf
 # Source files
 SRC = main.c \
 	ft_realloc.c \
+	map_setup.c \
+	helpers_3d.c \
+	ft_atoi_base.c \
 
 # Rule for compiling libft
 LIBFT_DIR = ../libft/
