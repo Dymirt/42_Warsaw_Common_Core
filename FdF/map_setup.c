@@ -6,16 +6,22 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:58:34 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/10 17:09:57 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/12 01:38:27 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+# include <stdio.h>
 
-t_dot ***allocate_map(int map_width, int map_height)
+int	create_trgb(int t, int r, int g, int b)
 {
-	t_dot ***map;
-	int i;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+t_dot	***allocate_map(int map_width, int map_height)
+{
+	t_dot	***map;
+	int		i;
 
 	map = (t_dot ***)malloc(sizeof(t_dot ***) * map_height);
 	i = 0;
@@ -27,48 +33,93 @@ t_dot ***allocate_map(int map_width, int map_height)
 	return (map);
 }
 
-
-void translate_map_3d(char	***map, t_dot ***coordinates, int map_width, int map_height)
+void translate_map_3d(t_map *map)
 {
-	int row;
-	int col = 0;
-	int min_x;
-	int min_y;
-	char **data;
+	int		row;
+	int		col;
+	float	min_x = 0;
+	float	min_y = 0;
+	float	max_x = 0;
+	float	max_y = 0;
+	char	**data;
 
 	t_dot *dot;
-
-	while (col < map_height)
+	col = 0;
+	while (col < map->height)
 	{
 		row = 0;
-		while (row < map_width)
+		while (row < map->width)
 		{
 			dot = (t_dot *)malloc(sizeof(t_dot));
-			data = ft_split(map[col][row], ',');
-			if (data[1])
-				dot->color = ft_atoi_base(data[1] + 2, "0123456789ABCDEF");
+			data = ft_split(map->map2d[col][row], ',');
+			if (data[1] != NULL)
+			{
+				char *g;
+				char *b;
+				char *r = ft_substr(data[1], 2, 2);
+				// TODO lovercase clors
+				printf("Color: %i\n", ft_atoi_base(r, "0123456789ABCDEF"));
+
+				if (ft_strlen(data[1]) > 4)
+					g = ft_substr(data[1], 4, 2);
+				else
+					g = ft_substr("00", 0, 2);
+				if (ft_strlen(data[1]) > 6)
+					b = ft_substr(data[1], 6, 2);
+				else
+					b = ft_substr("00", 0, 2);
+				dot->color = create_trgb(ft_atoi_base("00", "0123456789ABCDEF"), ft_atoi_base(r, "0123456789ABCDEF"), ft_atoi_base(g, "0123456789ABCDEF"), ft_atoi_base(b, "0123456789ABCDEF"));
+				free(r);
+				free(g);
+				free(b);
+			}
 			else
-				dot->color = 0xFFFFFF;
-			dot->x = isometric_x(row, col, 0.8);
-			dot->y = isometric_y(dot->x, col, atoi(data[0]), 0.8);
+				dot->color = 0x00FFFFFF;
+			dot->x = isometric_x(row, col, map->cos_angle);
+			dot->y = isometric_y(dot->x, col, (float)atoi(data[0]), map->sin_angle);
 			ft_free_split(data);
-			coordinates[col][row] = dot;
+			map->map3d[col][row] = dot;
 			if (dot->x < min_x)
 				min_x = dot->x;
 			if (dot->y < min_y)
 				min_y = dot->y;
+			if (dot->x > max_x)
+				max_x = dot->x;
+			if (dot->y > max_y)
+				max_y = dot->y;
 			row++;
 		}
 		col++;
 	}
+	while ((SCREEN_WIDTH - (max_x + fabs(min_x))  * map->scale) / 2 < 0)
+		map->scale -= 1;
+	max_x = (SCREEN_WIDTH - (max_x + fabs(min_x)) * map->scale) / 2;
+	while ((SCREEN_HEIGHT - (max_y + fabs(min_y)) * map->scale) / 2 < 0)
+		map->scale -= 1;
+	max_y = (SCREEN_HEIGHT - (max_y + fabs(min_y)) * map->scale) / 2;
+	if (map->scale < 1)
+		map->scale = 1;
 	col = 0;
-	while (col < map_height)
+	while (col < map->height)
 	{
 		row = 0;
-		while (row < map_width)
+		while (row < map->width)
 		{
-			coordinates[col][row]->x += abs(min_x);
-			coordinates[col][row]->y += abs(min_y);
+			map->map3d[col][row]->x += fabs(min_x);
+			map->map3d[col][row]->y += fabs(min_y);
+			row++;
+		}
+		col++;
+	}
+	scale_3d_map(map);
+	col = 0;
+	while (col < map->height)
+	{
+		row = 0;
+		while (row < map->width)
+		{
+			map->map3d[col][row]->x += max_x;
+			map->map3d[col][row]->y += max_y;
 			row++;
 		}
 		col++;
@@ -127,14 +178,11 @@ void free_map_data (t_map *map_data)
 		while (j < map_data->width)
 		{
 			free(map_data->map2d[i][j]);
-			free(map_data->map3d[i][j]);
 			j++;
 		}
 		free(map_data->map2d[i]);
-		free(map_data->map3d[i]);
 		i++;
 	}
 	free(map_data->map2d);
-	free(map_data->map3d);
 	free(map_data);
 }

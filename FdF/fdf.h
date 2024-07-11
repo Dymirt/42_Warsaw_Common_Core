@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/10 17:05:41 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/12 01:14:17 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 # include "../libft/libft.h"
 # include "../minilibx_macos/mlx.h"
 # include <math.h>
-#include <fcntl.h>
-
+# include <fcntl.h>
 
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 768
+# define ESC_KEY_MAC 53
+# define SCALE_P 24
+# define SCALE_M 27
+# define SIN_P 30
+# define SIN_M 33
 
 typedef struct s_data
 {
@@ -31,9 +35,9 @@ typedef struct s_data
 }				t_data;
 typedef struct s_dot
 {
-	int x;
-	int y;
-	int color;
+	float			x;
+	float			y;
+	unsigned int	color;
 }	t_dot;
 
 typedef struct s_map
@@ -43,27 +47,32 @@ typedef struct s_map
 	int		scale;
 	int		width;
 	int		height;
+	float	sin_angle;
+	float	cos_angle;
 }	t_map;
+typedef struct s_fdf
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_data	img;
+	t_map	*map_data;
+}	t_fdf;
 
 // helpers_3d.c
-int		isometric_x (int x, int y, float rotation);
-int		isometric_y (int x, int y, int z, float rotation);
-void	scale_3d_map(t_map *map_data);
+float			isometric_x(float x, float y, float rotation);
+float			isometric_y(float x, float y, float z, float rotation);
+void			scale_3d_map(t_map *map_data);
 
 // ft_realloc.c
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 // ft_atoi_base.c
-int ft_atoi_base(char *str, char *base);
-
+int				ft_atoi_base(char *str, char *base);
 
 //map_setup.c
-t_dot	***allocate_map(int map_width, int map_height);
-void	translate_map_3d(char	***map, t_dot ***coordinates, int map_width, int map_height);
-void	load_map(char *file_name, char ****map, int *map_width, int *map_height);
-void	free_map_data (t_map *map_data);
-
-
-
+t_dot			***allocate_map(int map_width, int map_height);
+void			translate_map_3d(t_map *map);
+void			load_map(char *file_name, char ****map, int *map_width, int *map_height);
+void			free_map_data(t_map *map_data);
 
 #endif

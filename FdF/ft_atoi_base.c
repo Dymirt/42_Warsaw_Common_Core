@@ -6,18 +6,18 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:02:40 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/10 17:02:57 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/12 01:07:57 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
-	int i;
-	int j;
-	int res;
-	int sign;
+	int	i;
+	int	j;
+	int	res;
+	int	sign;
 
 	i = 0;
 	res = 0;
