@@ -16,6 +16,7 @@ SRC = main.c \
 	map_setup.c \
 	helpers_3d.c \
 	ft_atoi_base.c \
+	src/colors.c \
 
 # Rule for compiling libft
 LIBFT_DIR = ../libft/

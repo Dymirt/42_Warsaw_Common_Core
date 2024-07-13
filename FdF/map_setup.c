@@ -6,17 +6,12 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:58:34 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/12 01:38:27 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/13 15:39:18 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 # include <stdio.h>
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
-}
 
 t_dot	***allocate_map(int map_width, int map_height)
 {
@@ -53,30 +48,11 @@ void translate_map_3d(t_map *map)
 			dot = (t_dot *)malloc(sizeof(t_dot));
 			data = ft_split(map->map2d[col][row], ',');
 			if (data[1] != NULL)
-			{
-				char *g;
-				char *b;
-				char *r = ft_substr(data[1], 2, 2);
-				// TODO lovercase clors
-				printf("Color: %i\n", ft_atoi_base(r, "0123456789ABCDEF"));
-
-				if (ft_strlen(data[1]) > 4)
-					g = ft_substr(data[1], 4, 2);
-				else
-					g = ft_substr("00", 0, 2);
-				if (ft_strlen(data[1]) > 6)
-					b = ft_substr(data[1], 6, 2);
-				else
-					b = ft_substr("00", 0, 2);
-				dot->color = create_trgb(ft_atoi_base("00", "0123456789ABCDEF"), ft_atoi_base(r, "0123456789ABCDEF"), ft_atoi_base(g, "0123456789ABCDEF"), ft_atoi_base(b, "0123456789ABCDEF"));
-				free(r);
-				free(g);
-				free(b);
-			}
+				dot->color = get_color(data[1]);
 			else
 				dot->color = 0x00FFFFFF;
 			dot->x = isometric_x(row, col, map->cos_angle);
-			dot->y = isometric_y(dot->x, col, (float)atoi(data[0]), map->sin_angle);
+			dot->y = isometric_y(dot->x, col, (float)ft_atoi(data[0]), map->sin_angle);
 			ft_free_split(data);
 			map->map3d[col][row] = dot;
 			if (dot->x < min_x)
@@ -91,6 +67,7 @@ void translate_map_3d(t_map *map)
 		}
 		col++;
 	}
+	ft_putendl_fd("Map translated to 3D", 1);
 	while ((SCREEN_WIDTH - (max_x + fabs(min_x))  * map->scale) / 2 < 0)
 		map->scale -= 1;
 	max_x = (SCREEN_WIDTH - (max_x + fabs(min_x)) * map->scale) / 2;
@@ -133,6 +110,7 @@ void	load_map(char *file_name, char ****map, int *map_width, int *map_height)
 	char	**map_line;
 
 	fd = open(file_name, O_RDONLY);
+	ft_printf("File descriptor: %d\n", fd);
 	while (fd > 0)
 	{
 		line = get_next_line(fd);
@@ -156,14 +134,13 @@ void	load_map(char *file_name, char ****map, int *map_width, int *map_height)
 			{
 				ft_printf("Memory allocation failed\n");
 				close(fd);
-				return;
+				return ;
 			}
 			(*map)[*map_height - 1] = map_line;
 		}
 		free(line);
 	}
-	ft_printf("Errorw\n");
-	return ;
+	close(fd);
 }
 
 void free_map_data (t_map *map_data)

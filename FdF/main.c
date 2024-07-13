@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/12 01:16:47 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/13 14:36:21 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,19 @@ int key_hook(int keycode, void *param)
 		mlx_destroy_image(fdf->mlx, fdf->img.img);
 		drow_img(fdf);
 	}
+	if (keycode == 42)
+	{
+		fdf->map_data->cos_angle += 0.1;
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		drow_img(fdf);
+	}
+	if (keycode == 39)
+	{
+		if (fdf->map_data->cos_angle - 0.1 > 0 )
+			fdf->map_data->cos_angle -= 0.1;
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		drow_img(fdf);
+	}
 
 	ft_printf("Keycode: %d\n", keycode);
 	return (0);
@@ -134,7 +147,7 @@ int	main(int argc, char **argv)
 	load_map(argv[1], &fdf->map_data->map2d, &fdf->map_data->width, &fdf->map_data->height);
 	if (fdf->map_data->map2d == NULL)
 	{
-		ft_printf("Error\n");
+		ft_printf("Load map Error\n");
 		return (1);
 	}
 	fdf->mlx_win = mlx_new_window(fdf->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Hello world!");

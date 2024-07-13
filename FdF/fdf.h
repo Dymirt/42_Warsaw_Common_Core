@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/12 01:14:17 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/13 16:31:01 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,8 @@ t_dot			***allocate_map(int map_width, int map_height);
 void			translate_map_3d(t_map *map);
 void			load_map(char *file_name, char ****map, int *map_width, int *map_height);
 void			free_map_data(t_map *map_data);
+
+// src/color.c
+int				get_color(char *color_str);
 
 #endif

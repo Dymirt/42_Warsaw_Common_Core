@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:02:40 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/12 01:07:57 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/13 16:31:55 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,9 @@ int	ft_atoi_base(char *str, char *base)
 	int	i;
 	int	j;
 	int	res;
-	int	sign;
 
 	i = 0;
 	res = 0;
-	sign = 1;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	while (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
 	while (str[i])
 	{
 		j = 0;
@@ -39,5 +29,5 @@ int	ft_atoi_base(char *str, char *base)
 			res = res * ft_strlen(base) + j;
 		i++;
 	}
-	return (res * sign);
+	return (res);
 }
