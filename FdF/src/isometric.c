@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:58 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 15:35:32 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:04:33 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,27 @@
 static float	isometric_x(float x, float y, float rotation);
 static float	isometric_y(float x, float y, float z, float rotation);
 
-void	translate_map_3d(t_map *map)
+void	new_dot(t_map *map, t_dot *dot)
 {
-	int		row;
-	int		col;
 	char	**data;
-	t_dot	*dot;
+	int		col;
+	int		row;
 
-	col = 0;
-	while (col < map->height)
-	{
-		row = 0;
-		while (row < map->width)
-		{
-			dot = (t_dot *)malloc(sizeof(t_dot));
-			data = ft_split(map->map2d[col][row], ',');
-			if (data[1] != NULL)
-				dot->color = get_color(data[1]);
-			else
-				dot->color = 0xFFFFFF;
-			dot->x = isometric_x(row, col, map->cos_angle);
-			dot->y = isometric_y(dot->x, col, (float)ft_atoi(data[0]), map->sin_angle);
-			ft_free_split(data);
-			map->map3d[col][row] = dot;
-			row++;
-		}
-		col++;
-	}
+	col = map->tmp->col;
+	row = map->tmp->row;
+	data = ft_split(map->map2d[col][row], ',');
+	if (data[1] != NULL)
+		dot->color = get_color(data[1]);
+	else
+		dot->color = 0xFFFFFF;
+	dot->x = isometric_x(row, col, map->cos_angle);
+	dot->y = isometric_y(dot->x, col, (float)ft_atoi(data[0]), map->sin_angle);
+	ft_free_split(data);
+}
+
+void	create_3d_map(t_map *map)
+{
+	for_each_t_dot(map, new_dot);
 	update_map_min_max(map);
 }
 

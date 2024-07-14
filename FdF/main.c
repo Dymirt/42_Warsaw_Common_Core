@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 15:52:47 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 19:38:54 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,63 +26,63 @@ int	key_hook(int keycode, void *param)
 	if (keycode == SCALE_P)
 	{
 		fdf->map_data->scale *= 1.1;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == SCALE_M)
 	{
 		fdf->map_data->scale *= 0.9;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == SIN_P)
 	{
 		if (fdf->map_data->sin_angle + 0.1 < 1.5)
 			fdf->map_data->sin_angle += 0.1;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == SIN_M)
 	{
 		if (fdf->map_data->sin_angle - 0.1 > 0)
 			fdf->map_data->sin_angle -= 0.1;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == 42)
 	{
 		fdf->map_data->degrees_rotate += 1.0;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == 39)
 	{
 		fdf->map_data->degrees_rotate -= 1.0;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == 126)
 	{
 		fdf->map_data->moves_y -= 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == 125)
 	{
 		fdf->map_data->moves_y += 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == 123)
 	{
 		fdf->map_data->moves_x -= 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	if (keycode == 124)
 	{
 		fdf->map_data->moves_x += 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
 	}
 	ft_printf("Keycode: %d\n", keycode);
@@ -109,9 +109,9 @@ int	main(int argc, char **argv)
 	}
 	fdf->mlx_win = mlx_new_window(fdf->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "FdF");
 	fdf->map_data->scale = 20.0;
-	fdf->map_data->sin_angle = 0.8;
-	fdf->map_data->cos_angle = -0.8;
-	fdf->map_data->degrees_rotate = 5.0;
+	fdf->map_data->sin_angle = 0.523599;
+	fdf->map_data->cos_angle = 0.523599;
+	fdf->map_data->degrees_rotate = 4.0;
 	fdf->map_data->moves_x = 0.0;
 	fdf->map_data->moves_y = 0.0;
 	fdf->map_data->on_start = 1;

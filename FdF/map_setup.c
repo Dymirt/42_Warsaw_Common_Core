@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:58:34 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 15:38:50 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 19:13:03 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,26 @@ void	load_map(char *file_name, char ****map, int *width, int *height)
 		}
 		free(line);
 	}
-	close(fd);
 }
 
 t_dot	***malloc_3d_fdf_map(int map_width, int map_height)
 {
 	t_dot	***map;
-	int		i;
+	int		col;
+	int		row;
 
 	map = (t_dot ***)malloc(sizeof(t_dot ***) * map_height);
-	i = 0;
-	while (i < map_height)
+	col = 0;
+	while (col < map_height)
 	{
-		map[i] = (t_dot **)malloc(sizeof(t_dot **) * map_width);
-		i++;
+		map[col] = (t_dot **)malloc(sizeof(t_dot **) * map_width);
+		row = 0;
+		while (row < map_width)
+		{
+			map[col][row] = (t_dot *)malloc(sizeof(t_dot));
+			row++;
+		}
+		col++;
 	}
 	return (map);
 }

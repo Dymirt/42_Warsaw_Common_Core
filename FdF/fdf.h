@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 15:37:51 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:05:01 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,15 @@ typedef struct s_dot
 	unsigned int	color;
 }	t_dot;
 
+typedef struct s_tmp
+{
+	int		row;
+	int		col;
+}	t_tmp;
+
 typedef struct s_map
 {
+	t_data	img;
 	t_dot	***map3d;
 	char	***map2d;
 	float	scale;
@@ -57,14 +64,23 @@ typedef struct s_map
 	float	moves_x;
 	float	moves_y;
 	int		on_start;
+	t_tmp	*tmp;
 }	t_map;
 typedef struct s_fdf
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_data	img;
 	t_map	*map_data;
 }	t_fdf;
+
+//src/for_each_mod_functions.c
+void	to_positive(t_map *map, t_dot *dot);
+void	scale_dot(t_map *map, t_dot *dot);
+void	move_dot(t_map *map, t_dot *dot);
+void	draw_lines(t_map *map, t_dot *dot);
+
+//src/for_each_functions.c
+void	for_each_t_dot(t_map *map, void (*f)(t_map *, t_dot *));
 
 // helpers_3d.c
 void	scale_3d_map(t_map *map_data);
@@ -72,10 +88,7 @@ void	update_map_min_max(t_map *map);
 void	rotate_map(t_map *map);
 void	center_map_to_screen(t_map *map);
 void	transate_to_positive(t_map *map);
-void	rotare_map_around(t_map *map, float degrees);
 void	rotate_point(t_dot *dot, float degrees);
-void	rotate_point_around(t_dot *dot, float degrees, t_map *map);
-void	crop_scale(t_map *map);
 void	apply_moves(t_map *map);
 
 // ft_realloc.c
@@ -91,11 +104,12 @@ void	free_map_data(t_map *map_data);
 
 //src/img.c
 void	drow_img(t_fdf *fdf);
+void	draw_line(t_dot *start, t_dot *end, t_data img);
 
 // src/color.c
 int		get_color(char *color_str);
 
 // src/isometric.c
-void	translate_map_3d(t_map *map);
+void	create_3d_map(t_map *map);
 
 #endif

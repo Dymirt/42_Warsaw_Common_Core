@@ -17,6 +17,9 @@ SRC = main.c \
 	src/colors.c \
 	src/isometric.c \
 	src/img.c \
+	src/navigation.c \
+	src/for_each_t_dot_mod_func.c\
+	src/for_each_t_dot.c\
 
 # Rule for compiling libft
 LIBFT_DIR = ../libft/

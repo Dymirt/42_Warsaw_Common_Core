@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 15:34:03 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:05:24 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,41 +17,19 @@ void	put_pixel(t_data *data, int x, int y, int color);
 
 void	drow_img(t_fdf *fdf)
 {
-	int	col;
-	int	row;
-
-	fdf->img.img = mlx_new_image(fdf->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bits_per_pixel,
-			&fdf->img.line_length, &fdf->img.endian);
+	fdf->map_data->img.img = mlx_new_image(fdf->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	fdf->map_data->img.addr = mlx_get_data_addr(fdf->map_data->img.img, &fdf->map_data->img.bits_per_pixel,
+			&fdf->map_data->img.line_length, &fdf->map_data->img.endian);
 	fdf->map_data->map3d = malloc_3d_fdf_map(fdf->map_data->width,
 			fdf->map_data->height);
-	translate_map_3d(fdf->map_data);
+	create_3d_map(fdf->map_data);
 	rotate_map(fdf->map_data);
-	rotare_map_around(fdf->map_data, 10);
 	transate_to_positive(fdf->map_data);
 	scale_3d_map(fdf->map_data);
 	center_map_to_screen(fdf->map_data);
 	apply_moves(fdf->map_data);
-	col = 0;
-	while (col < fdf->map_data->height)
-	{
-		row = 0;
-		while (row < fdf->map_data->width)
-		{
-			if (row + 1 < fdf->map_data->width)
-				draw_line(fdf->map_data->map3d[col][row],
-					fdf->map_data->map3d[col][row + 1], fdf->img);
-			if (col + 1 < fdf->map_data->height)
-				draw_line(fdf->map_data->map3d[col][row],
-					fdf->map_data->map3d[col + 1][row], fdf->img);
-			free(fdf->map_data->map3d[col][row]);
-			row++;
-		}
-		free(fdf->map_data->map3d[col]);
-		col++;
-	}
-	free(fdf->map_data->map3d);
-	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->img.img, 0, 0);
+	for_each_t_dot(fdf->map_data, draw_lines);
+	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->map_data->img.img, 0, 0);
 }
 
 void	draw_line(t_dot *start, t_dot *end, t_data img)
@@ -66,10 +44,7 @@ void	draw_line(t_dot *start, t_dot *end, t_data img)
 	y = start->y;
 	x_step = end->x - start->x;
 	y_step = end->y - start->y;
-	if (fabs(x_step) > fabs(y_step))
-		max = (int)fabs(x_step);
-	else
-		max = (int)fabs(y_step);
+	max = fmax(fabs(x_step), fabs(y_step));
 	x_step = x_step / (float)max;
 	y_step = y_step / (float)max;
 	while (((int)(x - end->x) || (int)(y - end->y)))
