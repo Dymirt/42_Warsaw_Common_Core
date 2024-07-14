@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 19:38:54 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:59:51 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,26 @@ int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
 
-	fdf = malloc(sizeof(t_fdf));
-	fdf->mlx = mlx_init();
-	fdf->map_data = malloc(sizeof(t_map));
 	if (argc != 2)
 	{
 		ft_printf("Usage: %s <filename>\n", argv[0]);
 		return (1);
 	}
+
+	fdf = malloc(sizeof(t_fdf));
+	if (fdf == NULL)
+	{
+		ft_printf("Memory allocation failed\n");
+		return (1);
+	}
+	fdf->mlx = mlx_init();
+	fdf->map_data = malloc(sizeof(t_map));
+	if (fdf->map_data == NULL)
+	{
+		ft_printf("Memory allocation failed\n");
+		return (1);
+	}
+
 	load_map(argv[1], &fdf->map_data->map2d, &fdf->map_data->width, &fdf->map_data->height); // Rewrite arguments
 	if (fdf->map_data->map2d == NULL)
 	{

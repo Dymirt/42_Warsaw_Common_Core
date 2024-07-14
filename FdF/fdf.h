@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 20:05:01 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 20:48:57 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,10 @@ typedef struct s_fdf
 	t_map	*map_data;
 }	t_fdf;
 
+//src/t_dot.c
+t_dot	***t_dot_allocate_2d_arr(int map_width, int map_height);
+void	t_dot_free_2d_arr(t_map *map);
+
 //src/for_each_mod_functions.c
 void	to_positive(t_map *map, t_dot *dot);
 void	scale_dot(t_map *map, t_dot *dot);
@@ -88,7 +92,7 @@ void	update_map_min_max(t_map *map);
 void	rotate_map(t_map *map);
 void	center_map_to_screen(t_map *map);
 void	transate_to_positive(t_map *map);
-void	rotate_point(t_dot *dot, float degrees);
+void	rotate_point(t_map *map, t_dot *dot);
 void	apply_moves(t_map *map);
 
 // ft_realloc.c
