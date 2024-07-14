@@ -11,7 +11,7 @@ NAME = fdf
 # Source files
 SRC = main.c \
 	ft_realloc.c \
-	map_setup.c \
+	src/read_map_file.c \
 	helpers_3d.c \
 	ft_atoi_base.c \
 	src/colors.c \

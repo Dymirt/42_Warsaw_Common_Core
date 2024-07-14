@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 16:40:43 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 17:52:21 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 23:10:24 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	crop_scale(t_map *map);
 void	apply_moves(t_map *map)
 {
 	for_each_t_dot(map, move_dot);
-	update_map_min_max(map);
+	reset_min_max(map);
 }
 
 void	scale_3d_map(t_map *map)
@@ -28,7 +28,7 @@ void	scale_3d_map(t_map *map)
 		map->on_start = 0;
 	}
 	for_each_t_dot(map, scale_dot);
-	update_map_min_max(map);
+	reset_min_max(map);
 }
 
 static void	crop_scale(t_map *map)

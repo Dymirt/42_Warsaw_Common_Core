@@ -6,11 +6,12 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 17:38:25 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 20:40:48 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 22:54:08 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../fdf.h"
+#include <stdio.h>
 
 void	to_positive(t_map *map, t_dot *dot)
 {
@@ -37,6 +38,7 @@ void	draw_lines(t_map *map, t_dot *dot)
 
 	col = map->tmp->col;
 	row = map->tmp->row;
+	printf("x: %f, y: %f\n", dot->x, dot->y);
 	if (row + 1 < map->width)
 		draw_line(dot, map->map3d[col][row + 1], map->img);
 	if (col + 1 < map->height)

@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 20:48:37 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 01:33:54 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	put_pixel(t_data *data, int x, int y, int color);
 
 void	drow_img(t_fdf *fdf)
 {
-	fdf->map_data->img.img = mlx_new_image(fdf->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	fdf->map_data->img.addr = mlx_get_data_addr(fdf->map_data->img.img, &fdf->map_data->img.bits_per_pixel,
+	fdf->map_data->img.img = mlx_new_image(fdf->mlx,
+			SCREEN_WIDTH, SCREEN_HEIGHT);
+	fdf->map_data->img.addr = mlx_get_data_addr(
+			fdf->map_data->img.img, &fdf->map_data->img.bits_per_pixel,
 			&fdf->map_data->img.line_length, &fdf->map_data->img.endian);
 	fdf->map_data->map3d = t_dot_allocate_2d_arr(fdf->map_data->width,
 			fdf->map_data->height);
@@ -29,7 +31,8 @@ void	drow_img(t_fdf *fdf)
 	center_map_to_screen(fdf->map_data);
 	apply_moves(fdf->map_data);
 	for_each_t_dot(fdf->map_data, draw_lines);
-	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win, fdf->map_data->img.img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win,
+		fdf->map_data->img.img, 0, 0);
 	t_dot_free_2d_arr(fdf->map_data);
 }
 

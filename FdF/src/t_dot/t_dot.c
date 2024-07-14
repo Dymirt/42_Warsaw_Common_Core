@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 20:20:01 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 20:56:26 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 01:30:38 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ t_dot	***t_dot_allocate_2d_arr(int map_width, int map_height)
 	return (map);
 }
 
-void t_dot_free_2d_arr(t_map *map)
+void	t_dot_free_2d_arr(t_map *map)
 {
-	int col;
-	int row;
+	int	col;
+	int	row;
 
 	col = 0;
 	while (col < map->height)

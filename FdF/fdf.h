@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 20:48:57 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 01:34:37 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ void	to_positive(t_map *map, t_dot *dot);
 void	scale_dot(t_map *map, t_dot *dot);
 void	move_dot(t_map *map, t_dot *dot);
 void	draw_lines(t_map *map, t_dot *dot);
+void	reset_min_max(t_map *map);
 
 //src/for_each_functions.c
 void	for_each_t_dot(t_map *map, void (*f)(t_map *, t_dot *));
 
 // helpers_3d.c
 void	scale_3d_map(t_map *map_data);
-void	update_map_min_max(t_map *map);
 void	rotate_map(t_map *map);
 void	center_map_to_screen(t_map *map);
 void	transate_to_positive(t_map *map);
@@ -101,9 +101,10 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 // ft_atoi_base.c
 int		ft_atoi_base(char *str, char *base);
 
-//map_setup.c
+//read_map_file.c
+void	read_map_file(t_fdf *fdf, char *file_name);
+
 t_dot	***malloc_3d_fdf_map(int map_width, int map_height);
-void	load_map(char *file_name, char ****map, int *width, int *height);
 void	free_map_data(t_map *map_data);
 
 //src/img.c

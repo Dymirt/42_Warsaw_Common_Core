@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:58 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 20:04:33 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 23:10:05 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	new_dot(t_map *map, t_dot *dot)
 void	create_3d_map(t_map *map)
 {
 	for_each_t_dot(map, new_dot);
-	update_map_min_max(map);
+	reset_min_max(map);
 }
 
 static float	isometric_x(float x, float y, float rotation)
