@@ -5,8 +5,6 @@ CC = clang
 CFLAGS = -Wall -Werror -Wextra -g -fdiagnostics-color=always
 CFLAGS_light = -Wall -Wextra -g -fdiagnostics-color=always
 
-
-
 # Executable name
 NAME = fdf
 
@@ -17,6 +15,8 @@ SRC = main.c \
 	helpers_3d.c \
 	ft_atoi_base.c \
 	src/colors.c \
+	src/isometric.c \
+	src/img.c \
 
 # Rule for compiling libft
 LIBFT_DIR = ../libft/

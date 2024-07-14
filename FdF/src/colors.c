@@ -6,30 +6,28 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:51:36 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/13 16:29:40 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/14 15:25:09 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
 char	**split_to_pairs(char *str);
-void	str_toupper(char *str);
 
-int	create_trgb(int t, int r, int g, int b)
+int	create_trgb(int r, int g, int b)
 {
-	return (t << 24 | r << 16 | g << 8 | b);
+	return (0 << 24 | r << 16 | g << 8 | b);
 }
 
 int	get_color(char *color_str)
 {
-	int		colors_int[3];
+	int		colors_int[4];
 	char	**colors_str;
 	int		color;
 	int		i;
 	int		j;
 
 	ft_str_toupper(color_str);
-	ft_printf("color_str: %s\n", color_str);
 	colors_str = split_to_pairs(color_str + 2);
 	i = 0;
 	j = 0;
@@ -39,7 +37,7 @@ int	get_color(char *color_str)
 		j++;
 		i++;
 	}
-	color = create_trgb(0, colors_int[0], colors_int[1], colors_int[2]);
+	color = create_trgb(colors_int[0], colors_int[1], colors_int[2]);
 	ft_free_split(colors_str);
 	return (color);
 }
