@@ -21,6 +21,7 @@ SRC = main.c \
 	src/t_dot/for_each_t_dot_mod_func.c\
 	src/t_dot/for_each_t_dot.c\
 	src/t_dot/t_dot.c \
+	src/keys.c \
 
 
 # Rule for compiling libft

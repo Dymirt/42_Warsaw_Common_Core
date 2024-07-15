@@ -6,14 +6,15 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:58 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 23:10:05 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 02:57:59 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static float	isometric_x(float x, float y, float rotation);
-static float	isometric_y(float x, float y, float z, float rotation);
+#include <stdio.h>
+
+void			isometric(t_map *map, t_dot *dot);
 
 void	new_dot(t_map *map, t_dot *dot)
 {
@@ -28,23 +29,32 @@ void	new_dot(t_map *map, t_dot *dot)
 		dot->color = get_color(data[1]);
 	else
 		dot->color = 0xFFFFFF;
-	dot->x = isometric_x(row, col, map->cos_angle);
-	dot->y = isometric_y(dot->x, col, (float)ft_atoi(data[0]), map->sin_angle);
+	dot->x = (float)row;
+	dot->z = (float)ft_atoi(data[0]);
+	dot->y = (float)col;
 	ft_free_split(data);
+}
+
+void	isometric_view(t_map *map)
+{
+	for_each_t_dot(map, isometric);
+	reset_min_max(map);
+}
+
+void	isometric(t_map *map, t_dot *dot)
+{
+	float	x;
+	float	y;
+	float	z;
+
+	x = dot->x;
+	y = dot->y;
+	z = dot->z;
+	dot->x = (float)(x - y)*cos(map->cos_angle);
+	dot->y = (float)(x + y)*sin(map->sin_angle) - z;
 }
 
 void	create_3d_map(t_map *map)
 {
 	for_each_t_dot(map, new_dot);
-	reset_min_max(map);
-}
-
-static float	isometric_x(float x, float y, float rotation)
-{
-	return ((float)(x - y)*cos(rotation));
-}
-
-static float	isometric_y(float x, float y, float z, float rotation)
-{
-	return ((float)(x + y)*sin(rotation) - z);
 }

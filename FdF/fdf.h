@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 01:34:37 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 02:56:05 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,24 @@
 
 # define SCREEN_WIDTH 1024
 # define SCREEN_HEIGHT 768
-# define ESC_KEY_MAC 53
-# define SCALE_P 24
-# define SCALE_M 27
-# define SIN_P 30
-# define SIN_M 33
+
+# ifdef __APPLE__
+#  define ESC_KEY_MAC 53
+#  define SCALE_UP 24
+#  define SCALE_DOWN 27
+#  define MOVE_UP 126
+#  define MOVE_DOWN 125
+#  define MOVE_LEFT 123
+#  define MOVE_RIGHT 124
+#  define SIN_P 30
+#  define SIN_M 33
+# else
+#  define ESC_KEY 0
+#  define SCALE_P 0
+#  define SCALE_M 0
+#  define SIN_P 0
+#  define SIN_M 0
+# endif
 
 typedef struct s_data
 {
@@ -37,6 +50,7 @@ typedef struct s_dot
 {
 	float			x;
 	float			y;
+	float			z;
 	unsigned int	color;
 }	t_dot;
 
@@ -116,5 +130,9 @@ int		get_color(char *color_str);
 
 // src/isometric.c
 void	create_3d_map(t_map *map);
+void	isometric_view(t_map *map);
+
+// src/keys.c
+int		key_hook(int keycode, void *param);
 
 #endif

@@ -6,93 +6,16 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 01:31:49 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 02:59:52 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-void	map_setup(t_map *map);
 void	mlx_setup(t_fdf *fdf);
 void	fdf_setup(t_fdf *fdf);
 void	check_inpit(int argc, char **argv);
-
-int	key_hook(int keycode, void *param)
-{
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *)param;
-	if (keycode == ESC_KEY_MAC)
-	{
-		free_map_data(fdf->map_data);
-		exit(0);
-	}
-	if (keycode == SCALE_P)
-	{
-		fdf->map_data->scale *= 1.1;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == SCALE_M)
-	{
-		fdf->map_data->scale *= 0.9;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == SIN_P)
-	{
-		if (fdf->map_data->sin_angle + 0.1 < 1.5)
-			fdf->map_data->sin_angle += 0.1;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == SIN_M)
-	{
-		if (fdf->map_data->sin_angle - 0.1 > 0)
-			fdf->map_data->sin_angle -= 0.1;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == 42)
-	{
-		fdf->map_data->degrees_rotate += 1.0;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == 39)
-	{
-		fdf->map_data->degrees_rotate -= 1.0;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == 126)
-	{
-		fdf->map_data->moves_y -= 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == 125)
-	{
-		fdf->map_data->moves_y += 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == 123)
-	{
-		fdf->map_data->moves_x -= 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	if (keycode == 124)
-	{
-		fdf->map_data->moves_x += 10.0;
-		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
-		drow_img(fdf);
-	}
-	ft_printf("Keycode: %d\n", keycode);
-	return (0);
-}
 
 int	main(int argc, char **argv)
 {
@@ -122,18 +45,13 @@ void	fdf_setup(t_fdf *fdf)
 		free(fdf);
 		exit(1);
 	}
-	map_setup(fdf->map_data);
-}
-
-void	map_setup(t_map *map)
-{
-	map->scale = 20.0;
-	map->sin_angle = 0.523599;
-	map->cos_angle = 0.523599;
-	map->degrees_rotate = 4.0;
-	map->moves_x = 0.0;
-	map->moves_y = 0.0;
-	map->on_start = 1;
+	fdf->map_data->scale = 20.0;
+	fdf->map_data->sin_angle = 0.523599;
+	fdf->map_data->cos_angle = 0.523599;
+	fdf->map_data->degrees_rotate = 4.0;
+	fdf->map_data->moves_x = 0.0;
+	fdf->map_data->moves_y = 0.0;
+	fdf->map_data->on_start = 1;
 }
 
 void	mlx_setup(t_fdf *fdf)
@@ -144,7 +62,8 @@ void	mlx_setup(t_fdf *fdf)
 
 void	check_inpit(int argc, char **argv)
 {
-	if (argc != 2 || ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".fdf", 4) != 0)
+	if (argc != 2
+		|| ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".fdf", 4) != 0)
 	{
 		ft_printf("Usage: %s <filename>.fdf\n", argv[0]);
 		exit(1);

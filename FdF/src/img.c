@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 01:33:54 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 02:52:28 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	drow_img(t_fdf *fdf)
 			&fdf->map_data->img.line_length, &fdf->map_data->img.endian);
 	fdf->map_data->map3d = t_dot_allocate_2d_arr(fdf->map_data->width,
 			fdf->map_data->height);
+	ft_printf("fdf->map_data->width = %d\n", fdf->map_data->width);
 	create_3d_map(fdf->map_data);
+	isometric_view(fdf->map_data);
 	rotate_map(fdf->map_data);
 	transate_to_positive(fdf->map_data);
 	scale_3d_map(fdf->map_data);
