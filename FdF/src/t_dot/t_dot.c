@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 20:20:01 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 01:30:38 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 00:02:27 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	t_dot_free_2d_arr(t_map *map)
 		row = 0;
 		while (row < map->width)
 		{
+			free(map->map3d[col][row]->color);
 			free(map->map3d[col][row]);
 			row++;
 		}

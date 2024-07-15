@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:58 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 02:57:59 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 00:04:30 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	new_dot(t_map *map, t_dot *dot)
 	char	**data;
 	int		col;
 	int		row;
+	t_color *def_color;
+
 
 	col = map->tmp->col;
 	row = map->tmp->row;
@@ -28,7 +30,13 @@ void	new_dot(t_map *map, t_dot *dot)
 	if (data[1] != NULL)
 		dot->color = get_color(data[1]);
 	else
-		dot->color = 0xFFFFFF;
+	{
+		def_color = malloc(sizeof(t_color));
+		def_color->r = 255;
+		def_color->g = 255;
+		def_color->b = 255;
+		dot->color = def_color;
+	}
 	dot->x = (float)row;
 	dot->z = (float)ft_atoi(data[0]);
 	dot->y = (float)col;

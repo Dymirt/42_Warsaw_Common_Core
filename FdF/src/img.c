@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 02:52:28 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 23:56:57 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	drow_img(t_fdf *fdf)
 	center_map_to_screen(fdf->map_data);
 	apply_moves(fdf->map_data);
 	for_each_t_dot(fdf->map_data, draw_lines);
+	t_dot_free_2d_arr(fdf->map_data);
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win,
 		fdf->map_data->img.img, 0, 0);
-	t_dot_free_2d_arr(fdf->map_data);
+
 }
 
 void	draw_line(t_dot *start, t_dot *end, t_data img)
@@ -45,6 +46,15 @@ void	draw_line(t_dot *start, t_dot *end, t_data img)
 	float	y_step;
 	float	x;
 	float	y;
+	int		t_step;
+
+	int start_color_r = start->color->r;
+	int start_color_g = start->color->g;
+	int start_color_b = start->color->b;
+	int step_r;
+	int step_g;
+	int step_b;
+
 
 	x = start->x;
 	y = start->y;
@@ -53,13 +63,21 @@ void	draw_line(t_dot *start, t_dot *end, t_data img)
 	max = fmax(fabs(x_step), fabs(y_step));
 	x_step = x_step / (float)max;
 	y_step = y_step / (float)max;
+
+	step_r= (end->color->r - start_color_r) / max;
+	step_g = (end->color->g - start_color_g) / max;
+	step_b = (end->color->b - start_color_b) / max;
+
 	while (((int)(x - end->x) || (int)(y - end->y)))
 	{
 		if (((int)x >= 0 && (int)y >= 0
 				&& (int)x < SCREEN_WIDTH && (int)y < SCREEN_HEIGHT))
-			put_pixel(&img, (int)x, (int)y, start->color);
+			put_pixel(&img, (int)x, (int)y, create_trgb(0, start_color_r, start_color_g, start_color_b));
 		x += x_step;
 		y += y_step;
+		start_color_r += step_r;
+		start_color_g += step_g;
+		start_color_b += step_b;
 	}
 }
 

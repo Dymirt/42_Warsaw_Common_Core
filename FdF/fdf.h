@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 02:56:05 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 23:36:46 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,20 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+	int	t;
+}	t_color;
 typedef struct s_dot
 {
-	float			x;
-	float			y;
-	float			z;
-	unsigned int	color;
+	float	x;
+	float	y;
+	float	z;
+	t_color	*color;
 }	t_dot;
 
 typedef struct s_tmp
@@ -126,7 +134,8 @@ void	drow_img(t_fdf *fdf);
 void	draw_line(t_dot *start, t_dot *end, t_data img);
 
 // src/color.c
-int		get_color(char *color_str);
+t_color	*get_color(char *color_str);
+int	create_trgb(int t, int r, int g, int b);
 
 // src/isometric.c
 void	create_3d_map(t_map *map);

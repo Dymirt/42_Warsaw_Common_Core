@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 02:59:52 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 23:18:41 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	fdf_setup(t_fdf *fdf)
 	fdf->map_data->moves_x = 0.0;
 	fdf->map_data->moves_y = 0.0;
 	fdf->map_data->on_start = 1;
+	fdf->map_data->width = 0;
+	fdf->map_data->height = 0;
 }
 
 void	mlx_setup(t_fdf *fdf)

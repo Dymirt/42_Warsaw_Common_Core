@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:51:36 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/14 15:25:09 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/15 23:36:31 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	**split_to_pairs(char *str);
 
-int	create_trgb(int r, int g, int b)
+int	create_trgb(int t, int r, int g, int b)
 {
-	return (0 << 24 | r << 16 | g << 8 | b);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	get_color(char *color_str)
+t_color	*get_color(char *color_str)
 {
 	int		colors_int[4];
 	char	**colors_str;
-	int		color;
+	t_color	*color;
 	int		i;
 	int		j;
 
@@ -37,8 +37,11 @@ int	get_color(char *color_str)
 		j++;
 		i++;
 	}
-	color = create_trgb(colors_int[0], colors_int[1], colors_int[2]);
 	ft_free_split(colors_str);
+	color = malloc(sizeof(t_color));
+	color->r = colors_int[0];
+	color->g = colors_int[1];
+	color->b = colors_int[2];
 	return (color);
 }
 
