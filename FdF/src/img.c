@@ -6,14 +6,17 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 23:56:57 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:04:27 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#include <stdio.h>
 
 void	draw_line(t_dot *start, t_dot *end, t_data img);
 void	put_pixel(t_data *data, int x, int y, int color);
+int		in_visible_erea(t_dot *dot);
+t_step	*init_step(t_dot *start, t_dot *end);
 
 void	drow_img(t_fdf *fdf)
 {
@@ -36,49 +39,31 @@ void	drow_img(t_fdf *fdf)
 	t_dot_free_2d_arr(fdf->map_data);
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win,
 		fdf->map_data->img.img, 0, 0);
-
 }
 
 void	draw_line(t_dot *start, t_dot *end, t_data img)
 {
-	int		max;
-	float	x_step;
-	float	y_step;
-	float	x;
-	float	y;
-	int		t_step;
+	t_dot	*tmp_dot;
+	t_step	*step;
 
-	int start_color_r = start->color->r;
-	int start_color_g = start->color->g;
-	int start_color_b = start->color->b;
-	int step_r;
-	int step_g;
-	int step_b;
-
-
-	x = start->x;
-	y = start->y;
-	x_step = end->x - start->x;
-	y_step = end->y - start->y;
-	max = fmax(fabs(x_step), fabs(y_step));
-	x_step = x_step / (float)max;
-	y_step = y_step / (float)max;
-
-	step_r= (end->color->r - start_color_r) / max;
-	step_g = (end->color->g - start_color_g) / max;
-	step_b = (end->color->b - start_color_b) / max;
-
-	while (((int)(x - end->x) || (int)(y - end->y)))
+	tmp_dot = copy_dot(start);
+	step = init_step(start, end);
+	while (((int)(tmp_dot->x - end->x) || (int)(tmp_dot->y - end->y)))
 	{
-		if (((int)x >= 0 && (int)y >= 0
-				&& (int)x < SCREEN_WIDTH && (int)y < SCREEN_HEIGHT))
-			put_pixel(&img, (int)x, (int)y, create_trgb(0, start_color_r, start_color_g, start_color_b));
-		x += x_step;
-		y += y_step;
-		start_color_r += step_r;
-		start_color_g += step_g;
-		start_color_b += step_b;
+		if (in_visible_erea(tmp_dot))
+			put_pixel(&img, (int)tmp_dot->x, (int)tmp_dot->y,
+				create_trgb(0, tmp_dot->color->r, tmp_dot->color->g,
+					tmp_dot->color->b));
+		printf("x = %f, y = %f\n", tmp_dot->x, tmp_dot->y);
+		tmp_dot->x += step->step_x;
+		tmp_dot->y += step->step_y;
+		tmp_dot->color->r += step->step_r;
+		tmp_dot->color->g += step->step_g;
+		tmp_dot->color->b += step->step_b;
 	}
+	free(step);
+	free(tmp_dot->color);
+	free(tmp_dot);
 }
 
 void	put_pixel(t_data *data, int x, int y, int color)
@@ -87,4 +72,32 @@ void	put_pixel(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+int	in_visible_erea(t_dot *dot)
+{
+	if (dot->x < 0 || dot->x >= SCREEN_WIDTH
+		|| dot->y < 0 || dot->y >= SCREEN_HEIGHT)
+		return (0);
+	return (1);
+}
+
+t_step	*init_step(t_dot *start, t_dot *end)
+{
+	t_step	*step;
+	float	x_step;
+	float	y_step;
+
+	step = malloc(sizeof(t_step));
+	if (step == NULL)
+		return (NULL);
+	x_step = end->x - start->x;
+	y_step = end->y - start->y;
+	step->steps = fmax(fabs(x_step), fabs(y_step));
+	step->step_x = x_step / (float)step->steps;
+	step->step_y = y_step / (float)step->steps;
+	step->step_r = (end->color->r - start->color->r) / step->steps;
+	step->step_g = (end->color->g - start->color->g) / step->steps;
+	step->step_b = (end->color->b - start->color->b) / step->steps;
+	return (step);
 }

@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 23:36:46 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:14:27 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 #  define MOVE_RIGHT 124
 #  define SIN_P 30
 #  define SIN_M 33
+#  define COS_P 38
+#  define COS_M 40
 # else
 #  define ESC_KEY 0
 #  define SCALE_P 0
@@ -95,9 +97,21 @@ typedef struct s_fdf
 	t_map	*map_data;
 }	t_fdf;
 
+typedef struct s_step
+{
+	float	step_x;
+	float	step_y;
+	int		step_r;
+	int		step_g;
+	int		step_b;
+	int		steps;
+}	t_step;
+
 //src/t_dot.c
 t_dot	***t_dot_allocate_2d_arr(int map_width, int map_height);
 void	t_dot_free_2d_arr(t_map *map);
+t_dot	*copy_dot(t_dot *dot);
+t_color	*copy_color(t_color *color);
 
 //src/for_each_mod_functions.c
 void	to_positive(t_map *map, t_dot *dot);
@@ -135,7 +149,7 @@ void	draw_line(t_dot *start, t_dot *end, t_data img);
 
 // src/color.c
 t_color	*get_color(char *color_str);
-int	create_trgb(int t, int r, int g, int b);
+int		create_trgb(int t, int r, int g, int b);
 
 // src/isometric.c
 void	create_3d_map(t_map *map);

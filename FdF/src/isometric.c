@@ -6,23 +6,21 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:44:58 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 00:04:30 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:01:45 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-
 #include <stdio.h>
 
-void			isometric(t_map *map, t_dot *dot);
+void	isometric(t_map *map, t_dot *dot);
 
 void	new_dot(t_map *map, t_dot *dot)
 {
 	char	**data;
 	int		col;
 	int		row;
-	t_color *def_color;
-
+	t_color	*def_color;
 
 	col = map->tmp->col;
 	row = map->tmp->row;

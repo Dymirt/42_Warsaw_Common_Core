@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 23:18:41 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:18:24 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	fdf_setup(t_fdf *fdf)
 	fdf->map_data->scale = 20.0;
 	fdf->map_data->sin_angle = 0.523599;
 	fdf->map_data->cos_angle = 0.523599;
-	fdf->map_data->degrees_rotate = 4.0;
+	fdf->map_data->degrees_rotate = 6.0;
 	fdf->map_data->moves_x = 0.0;
 	fdf->map_data->moves_y = 0.0;
 	fdf->map_data->on_start = 1;
