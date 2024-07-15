@@ -6,12 +6,11 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 01:04:27 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 01:58:44 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
-#include <stdio.h>
 
 void	draw_line(t_dot *start, t_dot *end, t_data img);
 void	put_pixel(t_data *data, int x, int y, int color);
@@ -27,7 +26,6 @@ void	drow_img(t_fdf *fdf)
 			&fdf->map_data->img.line_length, &fdf->map_data->img.endian);
 	fdf->map_data->map3d = t_dot_allocate_2d_arr(fdf->map_data->width,
 			fdf->map_data->height);
-	ft_printf("fdf->map_data->width = %d\n", fdf->map_data->width);
 	create_3d_map(fdf->map_data);
 	isometric_view(fdf->map_data);
 	rotate_map(fdf->map_data);
@@ -54,7 +52,6 @@ void	draw_line(t_dot *start, t_dot *end, t_data img)
 			put_pixel(&img, (int)tmp_dot->x, (int)tmp_dot->y,
 				create_trgb(0, tmp_dot->color->r, tmp_dot->color->g,
 					tmp_dot->color->b));
-		printf("x = %f, y = %f\n", tmp_dot->x, tmp_dot->y);
 		tmp_dot->x += step->step_x;
 		tmp_dot->y += step->step_y;
 		tmp_dot->color->r += step->step_r;
