@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 01:58:44 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 14:36:57 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	drow_img(t_fdf *fdf)
 	transate_to_positive(fdf->map_data);
 	scale_3d_map(fdf->map_data);
 	center_map_to_screen(fdf->map_data);
-	apply_moves(fdf->map_data);
 	for_each_t_dot(fdf->map_data, draw_lines);
-	t_dot_free_2d_arr(fdf->map_data);
 	mlx_put_image_to_window(fdf->mlx, fdf->mlx_win,
 		fdf->map_data->img.img, 0, 0);
 }

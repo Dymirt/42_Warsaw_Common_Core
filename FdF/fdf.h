@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 11:51:01 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 14:39:22 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 #  define MOVE_DOWN 125
 #  define MOVE_LEFT 123
 #  define MOVE_RIGHT 124
-#  define SIN_P 30
-#  define SIN_M 33
 # else
 #  define ESC_KEY 0
 #  define SCALE_P 0
@@ -104,6 +102,9 @@ typedef struct s_step
 	int		step_b;
 	int		steps;
 }	t_step;
+
+void	move_view_point(t_fdf *fdf);
+void	object_zoom(t_fdf *fdf);
 
 //src/t_dot.c
 t_dot	***t_dot_allocate_2d_arr(int map_width, int map_height);

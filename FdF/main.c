@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 11:50:53 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 14:38:01 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	free_map_data(t_map *map_data)
 		col++;
 	}
 	free(map_data->map2d);
+	t_dot_free_2d_arr(map_data);
 	free(map_data);
 }
