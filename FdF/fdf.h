@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 01:14:27 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:51:01 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 #  define MOVE_RIGHT 124
 #  define SIN_P 30
 #  define SIN_M 33
-#  define COS_P 38
-#  define COS_M 40
 # else
 #  define ESC_KEY 0
 #  define SCALE_P 0
@@ -157,5 +155,6 @@ void	isometric_view(t_map *map);
 
 // src/keys.c
 int		key_hook(int keycode, void *param);
+int		close_window_hook(void *param);
 
 #endif

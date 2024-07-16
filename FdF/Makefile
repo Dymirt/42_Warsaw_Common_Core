@@ -40,7 +40,7 @@ MINILIBX_DIR = ../minilibx_macos/
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_DIR)
 	@make -C $(MINILIBX_DIR)
-	$(CC) $(CFLAGS_light) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
+	@$(CC) $(CFLAGS_light) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # Rule for compiling individual source files
 $(OBJDIR)%.o: %.c

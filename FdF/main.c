@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 01:18:24 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:50:53 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 	mlx_setup(fdf);
 	drow_img(fdf);
 	mlx_key_hook(fdf->mlx_win, key_hook, fdf);
+	mlx_hook(fdf->mlx_win, 17, 0, close_window_hook, fdf);
 	mlx_loop(fdf->mlx);
 }
 

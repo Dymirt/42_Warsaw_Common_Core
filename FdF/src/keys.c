@@ -6,7 +6,7 @@
 /*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 01:38:36 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 01:56:54 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 11:50:39 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 static int	move_keys(t_map *map, int keycode);
 static int	scale_keys(t_map *map, int keycode);
 static int	sin_keys(t_map *map, int keycode);
-static int	cos_keys(t_map *map, int keycode);
+
+int	close_window_hook(void *param)
+{
+	t_fdf	*fdf;
+
+	fdf = (t_fdf *)param;
+	mlx_destroy_window(fdf->mlx, fdf->mlx_win);
+	free_map_data(fdf->map_data);
+	exit(0);
+}
 
 int	key_hook(int keycode, void *param)
 {
@@ -24,8 +33,7 @@ int	key_hook(int keycode, void *param)
 	fdf = (t_fdf *)param;
 	if (move_keys(fdf->map_data, keycode)
 		|| scale_keys(fdf->map_data, keycode)
-		|| sin_keys(fdf->map_data, keycode)
-		|| cos_keys(fdf->map_data, keycode))
+		|| sin_keys(fdf->map_data, keycode))
 	{
 		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
 		drow_img(fdf);
@@ -72,17 +80,6 @@ static int	sin_keys(t_map *map, int keycode)
 		map->sin_angle += 0.1;
 	else if (keycode == SIN_M)
 		map->sin_angle -= 0.1;
-	else
-		return (0);
-	return (1);
-}
-
-static int	cos_keys(t_map *map, int keycode)
-{
-	if (keycode == COS_P)
-		map->cos_angle += 0.1;
-	else if (keycode == COS_M)
-		map->cos_angle -= 0.1;
 	else
 		return (0);
 	return (1);
