@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 13:51:36 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 23:36:31 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 18:52:05 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@ int	create_trgb(int t, int r, int g, int b)
 t_color	*get_color(char *color_str)
 {
 	int		colors_int[4];
-	char	**colors_str;
+	char	**colors_str_arr;
 	t_color	*color;
 	int		i;
 	int		j;
 
 	ft_str_toupper(color_str);
-	colors_str = split_to_pairs(color_str + 2);
+	colors_str_arr = split_to_pairs(color_str + 2);
 	i = 0;
 	j = 0;
-	while (colors_str[j])
+	while (colors_str_arr[j])
 	{
-		colors_int[i] = ft_atoi_base(colors_str[j], "0123456789ABCDEF");
+		colors_int[i] = ft_atoi_base(colors_str_arr[j], "0123456789ABCDEF");
 		j++;
 		i++;
 	}
-	ft_free_split(colors_str);
+	ft_free_split(colors_str_arr);
 	color = malloc(sizeof(t_color));
 	color->r = colors_int[0];
 	color->g = colors_int[1];
@@ -54,21 +54,17 @@ char	**split_to_pairs(char *str)
 
 	i = 0;
 	j = 0;
-	pairs = (char **)malloc(sizeof(char *) * (ft_strlen(str) / 2 + 1));
-	while (str[i] != '\0')
+	pairs = (char **)malloc(sizeof(char *) * 4);
+	while (j < 3)
 	{
 		tmp = ft_substr(str, i, 2);
-		if (ft_strlen(tmp) == 2)
-		{
+		if (tmp != NULL)
 			pairs[j] = tmp;
-			j++;
-		}
 		else
-		{
-			free(tmp);
-		}
+			pairs[j] = ft_substr("00", 0, 2);
+		j++;
 		i += 2;
 	}
-	pairs[j] = NULL;
+	pairs[3] = NULL;
 	return (pairs);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 01:38:36 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 14:58:44 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 19:07:11 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 static int	move_keys(t_map *map, int keycode);
 static int	scale_keys(t_map *map, int keycode);
-//static int	sin_keys(t_map *map, int keycode);
+static int	rotate_keys(t_map *map, int keycode);
 
 int	close_window_hook(void *param)
 {
 	t_fdf	*fdf;
 
 	fdf = (t_fdf *)param;
-	mlx_destroy_window(fdf->mlx, fdf->mlx_win);
-	free_map_data(fdf->map_data);
-	exit(0);
+	clean_exit(fdf);
+	return (0);
 }
 
 int	key_hook(int keycode, void *param)
@@ -43,9 +42,15 @@ int	key_hook(int keycode, void *param)
 	}
 	if (keycode == ESC_KEY_MAC)
 	{
-		free_map_data(fdf->map_data);
-		exit(0);
+		clean_exit(fdf);
 	}
+	if (rotate_keys(fdf->map_data, keycode))
+	{
+		mlx_destroy_image(fdf->mlx, fdf->map_data->img.img);
+		t_dot_free_2d_arr(fdf->map_data);
+		drow_img(fdf);
+	}
+	ft_printf("keycode: %d\n", keycode);
 	return (0);
 }
 
@@ -70,6 +75,17 @@ static int	scale_keys(t_map *map, int keycode)
 		map->scale = 1.1;
 	else if (keycode == SCALE_DOWN)
 		map->scale = 0.9;
+	else
+		return (0);
+	return (1);
+}
+
+static int	rotate_keys(t_map *map, int keycode)
+{
+	if (keycode == ROTATE_LEFT)
+		map->degrees_rotate += 1;
+	else if (keycode == ROTATE_RIGHT)
+		map->degrees_rotate -= 1;
 	else
 		return (0);
 	return (1);

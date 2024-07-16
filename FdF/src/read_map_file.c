@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 19:58:34 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/15 01:25:53 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 19:08:15 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void	load_map(t_map *map, int fd)
 {
 	char	*line;
 
+	map->map2d = NULL;
 	while (fd > 0)
 	{
 		line = get_next_line(fd);
@@ -62,7 +63,6 @@ static void	load_map(t_map *map, int fd)
 		else
 			break ;
 	}
-	return ;
 }
 
 int	add_line(t_map *map, char *line)

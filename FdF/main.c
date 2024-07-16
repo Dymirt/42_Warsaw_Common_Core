@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:10:33 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 14:38:01 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 18:07:35 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	fdf_setup(t_fdf *fdf)
 	fdf->map_data->scale = 20.0;
 	fdf->map_data->sin_angle = 0.523599;
 	fdf->map_data->cos_angle = 0.523599;
-	fdf->map_data->degrees_rotate = 6.0;
+	fdf->map_data->degrees_rotate = 5;
 	fdf->map_data->moves_x = 0.0;
 	fdf->map_data->moves_y = 0.0;
 	fdf->map_data->on_start = 1;

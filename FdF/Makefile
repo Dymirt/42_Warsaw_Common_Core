@@ -22,10 +22,11 @@ SRC = main.c \
 	src/t_dot/for_each_t_dot.c\
 	src/t_dot/t_dot.c \
 	src/keys.c \
+	src/cleaning.c \
 
 
 # Rule for compiling libft
-LIBFT_DIR = ../libft/
+LIBFT_DIR = libft/
 
 # Object files
 OBJDIR = obj/
@@ -33,19 +34,21 @@ OBJ = $(SRC:.c=.o)
 OBJ := $(addprefix $(OBJDIR),$(OBJ))
 
 # Rule for compiling libft
-MINILIBX_DIR = ../minilibx_macos/
+MINILIBX_DIR = minilibx-linux/
 
 
 # Main rule for compiling the project
 $(NAME): $(OBJ)
+	
 	@make -C $(LIBFT_DIR)
 	@make -C $(MINILIBX_DIR)
-	@$(CC) $(CFLAGS_light) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm
+#	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I$(LIBFT_DIR) -I$(MINILIBX_DIR) -L$(LIBFT_DIR) -lft -L$(MINILIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 # Rule for compiling individual source files
 $(OBJDIR)%.o: %.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS_light) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 # Rule for cleaning object files
 clean:
 	rm -f $(OBJ)
@@ -55,6 +58,7 @@ clean:
 
 # Rule for fully cleaning the project (removing executable and object files)
 fclean: clean
+	rm -r $(MINILIBX_DIR)
 	rm -f $(NAME)
 	@make fclean -C $(LIBFT_DIR)
 
@@ -62,9 +66,12 @@ fclean: clean
 re: fclean all
 
 # Default rule
-all: $(NAME)
+all: unzip $(NAME)
 
 bonus : all
+
+unzip:
+	tar -xzf minilibx-linux.tgz
 
 # Phony targets to avoid conflicts with file names
 .PHONY: all clean fclean re

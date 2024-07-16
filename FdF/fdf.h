@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 23:09:30 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 14:39:22 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 19:26:33 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-# include "../libft/libft.h"
-# include "../minilibx_macos/mlx.h"
+# include "libft/libft.h"
+# include "minilibx-linux/mlx.h"
 # include <math.h>
 # include <fcntl.h>
 
@@ -29,11 +29,16 @@
 #  define MOVE_LEFT 123
 #  define MOVE_RIGHT 124
 # else
-#  define ESC_KEY 0
-#  define SCALE_P 0
-#  define SCALE_M 0
-#  define SIN_P 0
-#  define SIN_M 0
+#  define ESC_KEY_MAC 65307
+#  define SCALE_UP 65451
+#  define SCALE_DOWN 65453
+#  define MOVE_UP 65362
+#  define MOVE_DOWN 65364
+#  define MOVE_LEFT 65361
+#  define MOVE_RIGHT 65363
+#  define ROTATE_LEFT 91
+#  define ROTATE_RIGHT 93
+
 # endif
 
 typedef struct s_data
@@ -158,4 +163,6 @@ void	isometric_view(t_map *map);
 int		key_hook(int keycode, void *param);
 int		close_window_hook(void *param);
 
+//src/cleaning.c
+void	clean_exit(t_fdf *fdf);
 #endif

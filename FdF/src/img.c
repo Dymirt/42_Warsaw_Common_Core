@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   img.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkolida <dkolida@student.42warsaw.pl>      +#+  +:+       +#+        */
+/*   By: dkolida <dkolida@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 21:11:52 by dkolida           #+#    #+#             */
-/*   Updated: 2024/07/16 14:36:57 by dkolida          ###   ########.fr       */
+/*   Updated: 2024/07/16 19:41:16 by dkolida          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
+#include <stdio.h>
 
 void	draw_line(t_dot *start, t_dot *end, t_data img);
 void	put_pixel(t_data *data, int x, int y, int color);
 int		in_visible_erea(t_dot *dot);
-t_step	*init_step(t_dot *start, t_dot *end);
+void	init_step(t_step *step, t_dot *start, t_dot *end);
 
 void	drow_img(t_fdf *fdf)
 {
@@ -27,8 +28,8 @@ void	drow_img(t_fdf *fdf)
 	fdf->map_data->map3d = t_dot_allocate_2d_arr(fdf->map_data->width,
 			fdf->map_data->height);
 	create_3d_map(fdf->map_data);
-	isometric_view(fdf->map_data);
 	rotate_map(fdf->map_data);
+	isometric_view(fdf->map_data);
 	transate_to_positive(fdf->map_data);
 	scale_3d_map(fdf->map_data);
 	center_map_to_screen(fdf->map_data);
@@ -42,8 +43,11 @@ void	draw_line(t_dot *start, t_dot *end, t_data img)
 	t_dot	*tmp_dot;
 	t_step	*step;
 
+	step = malloc(sizeof(t_step));
+	if (step == NULL)
+		return ;
 	tmp_dot = copy_dot(start);
-	step = init_step(start, end);
+	init_step(step, start, end);
 	while (((int)(tmp_dot->x - end->x) || (int)(tmp_dot->y - end->y)))
 	{
 		if (in_visible_erea(tmp_dot))
@@ -77,22 +81,29 @@ int	in_visible_erea(t_dot *dot)
 	return (1);
 }
 
-t_step	*init_step(t_dot *start, t_dot *end)
+void	init_step(t_step *step, t_dot *start, t_dot *end)
 {
-	t_step	*step;
 	float	x_step;
 	float	y_step;
 
-	step = malloc(sizeof(t_step));
-	if (step == NULL)
-		return (NULL);
 	x_step = end->x - start->x;
 	y_step = end->y - start->y;
+	step->step_x = 0;
+	step->step_y = 0;
+	step->step_r = 0;
+	step->step_g = 0;
+	step->step_b = 0;
 	step->steps = fmax(fabs(x_step), fabs(y_step));
-	step->step_x = x_step / (float)step->steps;
-	step->step_y = y_step / (float)step->steps;
-	step->step_r = (end->color->r - start->color->r) / step->steps;
-	step->step_g = (end->color->g - start->color->g) / step->steps;
-	step->step_b = (end->color->b - start->color->b) / step->steps;
-	return (step);
+	if (step->steps == 0)
+		step->steps = 1;
+	if (x_step)
+		step->step_x = x_step / (float)step->steps;
+	if (y_step)
+		step->step_y = y_step / (float)step->steps;
+	if (end->color->r - start->color->r)
+		step->step_r = (end->color->r - start->color->r) / step->steps;
+	if (end->color->g - start->color->g)
+		step->step_g = (end->color->g - start->color->g) / step->steps;
+	if (end->color->b - start->color->b)
+		step->step_b = (end->color->b - start->color->b) / step->steps;
 }
