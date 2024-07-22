@@ -10,3 +10,6 @@
 [submodule "push_swap"]
 	path = push_swap
 	url = https://github.com/Dymirt/push_swap.git
+[submodule "FdF"]
+	path = FdF
+	url = https://github.com/Dymirt/FdF.git
