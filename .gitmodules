@@ -7,3 +7,6 @@
 [submodule "pipex"]
 	path = pipex
 	url = https://github.com/Dymirt/pipex.git
+[submodule "push_swap"]
+	path = push_swap
+	url = https://github.com/Dymirt/push_swap.git
