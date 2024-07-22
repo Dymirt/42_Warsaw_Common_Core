@@ -4,3 +4,6 @@
 [submodule "Libft"]
 	path = Libft
 	url = https://github.com/Dymirt/Libft.git
+[submodule "pipex"]
+	path = pipex
+	url = https://github.com/Dymirt/pipex.git
