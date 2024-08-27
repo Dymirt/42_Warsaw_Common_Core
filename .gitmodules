@@ -13,3 +13,6 @@
 [submodule "FdF"]
 	path = FdF
 	url = https://github.com/Dymirt/FdF.git
+[submodule "minishell"]
+	path = minishell
+	url = https://github.com/Dymirt/minishell.git
